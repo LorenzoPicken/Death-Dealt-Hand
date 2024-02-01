@@ -1,0 +1,89 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using System;
+using UnityEditor;
+using System.Security.Cryptography;
+
+
+    public class GameManager : MonoBehaviour
+    {
+        public List<Card> deck = new List<Card>();
+        
+
+
+        public Transform[] cardslotsPlayer1;
+        public Transform[] cardslotsPlayer2;
+        public bool[] availableCardSlotsPlayer1;
+        public bool[] availableCardSlotsPlayer2;
+        public TMP_Text decksizeText;
+
+
+        public static GameManager instance;
+        public event Action OnCardsPlayed;
+
+
+        private void Awake()
+        {
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+
+            instance = this;
+            
+        }
+
+        private void Start()
+        {
+            Shuffle(deck);
+            DrawCard(availableCardSlotsPlayer2, cardslotsPlayer2);
+            DrawCard(availableCardSlotsPlayer1, cardslotsPlayer1);
+
+        }
+
+
+        // Shuffle list
+        public List<Card> Shuffle(List<Card> listToShuffle)
+        {
+            System.Random _rand = new System.Random();
+
+            for (int i = listToShuffle.Count - 1; i > 0; i--)
+            {
+                var k = _rand.Next(i + 1);
+                var value = listToShuffle[k];
+                listToShuffle[k] = listToShuffle[i];
+                listToShuffle[i] = value;
+            }
+            return listToShuffle;
+        }
+
+
+    public void DrawCard(bool[] availableSlots, Transform[] cardSlots)
+    {
+        if (deck.Count >= 0)
+        {
+            for (int i = 0; i < availableSlots.Length; i++)
+            {
+                if (availableSlots[i] == true)
+                {
+                    deck[i].gameObject.SetActive(true);
+                    deck[i].transform.position = cardSlots[i].transform.position;
+                    availableSlots[i] = false;
+                    deck.Remove(deck[i]);
+                    
+                }
+            }
+        }
+    }
+
+        private void Update()
+        {
+            decksizeText.text = deck.Count.ToString();
+        }
+
+    }
+
