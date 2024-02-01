@@ -5,19 +5,14 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    public int number;
-    public string type;
+    [SerializeField] public Suit suit;
+    [SerializeField] public int cardValue;
+}
 
-
-    //private void OnEnable()
-    //{
-    //    GameManager.instance.onCardsPlayed += ;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    onCardsPlayed -= DrawCard;
-    //}
-
-
+public enum Suit
+{
+    SUNS,
+    JARS,
+    SABERS,
+    CLUBS
 }
