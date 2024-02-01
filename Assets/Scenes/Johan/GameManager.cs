@@ -11,15 +11,18 @@ using System.Security.Cryptography;
     public class GameManager : MonoBehaviour
     {
         public List<Card> deck = new List<Card>();
+        
 
 
-        public Transform[] cardslots;
-        public bool[] availableCardSlots;
+        public Transform[] cardslotsPlayer1;
+        public Transform[] cardslotsPlayer2;
+        public bool[] availableCardSlotsPlayer1;
+        public bool[] availableCardSlotsPlayer2;
         public TMP_Text decksizeText;
 
 
         public static GameManager instance;
-        public event Action onCardsPlayed;
+        public event Action OnCardsPlayed;
 
 
         private void Awake()
@@ -34,58 +37,48 @@ using System.Security.Cryptography;
             
         }
 
-
-    // Shuffle list
-    private  System.Random _rand;
-    public void RandomizeGenericListsMethods()
-    {
-        _rand = new System.Random();
-    }
-
-    public List<Card> Shuffle(List<Card> listToShuffle)
-    {
-        for (int i = listToShuffle.Count - 1; i > 0; i--)
+        private void Start()
         {
-            var k = _rand.Next(i + 1);
-            var value = listToShuffle[k];
-            listToShuffle[k] = listToShuffle[i];
-            listToShuffle[i] = value;
+            Shuffle(deck);
+            DrawCard(availableCardSlotsPlayer2, cardslotsPlayer2);
+            DrawCard(availableCardSlotsPlayer1, cardslotsPlayer1);
+
         }
-        return listToShuffle;
-    }
 
 
-    public void DrawCard()
+        // Shuffle list
+        public List<Card> Shuffle(List<Card> listToShuffle)
         {
-            if (deck.Count >= 0)
+            System.Random _rand = new System.Random();
+
+            for (int i = listToShuffle.Count - 1; i > 0; i--)
             {
+                var k = _rand.Next(i + 1);
+                var value = listToShuffle[k];
+                listToShuffle[k] = listToShuffle[i];
+                listToShuffle[i] = value;
+            }
+            return listToShuffle;
+        }
 
 
-                for (int i = 0; i < availableCardSlots.Length; i++)
+    public void DrawCard(bool[] availableSlots, Transform[] cardSlots)
+    {
+        if (deck.Count >= 0)
+        {
+            for (int i = 0; i < availableSlots.Length; i++)
+            {
+                if (availableSlots[i] == true)
                 {
-                    Card randCard = deck[UnityEngine.Random.Range(0, deck.Count)];
-                    if (availableCardSlots[i] == true)
-                    {
-                        randCard.gameObject.SetActive(true);
-                        randCard.transform.position = cardslots[i].position;
-                        availableCardSlots[i] = false;
-                        deck.Remove(randCard);
-                    // playerDeck.Add(randCard);
-               
-
-
-                    }
+                    deck[i].gameObject.SetActive(true);
+                    deck[i].transform.position = cardSlots[i].transform.position;
+                    availableSlots[i] = false;
+                    deck.Remove(deck[i]);
+                    
                 }
             }
         }
-
-        public void OnCardsPlayed()
-        {
-            onCardsPlayed?.Invoke();
-            //Change player turn
-            //Find cards and add them to player
-        }
-
+    }
 
         private void Update()
         {

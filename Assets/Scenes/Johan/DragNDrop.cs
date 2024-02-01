@@ -37,7 +37,7 @@ public class DragNDrop : MonoBehaviour
                 //Two cards snap event
                 GetComponent<Card>();
                 hit.collider.GetComponent<Card>();
-                GameManager.instance.OnCardsPlayed();
+                //GameManager.instance.OnCardsPlayed();
             }
         }
     }
