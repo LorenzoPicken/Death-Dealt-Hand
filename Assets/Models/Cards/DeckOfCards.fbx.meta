@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 320d6fa996e862848b81e1aa052da90b
+guid: c318a19a06c81e24bab3e2a07c889ee9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -18,12 +18,12 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: All Scopa cards
-    second: {fileID: 2800000, guid: e471f789c60bf4942b9e7770b689bc34, type: 3}
+    second: {fileID: 2800000, guid: 80054584056e9454f96d5208503bb807, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Scopa card back
-    second: {fileID: 2800000, guid: 514f5a0df41c58841ac8f497448c9878, type: 3}
+    second: {fileID: 2800000, guid: 265696eab2d76f941bc86b9b376cf258, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
