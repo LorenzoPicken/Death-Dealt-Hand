@@ -11,18 +11,25 @@ using System.Security.Cryptography;
     public class GameManager : MonoBehaviour
     {
         public List<Card> deck = new List<Card>();
+        public List<Card> player1Hand = new List<Card>();
+        public List<Card> player2Hand = new List<Card>();
+        public List<Card> tableHand = new List<Card>();
+
+     
         
 
 
         public Transform[] cardslotsPlayer1;
         public Transform[] cardslotsPlayer2;
+        public Transform[] cardslotsTable;
         public bool[] availableCardSlotsPlayer1;
         public bool[] availableCardSlotsPlayer2;
-        public TMP_Text decksizeText;
+        public bool[] availableCardSlotsTable;
+       
 
 
         public static GameManager instance;
-        public event Action OnCardsPlayed;
+        //public event Action OnCardsPlayed;
 
 
         private void Awake()
@@ -37,15 +44,42 @@ using System.Security.Cryptography;
             
         }
 
-        private void Start()
+    private void OnEnable()
+    {
+        SelectionManager.OnCardSelected += MakeTableCardsAvailable;
+    }
+    private void OnDisable()
+    {
+        SelectionManager.OnCardSelected -= MakeTableCardsAvailable;
+
+    }
+
+    private void MakeTableCardsAvailable()
+    {
+        foreach (Card card in tableHand) 
+        { 
+            card.selectable = true;
+        }
+    }
+
+    private void MakePlayerCardsAvailable()
+    {
+        foreach (Card card in player1Hand)
+        {
+            card.selectable = true;
+            Debug.Log(card.cardValue);
+        }
+    }
+    private void Start()
         {
             Shuffle(deck);
-            DrawCard(availableCardSlotsPlayer2, cardslotsPlayer2);
-            DrawCard(availableCardSlotsPlayer1, cardslotsPlayer1);
-
+            DrawCard(availableCardSlotsPlayer2, cardslotsPlayer2, player2Hand);
+            DrawCard(availableCardSlotsPlayer1, cardslotsPlayer1, player1Hand);
+            DrawCard(availableCardSlotsTable, cardslotsTable, tableHand);
+            MakePlayerCardsAvailable();
         }
 
-
+        
         // Shuffle list
         public List<Card> Shuffle(List<Card> listToShuffle)
         {
@@ -61,29 +95,28 @@ using System.Security.Cryptography;
             return listToShuffle;
         }
 
-
-    public void DrawCard(bool[] availableSlots, Transform[] cardSlots)
-    {
-        if (deck.Count >= 0)
+        
+        // Draw randomly cards and place in both player hands
+        public void DrawCard(bool[] availableSlots, Transform[] cardSlots, List<Card> playerHand)
         {
-            for (int i = 0; i < availableSlots.Length; i++)
+            if (deck.Count >= 0)
             {
-                if (availableSlots[i] == true)
+                for (int i = 0; i < availableSlots.Length; i++)
                 {
-                    deck[i].gameObject.SetActive(true);
-                    deck[i].transform.position = cardSlots[i].transform.position;
-                    availableSlots[i] = false;
-                    deck.Remove(deck[i]);
+                    if (availableSlots[i] == true)
+                    {
+                        deck[i].gameObject.SetActive(true);
+                        deck[i].transform.position = cardSlots[i].transform.position;
+                        availableSlots[i] = false;
+                        deck.Remove(deck[i]);
+                        playerHand.Add(deck[i]);
                     
+                    }
                 }
             }
         }
-    }
 
-        private void Update()
-        {
-            decksizeText.text = deck.Count.ToString();
-        }
+      
 
     }
 
