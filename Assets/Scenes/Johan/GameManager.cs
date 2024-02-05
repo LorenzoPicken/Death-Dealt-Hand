@@ -7,9 +7,8 @@ using System;
 using UnityEditor;
 using System.Security.Cryptography;
 
-
-    public class GameManager : MonoBehaviour
-    {
+public class GameManager : MonoBehaviour
+{
         public List<Card> deck = new List<Card>();
         public List<Card> player1Hand = new List<Card>();
         public List<Card> player2Hand = new List<Card>();
@@ -44,23 +43,35 @@ using System.Security.Cryptography;
             
         }
 
-    private void OnEnable()
-    {
-        SelectionManager.OnCardSelected += MakeTableCardsAvailable;
-    }
-    private void OnDisable()
-    {
-        SelectionManager.OnCardSelected -= MakeTableCardsAvailable;
+    // Function subscription
+        private void OnEnable()
+        {
+            SelectionManager.OnCardSelected += MakeTableCardsAvailable;
+            SelectionManager.OnCardDeselected += MakeTableCardsUnavailable;
+        }
+        private void OnDisable()
+        {
+            SelectionManager.OnCardSelected -= MakeTableCardsAvailable;
+            SelectionManager.OnCardDeselected -= MakeTableCardsUnavailable;
 
-    }
+        }
 
-    private void MakeTableCardsAvailable()
+    // Switching on and off cards selectable bool
+        private void MakeTableCardsAvailable()
+        {
+            foreach (Card card in tableHand) 
+            { 
+                card.selectable = true;
+            }
+        }   
+    private void MakeTableCardsUnavailable()
     {
         foreach (Card card in tableHand) 
         { 
-            card.selectable = true;
+                card.selectable = false;
         }
     }
+
 
     private void MakePlayerCardsAvailable()
     {
@@ -116,7 +127,11 @@ using System.Security.Cryptography;
                 }
             }
         }
+        
+        public void PutDown()
+        {
 
+        }
       
 
     }
