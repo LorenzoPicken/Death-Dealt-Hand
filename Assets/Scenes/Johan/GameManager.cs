@@ -105,13 +105,14 @@ using System.Security.Cryptography;
                 {
                     if (availableSlots[i] == true)
                     {
-                        deck[i].gameObject.SetActive(true);
-                        deck[i].transform.position = cardSlots[i].transform.position;
+                        deck[0].gameObject.SetActive(true);
+                        deck[0].transform.position = cardSlots[i].transform.position;
                         availableSlots[i] = false;
-                        deck.Remove(deck[i]);
-                        playerHand.Add(deck[i]);
-                    
+                        playerHand.Add(deck[0]);
+                        deck.Remove(deck[0]);
+                        
                     }
+
                 }
             }
         }
