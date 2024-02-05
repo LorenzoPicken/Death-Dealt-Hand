@@ -7,6 +7,7 @@ public class Card : MonoBehaviour
 {
     [SerializeField] public Suit suit;
     [SerializeField] public int cardValue;
+    [SerializeField] public bool selectable;
 }
 
 public enum Suit
