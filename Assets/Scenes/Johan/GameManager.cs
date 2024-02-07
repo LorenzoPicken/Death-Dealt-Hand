@@ -118,6 +118,19 @@ public class GameManager : MonoBehaviour
                     {
                         deck[0].gameObject.SetActive(true);
                         deck[0].transform.position = cardSlots[i].transform.position;
+                        try
+                        {
+                            var cardSlotsTry = cardSlots[i].GetChild(0).gameObject.GetComponent<CardSlot>();
+                            Debug.Log(cardSlotsTry + "Im here");
+                            if (cardSlotsTry != null) { cardSlotsTry.available = false; }
+                            Debug.Log(cardSlotsTry + "Im working?");
+
+                        }
+                        catch (Exception e) 
+                        { 
+                            Debug.Log(e);
+                        }
+                        
                         availableSlots[i] = false;
                         playerHand.Add(deck[0]);
                         deck.Remove(deck[0]);
@@ -128,10 +141,7 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        public void PutDown()
-        {
-
-        }
+      
       
 
     }

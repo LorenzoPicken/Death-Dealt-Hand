@@ -26,7 +26,7 @@ public class SelectionManager : MonoBehaviour
         // If left click and selection1 is not null, compare both cards 
         if (Input.GetMouseButtonDown(0) && selection1 != null && selection2 == null)
         {
-
+           
             selection2 = SelectCard();
             if(selection1.Equals(selection2))
             {
@@ -74,17 +74,44 @@ public class SelectionManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            var card = hit.transform.GetComponent<Card>();
-            if (card.selectable)
+            if(hit.collider.tag == "card")
             {
-                return card;
+                var card = hit.transform.GetComponent<Card>();
+                if (card.selectable)
+                {
+                    return card;
+                }
+                else
+                {
+                    Debug.Log("here");
+                }
             }
-            else
-            {
-                Debug.Log("here");
-            }
+
         }
         return null;
+    }
+
+
+    private void PutDownCard(Card card)
+    {
+        var ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+
+        if(Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.tag == "TableSlots")
+            {
+                var cardSlots = hit.collider.gameObject.GetComponent<CardSlot>();
+                if (cardSlots.available)
+                {
+                    card.transform.position = cardSlots.transform.position;
+                }
+                else
+                {
+                    Debug.Log("not available");
+                }
+
+            }
+        }
     }
 }
 
