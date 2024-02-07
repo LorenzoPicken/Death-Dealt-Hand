@@ -19,21 +19,24 @@ public class SelectionManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && selection1 == null && selection2 == null)
         {
             selection1 = SelectCard();
-            if(selection1 != null) { OnCardSelected?.Invoke(); }
+            if (selection1 != null) { OnCardSelected?.Invoke(); }
             return;
         }
 
         // If left click and selection1 is not null, compare both cards 
         if (Input.GetMouseButtonDown(0) && selection1 != null && selection2 == null)
         {
-           
+
             selection2 = SelectCard();
-            if(selection1.Equals(selection2))
+            if (selection1.Equals(selection2))
             {
-                selection2 = null; 
+                selection2 = null;
                 return;
             }
-            CompareCards(selection1, selection2);
+            if (selection1 != null && selection2 != null)
+            {
+                CompareCards(selection1, selection2);
+            }
         }
 
         // If right click deselect cards and unable table cards 
@@ -46,19 +49,19 @@ public class SelectionManager : MonoBehaviour
 
     private void CompareCards(Card card1, Card card2)
     {
-        if(card1.cardValue == card2.cardValue)
+        if (card1.cardValue == card2.cardValue)
         {
             card1.transform.position = playedCards.position;
             card2.transform.position = playedCards.position + Vector3.up;
             selection1 = null;
             selection2 = null;
+            OnCardDeselected?.Invoke();
         }
         else
         {
             selection2 = null;
         }
-        if(card1 == null) { return; }
-        if(card2 == null) { return; }
+      
     }
 
 
@@ -74,7 +77,7 @@ public class SelectionManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if(hit.collider.tag == "card")
+            if (hit.collider.tag == "card")
             {
                 var card = hit.transform.GetComponent<Card>();
                 if (card.selectable)
@@ -86,24 +89,14 @@ public class SelectionManager : MonoBehaviour
                     Debug.Log("here");
                 }
             }
-
-        }
-        return null;
-    }
-
-
-    private void PutDownCard(Card card)
-    {
-        var ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
-        if(Physics.Raycast(ray, out hit))
-        {
             if (hit.collider.tag == "TableSlots")
             {
                 var cardSlots = hit.collider.gameObject.GetComponent<CardSlot>();
                 if (cardSlots.available)
                 {
-                    card.transform.position = cardSlots.transform.position;
+                    selection1.transform.position = cardSlots.transform.position;
+                    OnCardDeselected?.Invoke();
+                    selection1 = null;
                 }
                 else
                 {
@@ -112,8 +105,31 @@ public class SelectionManager : MonoBehaviour
 
             }
         }
+            return null;
+
     }
-}
+        private void PutDownCard(Card card)
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.tag == "TableSlots")
+                {
+                    var cardSlots = hit.collider.gameObject.GetComponent<CardSlot>();
+                    if (cardSlots.available)
+                    {
+                        card.transform.position = cardSlots.transform.position;
+                    }
+                    else
+                    {
+                        Debug.Log("not available");
+                    }
+
+                }
+            }
+        }
+    } 
 
 
 
