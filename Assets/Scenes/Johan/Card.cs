@@ -5,9 +5,22 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] public Suit suit;
-    [SerializeField] public int cardValue;
-    [SerializeField] public bool selectable;
+    [SerializeField] private Suit suit;
+    [SerializeField] private int cardValue;
+    private bool selectable;
+    public bool inHand;
+    private bool selected;
+
+    public Suit Suit
+    {
+        get { return suit; }
+        set { suit = value; }
+    }
+
+    public int CardValue { get => cardValue; set => cardValue = value; }
+    public bool Selectable { get => selectable; set => selectable = value; }
+    public bool InHand { get => inHand; set => inHand = value; }
+    public bool Selected { get => selected; set => selected = value; }
 }
 
 public enum Suit

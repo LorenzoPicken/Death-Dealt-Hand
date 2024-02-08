@@ -4,25 +4,38 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-    public List<GameObject> tableList = new List<GameObject>();
+    public List<Card> tableList = new List<Card>();
+    int tableTotal;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        tableTotal = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    
+    public void UpdateTable()
     {
-        
+        int newTotal = 0;
+        foreach (Card card in tableList) 
+        {
+            newTotal += card.CardValue;
+        }
+        tableTotal = newTotal;
     }
 
-    private void CalculateTotal()
+    public void AddCards(Card card)
     {
-        foreach (GameObject card in tableList) 
-        { 
+        tableList.Add(card);
+    }
 
+    public void RemoveCards(List<Card> removeList)
+    {
+        foreach (Card card in removeList)
+        {
+            tableList.Remove(card);
         }
+        removeList.Clear();
     }
 }

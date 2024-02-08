@@ -58,7 +58,7 @@ using System.Security.Cryptography;
     {
         foreach (Card card in tableHand) 
         { 
-            card.selectable = true;
+            card.Selectable = true;
         }
     }
 
@@ -66,8 +66,8 @@ using System.Security.Cryptography;
     {
         foreach (Card card in player1Hand)
         {
-            card.selectable = true;
-            Debug.Log(card.cardValue);
+            card.Selectable = true;
+            Debug.Log(card.CardValue);
         }
     }
     private void Start()

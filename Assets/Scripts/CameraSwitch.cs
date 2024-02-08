@@ -6,38 +6,19 @@ using System.Runtime.CompilerServices;
 
 public class CameraSwitch : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera fpsCam;
-    [SerializeField] CinemachineVirtualCamera tableCam;
-    bool isFPS = false;
-
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]  CinemachineVirtualCamera fpsCam;
+    [SerializeField]  CinemachineVirtualCamera tableCam;
+    
+    // Update is called once per frame
+    public void SwitchToHand()
     {
         fpsCam.Priority = 1;
         tableCam.Priority = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SwitchToTable()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            SwitchCam();
-        }
-    }
-
-    private void SwitchCam()
-    {
-        isFPS = !isFPS;
-        if (isFPS == true) 
-        {
-            fpsCam.Priority = 0;
-            tableCam.Priority = 1;
-        }
-        else
-        {
-            fpsCam.Priority = 1;
-            tableCam.Priority = 0;
-        }
+        fpsCam.Priority = 0;
+        tableCam.Priority = 1;
     }
 }
