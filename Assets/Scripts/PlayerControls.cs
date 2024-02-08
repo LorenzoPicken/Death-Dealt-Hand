@@ -86,6 +86,7 @@ public class PlayerControls : MonoBehaviour
                     selectedValue = selectedCard.CardValue;
                     selectedCard.Selected = true;
                     ShowSelectedCardHand(selectedCard);
+                    Debug.Log("You Have Decided To Play The " + selectedValue + " Of " + selectedCard.Suit);
                     currentState = STATE.MOVETOTABLE;
                 }
 
@@ -106,7 +107,8 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            selectedValue = 0;
+            
+            DeselectCardHand();
             currentState = STATE.MOVETOHAND;
         }
     }
@@ -114,6 +116,22 @@ public class PlayerControls : MonoBehaviour
     void ShowSelectedCardHand(Card selectedCard)
     {
         selectedCard.transform.localPosition += (Vector3.forward * -0.2f) + (Vector3.up * 0.2f);
+    }
+
+    void DeselectCardHand()
+    {
+        foreach(Card card in handList)
+        {
+            if(card.Selected == true)
+            {
+                card.transform.localPosition += (Vector3.forward * +0.2f) + (Vector3.up * -0.2f);
+                card.Selected = false;
+            }
+            
+        }
+        selectedValue = 0;
+        Debug.Log("Selection Cancelled");
+
     }
 
 

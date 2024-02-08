@@ -9,7 +9,7 @@ public class Card : MonoBehaviour
     [SerializeField] private int cardValue;
     private bool selectable;
     public bool inHand;
-    private bool selected;
+    private bool selected = false;
 
     public Suit Suit
     {
