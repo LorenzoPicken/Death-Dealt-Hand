@@ -952,6 +952,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.018380372, y: 0.030143803, z: 0.00018380488}
   m_Center: {x: 3.783498e-10, y: 0, z: 0.000000029802322}
+--- !u!114 &557059972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5123389356150393907, guid: 9410358c6bbd9464fa81b1a9995609eb, type: 3}
+  m_PrefabInstance: {fileID: 1800311767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557059969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe39fc9750c3e046a2e050533d1ec64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &642009676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1390,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.018380363, y: 0.0301438, z: 0.0001838056}
   m_Center: {x: 0.0000000018626451, y: 0, z: 0}
+--- !u!114 &813425102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 747964364983721894, guid: 2da0e400a8a08b242a5ce3b549799f2a, type: 3}
+  m_PrefabInstance: {fileID: 899960350}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813425099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe39fc9750c3e046a2e050533d1ec64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &826721579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1696,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.018380374, y: 0.0301438, z: 0.00018380741}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1018815509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1223127013846801731, guid: 7a4b3bbabfac9484192cd506b973c7d3, type: 3}
+  m_PrefabInstance: {fileID: 804911344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018815502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe39fc9750c3e046a2e050533d1ec64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1211700942
 GameObject:
   m_ObjectHideFlags: 0
@@ -2011,10 +2044,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camSwitch: {fileID: 29145556}
-  handList:
-  - {fileID: 1018815502}
-  - {fileID: 813425099}
-  - {fileID: 557059969}
+  FOURSABERS: {fileID: 813425102}
+  ACESUNS: {fileID: 557059972}
+  TENCLUBS: {fileID: 1018815509}
+  handList: []
 --- !u!1 &1524373263
 GameObject:
   m_ObjectHideFlags: 0
