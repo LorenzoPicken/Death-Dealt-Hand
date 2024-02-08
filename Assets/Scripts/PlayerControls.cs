@@ -9,7 +9,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] CameraSwitch camSwitch;
 
     //List of Cards Currently In player's hand
-    [SerializeField] List<GameObject> handList = new List<GameObject>() { };
+    [SerializeField] List<Card> handList = new List<Card>() { };
 
     //list of cards collected by the player
     List<GameObject> pickedUP = new List<GameObject>() { };
@@ -85,7 +85,7 @@ public class PlayerControls : MonoBehaviour
                 {
                     selectedValue = selectedCard.CardValue;
                     selectedCard.Selected = true;
-                    ShowSelectedCardHand();
+                    ShowSelectedCardHand(selectedCard);
                     currentState = STATE.MOVETOTABLE;
                 }
 
@@ -111,20 +111,9 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    void ShowSelectedCardHand()
+    void ShowSelectedCardHand(Card selectedCard)
     {
-        foreach (GameObject selectedCard in handList)
-        {
-            Card card = selectedCard.GetComponent<Card>();
-            if(card.Selected == true)
-            {
-                
-                Vector3 cardPosition = selectedCard.transform.localPosition;
-                //cardPosition.z -= 0.2f;
-                cardPosition += ((Vector3.forward * -0.2f )+ (Vector3.up * 0.2f));
-                selectedCard.transform.localPosition = cardPosition;
-            }
-        }
+        selectedCard.transform.localPosition += (Vector3.forward * -0.2f) + (Vector3.up * 0.2f);
     }
 
 
