@@ -50,8 +50,7 @@ public class PlayerControls : MonoBehaviour
                     break;
 
                 case STATE.MOVETOTABLE:
-                    camSwitch.SwitchToTable();
-                    currentState = STATE.TABLE;
+                    Invoke("MoveToTable", 0.5f);
                     break;
 
                 case STATE.MOVETOHAND:
@@ -97,7 +96,11 @@ public class PlayerControls : MonoBehaviour
 
 
     }
-
+    void MoveToTable()
+    {
+        camSwitch.SwitchToTable();
+        currentState = STATE.TABLE;
+    }
 
     void PlayFromTable()
     {
@@ -115,8 +118,11 @@ public class PlayerControls : MonoBehaviour
             Card card = selectedCard.GetComponent<Card>();
             if(card.Selected == true)
             {
+                
                 Vector3 cardPosition = selectedCard.transform.localPosition;
-                cardPosition.z += 0.2f;
+                //cardPosition.z -= 0.2f;
+                cardPosition += ((Vector3.forward * -0.2f )+ (Vector3.up * 0.2f));
+                selectedCard.transform.localPosition = cardPosition;
             }
         }
     }

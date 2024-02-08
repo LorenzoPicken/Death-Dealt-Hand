@@ -49,7 +49,7 @@ public class SelectionManager : MonoBehaviour
 
     private void CompareCards(Card card1, Card card2)
     {
-        if (card1.cardValue == card2.cardValue)
+        if (card1.CardValue == card2.CardValue)
         {
             card1.transform.position = playedCards.position;
             card2.transform.position = playedCards.position + Vector3.up;
@@ -80,7 +80,7 @@ public class SelectionManager : MonoBehaviour
             if (hit.collider.tag == "card")
             {
                 var card = hit.transform.GetComponent<Card>();
-                if (card.selectable)
+                if (card.Selectable)
                 {
                     return card;
                 }

@@ -61,14 +61,14 @@ public class GameManager : MonoBehaviour
         {
             foreach (Card card in tableHand) 
             { 
-                card.selectable = true;
+                card.Selectable = true;
             }
         }   
     private void MakeTableCardsUnavailable()
     {
         foreach (Card card in tableHand) 
         { 
-                card.selectable = false;
+                card.Selectable = false;
         }
     }
 
@@ -77,8 +77,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (Card card in player1Hand)
         {
-            card.selectable = true;
-            Debug.Log(card.cardValue);
+            card.Selectable = true;
+            Debug.Log(card.CardValue);
         }
     }
     private void Start()
