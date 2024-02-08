@@ -9,6 +9,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] CameraSwitch camSwitch;
 
     //List of Cards Currently In player's hand
+    [SerializeField] Card FOURSABERS;
+    [SerializeField] Card ACESUNS;
+    [SerializeField] Card TENCLUBS;
+
     [SerializeField] List<Card> handList = new List<Card>() { };
 
     //list of cards collected by the player
@@ -31,6 +35,9 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         currentState = STATE.HAND;
+        handList.Add(FOURSABERS);
+        handList.Add(ACESUNS);
+        handList.Add (TENCLUBS);
     }
 
     // Update is called once per frame
