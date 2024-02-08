@@ -9,10 +9,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] CameraSwitch camSwitch;
 
     //List of Cards Currently In player's hand
-    [SerializeField] List<Card> handList = new List<Card>() { };
+    [SerializeField] List<Card> handList = new List<Card>();
 
     //list of cards collected by the player
-    List<GameObject> pickedUP = new List<GameObject>() { };
+    List<GameObject> pickedUP = new List<GameObject>();
 
     private GameObject selectedCardGO;
 
@@ -66,7 +66,6 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             
-
             Vector3 mousePosition = Input.mousePosition;
 
 
@@ -86,6 +85,7 @@ public class PlayerControls : MonoBehaviour
                     selectedValue = selectedCard.CardValue;
                     selectedCard.Selected = true;
                     ShowSelectedCardHand(selectedCard);
+                    Debug.Log(selectedCard.Selected);
                     Debug.Log("You Have Decided To Play The " + selectedValue + " Of " + selectedCard.Suit);
                     currentState = STATE.MOVETOTABLE;
                 }
@@ -122,7 +122,7 @@ public class PlayerControls : MonoBehaviour
     {
         foreach(Card card in handList)
         {
-            if(card.Selected == true)
+            if(card.Selected)
             {
                 card.transform.localPosition += (Vector3.forward * +0.2f) + (Vector3.up * -0.2f);
                 card.Selected = false;
