@@ -73,17 +73,9 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            selectedCard = SelectCard();
 
-
-
-            Ray ray;
-
-            if (Physics.Raycast(ray = Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
-            {
-
-                Card selectedCard = hit.transform?.GetComponent<Card>();
-
-                if (selectedCard.InHand == true)
+                if (selectedCard.InHand == true && selectedCard != null)
                 {
                     selectedValue = selectedCard.CardValue;
                     selectedCard.Selected = true;
@@ -92,12 +84,24 @@ public class PlayerControls : MonoBehaviour
                     currentState = STATE.MOVETOTABLE;
                     return selectedCard;
                 }
-            }
+            
         }
         return null;
 
 
 
+    }
+    Card SelectCard()
+    {
+        Ray ray;
+
+        if (Physics.Raycast(ray = Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+        {
+            Card selectedCard = hit.transform?.GetComponent<Card>();
+            return selectedCard;
+            
+        }
+        return null;
     }
     void MoveToTable()
     {
@@ -107,7 +111,12 @@ public class PlayerControls : MonoBehaviour
 
     void PlayFromTable()
     {
-        
+        Card tableCard = SelectCard();
+
+        if (tableCard)
+        {
+            Debug.Log("empty");
+        }
 
         if (Input.GetMouseButtonDown(1))
         {
