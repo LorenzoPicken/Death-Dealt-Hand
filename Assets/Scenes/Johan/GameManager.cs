@@ -7,9 +7,8 @@ using System;
 using UnityEditor;
 using System.Security.Cryptography;
 
-
-    public class GameManager : MonoBehaviour
-    {
+public class GameManager : MonoBehaviour
+{
         public List<Card> deck = new List<Card>();
         public List<Card> player1Hand = new List<Card>();
         public List<Card> player2Hand = new List<Card>();
@@ -44,30 +43,42 @@ using System.Security.Cryptography;
             
         }
 
-    private void OnEnable()
-    {
-        SelectionManager.OnCardSelected += MakeTableCardsAvailable;
-    }
-    private void OnDisable()
-    {
-        SelectionManager.OnCardSelected -= MakeTableCardsAvailable;
+    // Function subscription
+        private void OnEnable()
+        {
+            SelectionManager.OnCardSelected += MakeTableCardsAvailable;
+            SelectionManager.OnCardDeselected += MakeTableCardsUnavailable;
+        }
+        private void OnDisable()
+        {
+            SelectionManager.OnCardSelected -= MakeTableCardsAvailable;
+            SelectionManager.OnCardDeselected -= MakeTableCardsUnavailable;
 
-    }
+        }
 
-    private void MakeTableCardsAvailable()
+    // Switching on and off cards selectable bool
+        private void MakeTableCardsAvailable()
+        {
+            foreach (Card card in tableHand) 
+            { 
+                card.selectable = true;
+            }
+        }   
+    private void MakeTableCardsUnavailable()
     {
         foreach (Card card in tableHand) 
         { 
-            card.Selectable = true;
+                card.selectable = false;
         }
     }
+
 
     private void MakePlayerCardsAvailable()
     {
         foreach (Card card in player1Hand)
         {
-            card.Selectable = true;
-            Debug.Log(card.CardValue);
+            card.selectable = true;
+            Debug.Log(card.cardValue);
         }
     }
     private void Start()
@@ -105,17 +116,32 @@ using System.Security.Cryptography;
                 {
                     if (availableSlots[i] == true)
                     {
-                        deck[i].gameObject.SetActive(true);
-                        deck[i].transform.position = cardSlots[i].transform.position;
+                        deck[0].gameObject.SetActive(true);
+                        deck[0].transform.position = cardSlots[i].transform.position;
+                        try
+                        {
+                            var cardSlotsTry = cardSlots[i].GetChild(0).gameObject.GetComponent<CardSlot>();
+                            Debug.Log(cardSlotsTry + "Im here");
+                            if (cardSlotsTry != null) { cardSlotsTry.available = false; }
+                            Debug.Log(cardSlotsTry + "Im working?");
+
+                        }
+                        catch (Exception e) 
+                        { 
+                            Debug.Log(e);
+                        }
+                        
                         availableSlots[i] = false;
-                        deck.Remove(deck[i]);
-                        playerHand.Add(deck[i]);
-                    
+                        playerHand.Add(deck[0]);
+                        deck.Remove(deck[0]);
+                        
                     }
+
                 }
             }
         }
-
+        
+      
       
 
     }

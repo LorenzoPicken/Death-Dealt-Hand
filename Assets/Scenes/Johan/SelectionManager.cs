@@ -12,64 +12,124 @@ public class SelectionManager : MonoBehaviour
     public Card selection2;
 
     public static event Action OnCardSelected;
+    public static event Action OnCardDeselected;
     private void Update()
     {
+        // If left click and selection null select a card 
         if (Input.GetMouseButtonDown(0) && selection1 == null && selection2 == null)
         {
             selection1 = SelectCard();
-            OnCardSelected?.Invoke();
+            if (selection1 != null) { OnCardSelected?.Invoke(); }
             return;
         }
 
+        // If left click and selection1 is not null, compare both cards 
         if (Input.GetMouseButtonDown(0) && selection1 != null && selection2 == null)
         {
 
             selection2 = SelectCard();
-            if(selection1.Equals(selection2))
+            if (selection1.Equals(selection2))
             {
-                selection2 = null; 
+                selection2 = null;
                 return;
             }
-            CompareCards(selection1, selection2);
+            if (selection1 != null && selection2 != null)
+            {
+                CompareCards(selection1, selection2);
+            }
+        }
+
+        // If right click deselect cards and unable table cards 
+        if (Input.GetMouseButtonDown(1))
+        {
+            Deselect();
+            OnCardDeselected?.Invoke();
         }
     }
 
     private void CompareCards(Card card1, Card card2)
     {
-        if(card1.CardValue == card2.CardValue)
+        if (card1.cardValue == card2.cardValue)
         {
             card1.transform.position = playedCards.position;
             card2.transform.position = playedCards.position + Vector3.up;
             selection1 = null;
             selection2 = null;
+            OnCardDeselected?.Invoke();
         }
         else
         {
             selection2 = null;
         }
-        if(card1 == null) { return; }
-        if(card2 == null) { return; }
+      
     }
 
+
+    private void Deselect()
+    {
+        selection1 = null;
+    }
+
+    // Select a card which selectable attribute is true through Raycast 
     private Card SelectCard()
     {
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out hit))
         {
-            var card = hit.transform.GetComponent<Card>();
-            if (card.Selectable)
+            if (hit.collider.tag == "card")
             {
-                return card;
+                var card = hit.transform.GetComponent<Card>();
+                if (card.selectable)
+                {
+                    return card;
+                }
+                else
+                {
+                    Debug.Log("here");
+                }
             }
-            else
+            if (hit.collider.tag == "TableSlots")
             {
-                Debug.Log("here");
+                var cardSlots = hit.collider.gameObject.GetComponent<CardSlot>();
+                if (cardSlots.available)
+                {
+                    selection1.transform.position = cardSlots.transform.position;
+                    OnCardDeselected?.Invoke();
+                    selection1 = null;
+                }
+                else
+                {
+                    Debug.Log("not available");
+                }
+
             }
         }
-        return null;
+            return null;
+
     }
-}
+        private void PutDownCard(Card card)
+        {
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.tag == "TableSlots")
+                {
+                    var cardSlots = hit.collider.gameObject.GetComponent<CardSlot>();
+                    if (cardSlots.available)
+                    {
+                        card.transform.position = cardSlots.transform.position;
+                    }
+                    else
+                    {
+                        Debug.Log("not available");
+                    }
+
+                }
+            }
+        }
+    } 
 
 
 
