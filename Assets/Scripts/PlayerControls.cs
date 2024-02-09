@@ -57,7 +57,7 @@ public class PlayerControls : MonoBehaviour
                     break;
 
                 case STATE.MOVETOTABLE:
-                    Invoke("MoveToTable", 0.5f);
+                    Invoke("MoveToTable", 0.3f);
                     break;
 
                 case STATE.MOVETOHAND:
