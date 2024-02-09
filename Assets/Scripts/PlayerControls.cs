@@ -22,6 +22,7 @@ public class PlayerControls : MonoBehaviour
 
     private int selectedValue = 0;
 
+     private Card selectedCard;
 
     STATE currentState;
 
@@ -49,7 +50,7 @@ public class PlayerControls : MonoBehaviour
             switch(currentState)
             {
                 case STATE.HAND:
-                    PlayFromHand();
+                    selectedCard = PlayFromHand();
                     break;
 
                 case STATE.TABLE:
@@ -68,41 +69,39 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    void PlayFromHand()
+    Card PlayFromHand()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            
+            selectedCard = SelectCard();
 
-            Vector3 mousePosition = Input.mousePosition;
-
-
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                
-                
-
-                Card selectedCard = hit.transform?.GetComponent<Card>();
-
-                if(selectedCard.InHand == true) 
+                if (selectedCard.InHand == true && selectedCard != null)
                 {
                     selectedValue = selectedCard.CardValue;
                     selectedCard.Selected = true;
                     ShowSelectedCardHand(selectedCard);
                     Debug.Log("You Have Decided To Play The " + selectedValue + " Of " + selectedCard.Suit);
                     currentState = STATE.MOVETOTABLE;
+                    return selectedCard;
                 }
-
-                
-            }
+            
         }
+        return null;
 
 
 
+    }
+    Card SelectCard()
+    {
+        Ray ray;
+
+        if (Physics.Raycast(ray = Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
+        {
+            Card selectedCard = hit.transform?.GetComponent<Card>();
+            return selectedCard;
+            
+        }
+        return null;
     }
     void MoveToTable()
     {
@@ -112,6 +111,13 @@ public class PlayerControls : MonoBehaviour
 
     void PlayFromTable()
     {
+        Card tableCard = SelectCard();
+
+        if (tableCard)
+        {
+            Debug.Log("empty");
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             
@@ -127,17 +133,23 @@ public class PlayerControls : MonoBehaviour
 
     void DeselectCardHand()
     {
-        foreach(Card card in handList)
-        {
-            if(card.Selected == true)
-            {
-                card.transform.localPosition += (Vector3.forward * +0.2f) + (Vector3.up * -0.2f);
-                card.Selected = false;
-            }
+        //foreach(Card card in handList)
+        //{
+        //    if(card.Selected == true)
+        //    {
+        //        card.transform.localPosition += (Vector3.forward * +0.2f) + (Vector3.up * -0.2f);
+        //        card.Selected = false;
+        //    }
             
+        //}
+        //selectedValue = 0;
+        //Debug.Log("Selection Cancelled");
+        if(selectedCard != null) 
+        { 
+            selectedCard.transform.localPosition += (Vector3.forward * +0.2f) + (Vector3.up * -0.2f);
+            selectedCard.Selected = false;
+            selectedCard = null;
         }
-        selectedValue = 0;
-        Debug.Log("Selection Cancelled");
 
     }
 
