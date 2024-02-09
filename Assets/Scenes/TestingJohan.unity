@@ -2379,7 +2379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c307063509b44409e5e753b416514e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRoundState: 0
 --- !u!4 &1814778827
 Transform:
   m_ObjectHideFlags: 0
@@ -2482,7 +2481,6 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1814778827}
   - {fileID: 302598852}
   - {fileID: 29338495}
   - {fileID: 642009679}
@@ -2501,3 +2499,4 @@ SceneRoots:
   - {fileID: 804911344}
   - {fileID: 1800311767}
   - {fileID: 899960350}
+  - {fileID: 1814778827}
