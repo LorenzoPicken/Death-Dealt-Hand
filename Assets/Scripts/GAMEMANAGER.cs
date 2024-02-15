@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, WON, LOST }
+public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, ENEMYTURN, WON, LOST }
 public class GAMEMANAGER : MonoBehaviour
 {
     public static GAMEMANAGER Instance;
@@ -44,13 +44,24 @@ public class GAMEMANAGER : MonoBehaviour
             case RoundState.PLAYERTURN:
                 break;               
             case RoundState.CHECKPLAYSTATE:
-                
+                CheckPlayerHand();
                 break; 
+            case RoundState.ENEMYTURN:
+                break;
             case RoundState.LOST:
                 break;
             case RoundState.WON: 
                 break;
         }
+    }
+
+    private void CheckPlayerHand()
+    {
+        if(playerHand.Count == 0)
+        {
+
+        }
+
     }
 
     private void SetUpGame()
