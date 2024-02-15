@@ -7,6 +7,7 @@ using UnityEngine;
 public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, ENEMYTURN, WON, LOST }
 public class GAMEMANAGER : MonoBehaviour
 {
+    int me = 350;
     public static GAMEMANAGER Instance;
    
     public List<Card> deck = new List<Card>();
