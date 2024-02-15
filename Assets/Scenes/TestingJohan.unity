@@ -4489,6 +4489,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa41af5212e1f642bed698704e08634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1495685300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1495685301}
+  m_Layer: 0
+  m_Name: PlayedCards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1495685301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495685300}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.798, y: 0.835, z: -2.334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1520090411
 GameObject:
   m_ObjectHideFlags: 0
@@ -5238,6 +5269,7 @@ MonoBehaviour:
   - {fileID: 607093542}
   playerHand: []
   playedCards: []
+  tableList: []
   playerSlots:
   - {fileID: 6121536686838137466}
   - {fileID: 1041266503}
@@ -5250,6 +5282,7 @@ MonoBehaviour:
   - {fileID: 1382272574}
   - {fileID: 1745413849}
   - {fileID: 1292720436}
+  isPlayerHandEmpty: 0
   currentRoundState: 0
 --- !u!1 &1827755909
 GameObject:
@@ -6267,3 +6300,4 @@ SceneRoots:
   - {fileID: 700896707}
   - {fileID: 2089666183}
   - {fileID: 1520090412}
+  - {fileID: 1495685301}

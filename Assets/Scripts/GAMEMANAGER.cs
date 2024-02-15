@@ -17,6 +17,8 @@ public class GAMEMANAGER : MonoBehaviour
     public Transform[] playerSlots;
     public CardSlot[] cardSlots;
 
+    public bool isPlayerHandEmpty = false;
+
     public RoundState currentRoundState;
     private void Awake()
     {
@@ -58,10 +60,25 @@ public class GAMEMANAGER : MonoBehaviour
 
     private void CheckPlayerHand()
     {
-        if(playerHand.Count == 0)
+        if (deck.Count >= 3)
         {
+            if (playerHand.Count == 0)
+            {
+                for (int i = 0; i < playerSlots.Length; i++)
+                {
+                    deck[0].gameObject.SetActive(true);
+                    deck[0].transform.position = playerSlots[i].transform.position;
+                    deck[0].transform.rotation = playerSlots[i].transform.rotation;
+                    deck[0].inHand = true;
+                    playerHand.Add(deck[0]);
+                    deck.Remove(deck[0]);
 
+                }
+
+            }
+                currentRoundState = RoundState.PLAYERTURN;
         }
+
 
     }
 
@@ -89,7 +106,7 @@ public class GAMEMANAGER : MonoBehaviour
 
         if (deck.Count >= 0)
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < playerSlots.Length; i++)
             {
                 deck[0].gameObject.SetActive(true);
                 deck[0].transform.position = playerSlots[i].transform.position;
