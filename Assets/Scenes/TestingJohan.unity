@@ -4675,6 +4675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camSwitch: {fileID: 29145556}
+  playedCards: {fileID: 1495685301}
   cards:
     serializedVersion: 2
     m_Bits: 64
@@ -5226,6 +5227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c307063509b44409e5e753b416514e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tableTotal: 0
   deck:
   - {fileID: 1995841053}
   - {fileID: 2084206324}
@@ -5282,7 +5284,6 @@ MonoBehaviour:
   - {fileID: 1382272574}
   - {fileID: 1745413849}
   - {fileID: 1292720436}
-  isPlayerHandEmpty: 0
   currentRoundState: 0
 --- !u!1 &1827755909
 GameObject:

@@ -19,7 +19,6 @@ public class GAMEMANAGER : MonoBehaviour
     public Transform[] playerSlots;
     public CardSlot[] cardSlots;
 
-    public bool isPlayerHandEmpty = false;
 
     public RoundState currentRoundState;
     private void Awake()

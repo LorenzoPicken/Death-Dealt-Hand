@@ -107,7 +107,7 @@ public class PlayerControls : MonoBehaviour
                 Debug.Log("Correct, the sum of cards is equal to the selected card");
                 StartCoroutine(transformPositionDown(tableCard.transform));
                 StartCoroutine(transformPositionDown(secondTableCard.transform));
-                //MovePlayedCards(selectedCard, tableCard, secondTableCard);
+                MovePlayedCards(selectedCard, tableCard, secondTableCard);
                 DeselectCardHand();
                 currentState = STATE.MOVETOHAND;
             }
@@ -243,7 +243,7 @@ public class PlayerControls : MonoBehaviour
             {
                 Debug.Log("You got it");
                 StartCoroutine(transformPositionDown(tableCard.transform));
-                MovePlayedCards(selectedCard, tableCard);
+                MovePlayedCards(selectedCard, tableCard, null);
                 currentState = STATE.MOVETOHAND;
             }
             if(selectedCard.CardValue < tableCard.CardValue)
@@ -256,10 +256,19 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void MovePlayedCards(Card card1, Card card2)
+    private void MovePlayedCards(Card card1, Card card2, Card card3)
     {
         GAMEMANAGER.Instance.playedCards.Add(card1);
-        GAMEMANAGER.Instance.playedCards.Add(card2);
+        GAMEMANAGER.Instance.playedCards.Add(card2); 
+        GAMEMANAGER.Instance.playerHand.Remove(card1);
+        GAMEMANAGER.Instance.playerHand.Remove(card2);
+        if(card3 != null)
+        {
+            GAMEMANAGER.Instance.playedCards.Add(card3);
+            card3.transform.position = playedCards.transform.position;
+            card3.transform.rotation = playedCards.transform.rotation;
+            GAMEMANAGER.Instance.playerHand.Remove(card3);
+        }
         card1.transform.position = playedCards.transform.position;
         card1.transform.rotation = playedCards.transform.rotation;
         card2.transform.position = playedCards.transform.position;
