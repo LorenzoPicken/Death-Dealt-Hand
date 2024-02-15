@@ -12,6 +12,7 @@ public class GAMEMANAGER : MonoBehaviour
     public List<Card> deck = new List<Card>();
     public List<Card> playerHand = new List<Card>();
     public List<Card> playedCards = new List<Card>();
+    public List<Card> tableList = new List<Card>();
 
     public Transform[] playerSlots;
     public CardSlot[] cardSlots;
