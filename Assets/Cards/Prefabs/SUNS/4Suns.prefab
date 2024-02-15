@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 4Suns
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bc110eeeb4103b24785c483a01f12fce, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bc110eeeb4103b24785c483a01f12fce, type: 3}
+      propertyPath: m_TagString
+      value: card
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95,6 +103,7 @@ MonoBehaviour:
   suit: 0
   cardValue: 4
   inHand: 0
+  inTable: 0
 --- !u!65 &-929251366457920124
 BoxCollider:
   m_ObjectHideFlags: 0

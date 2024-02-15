@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 7Suns
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 192646c58605c5a43a41ee8a81840802, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 192646c58605c5a43a41ee8a81840802, type: 3}
+      propertyPath: m_TagString
+      value: card
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95,6 +103,7 @@ MonoBehaviour:
   suit: 0
   cardValue: 7
   inHand: 0
+  inTable: 0
 --- !u!65 &-8833269207968849860
 BoxCollider:
   m_ObjectHideFlags: 0

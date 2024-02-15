@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 7Clubs
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1188a53c6f7f56a44b16b156089cf225, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1188a53c6f7f56a44b16b156089cf225, type: 3}
+      propertyPath: m_TagString
+      value: card
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95,6 +103,7 @@ MonoBehaviour:
   suit: 3
   cardValue: 7
   inHand: 0
+  inTable: 0
 --- !u!65 &-3470331398420320567
 BoxCollider:
   m_ObjectHideFlags: 0
