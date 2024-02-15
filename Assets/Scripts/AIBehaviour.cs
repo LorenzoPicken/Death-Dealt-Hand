@@ -19,7 +19,7 @@ public class AIBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GAMEMANAGER.currentTurn == 2)
+        if (GAMEMANAGER.Instance.currentRoundState == RoundState.ENEMYTURN)
         {
             switch (currentState)
             {

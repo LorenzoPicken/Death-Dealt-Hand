@@ -11,6 +11,7 @@ public class PlayerControls : MonoBehaviour
 {
     //Cameras
     [SerializeField] CameraSwitch camSwitch;
+    [SerializeField] Transform playedCards;
 
     public LayerMask cards;
     //list of cards collected by the player
@@ -50,6 +51,10 @@ public class PlayerControls : MonoBehaviour
             switch(currentState)
             {
                 case STATE.HAND:
+                    if (GAMEMANAGER.Instance.playerHand.Count == 0)
+                    {
+                        GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
+                    }
                     selectedCard = PlayFromHand();
                     break;
 
@@ -71,6 +76,7 @@ public class PlayerControls : MonoBehaviour
                     camSwitch.SwitchToHand();
                     currentState = STATE.HAND;
                     break;
+                
             }
         }
     }
@@ -100,6 +106,7 @@ public class PlayerControls : MonoBehaviour
                 Debug.Log("Correct, the sum of cards is equal to the selected card");
                 StartCoroutine(transformPositionDown(tableCard.transform));
                 StartCoroutine(transformPositionDown(secondTableCard.transform));
+                //MovePlayedCards(selectedCard, tableCard, secondTableCard);
                 DeselectCardHand();
                 currentState = STATE.MOVETOHAND;
             }
@@ -197,11 +204,13 @@ public class PlayerControls : MonoBehaviour
                     {
                         selectedCard.transform.position = cardslot.transform.position;
                         selectedCard.transform.rotation = cardslot.transform.rotation;
+                        GAMEMANAGER.Instance.playerHand.Remove(selectedCard);
                         currentState = STATE.MOVETOHAND;
                     }
                 }
             }
-                tableCard = SelectCard();
+            
+            tableCard = SelectCard();
             if(tableCard != null)
             {
 
@@ -233,8 +242,8 @@ public class PlayerControls : MonoBehaviour
             {
                 Debug.Log("You got it");
                 StartCoroutine(transformPositionDown(tableCard.transform));
+                MovePlayedCards(selectedCard, tableCard);
                 currentState = STATE.MOVETOHAND;
-                GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
             }
             if(selectedCard.CardValue < tableCard.CardValue)
             {
@@ -245,6 +254,17 @@ public class PlayerControls : MonoBehaviour
             }
         }
     }
+
+    private void MovePlayedCards(Card card1, Card card2)
+    {
+        GAMEMANAGER.Instance.playedCards.Add(card1);
+        GAMEMANAGER.Instance.playedCards.Add(card2);
+        card1.transform.position = playedCards.transform.position;
+        card1.transform.rotation = playedCards.transform.rotation;
+        card2.transform.position = playedCards.transform.position;
+        card2.transform.rotation = playedCards.transform.rotation;
+    }
+
     void ShowSelectedCardHand(Card selectedCard)
     {
         selectedCard.transform.localPosition += (Vector3.forward * -0.2f) + (Vector3.up * 0.2f);
@@ -270,5 +290,6 @@ public enum STATE
     TABLE,
     MOVETOTABLE,
     MOVETOHAND,
-    SECONDCARD
+    SECONDCARD,
+    CHANGESTATE
 }
