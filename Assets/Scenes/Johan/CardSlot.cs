@@ -6,4 +6,20 @@ using UnityEngine;
 public class CardSlot : MonoBehaviour
 {
     public bool available = true;
+    Card card;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "card")
+        available = false;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "card")
+            available = true;
+    }
+
+   
+
 }

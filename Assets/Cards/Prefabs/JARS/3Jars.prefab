@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: 3Jars
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a3697089b57060445916a21322ac98e2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a3697089b57060445916a21322ac98e2, type: 3}
+      propertyPath: m_TagString
+      value: card
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95,6 +103,7 @@ MonoBehaviour:
   suit: 1
   cardValue: 3
   inHand: 0
+  inTable: 0
 --- !u!65 &-6850532405420670612
 BoxCollider:
   m_ObjectHideFlags: 0
