@@ -3,12 +3,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; 
 
-public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, ENEMYTURN, WON, LOST }
+public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTURN, WON, LOST }
 public class GAMEMANAGER : MonoBehaviour
 {
+
+    [SerializeField] public TMP_Text textMeshPro;
     public int tableTotal;
     public static GAMEMANAGER Instance;
+    public int playerPoints = 0;
    
 
     public List<Card> deck = new List<Card>();
@@ -33,6 +37,8 @@ public class GAMEMANAGER : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    // Set Cards
     void Start()
     {
       currentRoundState = RoundState.START;
@@ -49,7 +55,10 @@ public class GAMEMANAGER : MonoBehaviour
                 break;               
             case RoundState.CHECKPLAYSTATE:
                 CheckPlayerHand();
-                break; 
+                break;
+            case RoundState.COUNTPOINTS:
+                CountPoints();
+                break;
             case RoundState.ENEMYTURN:
                 break;
             case RoundState.LOST:
@@ -59,9 +68,35 @@ public class GAMEMANAGER : MonoBehaviour
         }
     }
 
+    private void CountPoints()
+    {
+
+        int playerSuns = 0;
+        int playerSevens = 0;
+        
+        foreach(Card card in playedCards)
+        {
+            if(card.Suit == Suit.SUNS)
+            {
+                playerSuns++;
+                if(card.CardValue == 7) { playerPoints++; }
+            }
+            if(card.CardValue == 7) { playerSevens++; }
+        }
+        
+        if (playedCards.Count >= 21) { playerPoints++;}
+        if (playerSuns >= 6) { playerPoints++; }
+        if (playerSevens >= 6) {  playerPoints++; }
+
+        textMeshPro.text = "Points: " + playerPoints;
+
+        currentRoundState = RoundState.WON;
+
+    }
+
     private void CheckPlayerHand()
     {
-        if (deck.Count >= 3)
+        if (deck.Count != 0)
         {
             if (playerHand.Count == 0)
             {
@@ -75,9 +110,12 @@ public class GAMEMANAGER : MonoBehaviour
                     deck.Remove(deck[0]);
 
                 }
-
             }
-                currentRoundState = RoundState.PLAYERTURN;
+                 currentRoundState = RoundState.PLAYERTURN;
+        }
+        else
+        {
+            currentRoundState = RoundState.COUNTPOINTS;
         }
 
 
@@ -117,6 +155,7 @@ public class GAMEMANAGER : MonoBehaviour
                 deck.Remove(deck[0]);
                 
             }
+            // Place four cards in the table
             for (int j = 0; j < 4; j++)
             {
                 deck[0].gameObject.SetActive(true);

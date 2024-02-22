@@ -9,8 +9,7 @@ using Debug = UnityEngine.Debug;
 
 public class PlayerControls : MonoBehaviour
 {
-    int me = 350;
-    //Cameras
+
     [SerializeField] CameraSwitch camSwitch;
     [SerializeField] Transform playedCards;
 
