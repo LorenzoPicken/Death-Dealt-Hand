@@ -3,13 +3,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; 
+using TMPro;
+using UnityEditor.PackageManager.Requests;
 
 public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTURN, WON, LOST }
 public class GAMEMANAGER : MonoBehaviour
 {
 
     [SerializeField] public TMP_Text textMeshPro;
+    [SerializeField] public TMP_Text round_number_tmp;
+
+    private int round_number = 1;
     public int tableTotal;
     public static GAMEMANAGER Instance;
     public int playerPoints = 0;
@@ -42,11 +46,13 @@ public class GAMEMANAGER : MonoBehaviour
     void Start()
     {
       currentRoundState = RoundState.START;
+      round_number_tmp.text = "Round: " + round_number.ToString();
     }
 
     private void Update()
     {
-        switch(currentRoundState)
+        
+        switch (currentRoundState)
         {
             case RoundState.START:
                 SetUpGame();
@@ -63,9 +69,32 @@ public class GAMEMANAGER : MonoBehaviour
                 break;
             case RoundState.LOST:
                 break;
-            case RoundState.WON: 
+            case RoundState.WON:
+                ResetLists();
+                round_number++;
+                round_number_tmp.text = "Round: " + round_number.ToString();
                 break;
         }
+    }
+
+    private void ResetLists()
+    {
+        foreach(Card card in playedCards)
+        {
+            deck.Add(card);
+            playedCards.Remove(card);
+        }
+        foreach (Card card in tableList)
+        {
+            card.transform.position += Vector3.right * 7; 
+            deck.Add(card);
+            tableList.Remove(card);
+            
+        }
+        
+
+
+        currentRoundState = RoundState.START;
     }
 
     private void CountPoints()
@@ -79,14 +108,16 @@ public class GAMEMANAGER : MonoBehaviour
             if(card.Suit == Suit.SUNS)
             {
                 playerSuns++;
-                if(card.CardValue == 7) { playerPoints++; }
+               
             }
-            if(card.CardValue == 7) { playerSevens++; }
+
+            if(card.Suit == Suit.SUNS && card.CardValue == 7) { playerPoints++; Debug.Log("You got the seven of SUNS"); }
+            if(card.CardValue == 7) { playerSevens++;  }
         }
         
-        if (playedCards.Count >= 21) { playerPoints++;}
-        if (playerSuns >= 6) { playerPoints++; }
-        if (playerSevens >= 6) {  playerPoints++; }
+        if (playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + playedCards.Count); }
+        if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); }
+        if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); }
 
         textMeshPro.text = "Points: " + playerPoints;
 
@@ -160,7 +191,9 @@ public class GAMEMANAGER : MonoBehaviour
             {
                 deck[0].gameObject.SetActive(true);
                 deck[0].transform.position = cardSlots[j].transform.position;
+                deck[0].transform.rotation = cardSlots[j].transform.rotation;
                 cardSlots[j].available = false;
+                tableList.Add(deck[0]);
                 deck.Remove(deck[0]);
             }
 

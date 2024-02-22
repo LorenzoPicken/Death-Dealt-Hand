@@ -204,6 +204,10 @@ public class PlayerControls : MonoBehaviour
                     {
                         selectedCard.transform.position = cardslot.transform.position;
                         selectedCard.transform.rotation = cardslot.transform.rotation;
+
+                        // Adding card to tableList 
+                        
+                        GAMEMANAGER.Instance.tableList.Add(selectedCard);
                         GAMEMANAGER.Instance.playerHand.Remove(selectedCard);
                         currentState = STATE.MOVETOHAND;
                     }
@@ -259,6 +263,7 @@ public class PlayerControls : MonoBehaviour
     {
         GAMEMANAGER.Instance.playedCards.Add(card1);
         GAMEMANAGER.Instance.playedCards.Add(card2); 
+        GAMEMANAGER.Instance.tableList.Remove(card2);
         GAMEMANAGER.Instance.playerHand.Remove(card1);
         GAMEMANAGER.Instance.playerHand.Remove(card2);
         if(card3 != null)
@@ -266,6 +271,7 @@ public class PlayerControls : MonoBehaviour
             GAMEMANAGER.Instance.playedCards.Add(card3);
             card3.transform.position = playedCards.transform.position;
             card3.transform.rotation = playedCards.transform.rotation;
+            GAMEMANAGER.Instance.tableList.Remove(card3);
             GAMEMANAGER.Instance.playerHand.Remove(card3);
         }
         card1.transform.position = playedCards.transform.position;
