@@ -12,17 +12,21 @@ public class GAMEMANAGER : MonoBehaviour
 
     [SerializeField] public TMP_Text textMeshPro;
     [SerializeField] public TMP_Text round_number_tmp;
+    
+    // Reference to the player and table
+    [SerializeField] public PlayerStateManager player;
+    [SerializeField] public Table table;
 
     private int round_number = 1;
     public int tableTotal;
     public static GAMEMANAGER Instance;
     public int playerPoints = 0;
    
-
+   
+    
     public List<Card> deck = new List<Card>();
-    public List<Card> playerHand = new List<Card>();
-    public List<Card> playedCards = new List<Card>();
-    public List<Card> tableList = new List<Card>();
+    
+    
 
     public Transform[] playerSlots;
     public CardSlot[] cardSlots;
@@ -79,21 +83,19 @@ public class GAMEMANAGER : MonoBehaviour
 
     private void ResetLists()
     {
-        foreach(Card card in playedCards)
+        foreach(Card card in table.playedCards)
         {
             deck.Add(card);
-            playedCards.Remove(card);
+            table.playedCards.Remove(card);
         }
-        foreach (Card card in tableList)
+        foreach (Card card in table.cards)
         {
             card.transform.position += Vector3.right * 7; 
             deck.Add(card);
-            tableList.Remove(card);
+            table.cards.Remove(card);
             
         }
         
-
-
         currentRoundState = RoundState.START;
     }
 
@@ -103,7 +105,7 @@ public class GAMEMANAGER : MonoBehaviour
         int playerSuns = 0;
         int playerSevens = 0;
         
-        foreach(Card card in playedCards)
+        foreach(Card card in table.playedCards)
         {
             if(card.Suit == Suit.SUNS)
             {
@@ -115,7 +117,7 @@ public class GAMEMANAGER : MonoBehaviour
             if(card.CardValue == 7) { playerSevens++;  }
         }
         
-        if (playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + playedCards.Count); }
+        if (table.playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); }
         if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); }
         if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); }
 
@@ -129,7 +131,7 @@ public class GAMEMANAGER : MonoBehaviour
     {
         if (deck.Count != 0)
         {
-            if (playerHand.Count == 0)
+            if (player.playerCards.Count == 0)
             {
                 for (int i = 0; i < playerSlots.Length; i++)
                 {
@@ -137,17 +139,18 @@ public class GAMEMANAGER : MonoBehaviour
                     deck[0].transform.position = playerSlots[i].transform.position;
                     deck[0].transform.rotation = playerSlots[i].transform.rotation;
                     deck[0].inHand = true;
-                    playerHand.Add(deck[0]);
+                    player.playerCards.Add(deck[0]);
                     deck.Remove(deck[0]);
 
                 }
             }
                  currentRoundState = RoundState.PLAYERTURN;
         }
-        else
+        if(deck.Count == 0 && player.playerCards.Count == 0)
         {
             currentRoundState = RoundState.COUNTPOINTS;
         }
+       
 
 
     }
@@ -182,7 +185,7 @@ public class GAMEMANAGER : MonoBehaviour
                 deck[0].transform.position = playerSlots[i].transform.position;
                 deck[0].transform.rotation = playerSlots[i].transform.rotation;
                 deck[0].inHand = true;
-                playerHand.Add(deck[0]);
+                player.playerCards.Add(deck[0]);
                 deck.Remove(deck[0]);
                 
             }
@@ -193,7 +196,7 @@ public class GAMEMANAGER : MonoBehaviour
                 deck[0].transform.position = cardSlots[j].transform.position;
                 deck[0].transform.rotation = cardSlots[j].transform.rotation;
                 cardSlots[j].available = false;
-                tableList.Add(deck[0]);
+                table.cards.Add(deck[0]);
                 deck.Remove(deck[0]);
             }
 

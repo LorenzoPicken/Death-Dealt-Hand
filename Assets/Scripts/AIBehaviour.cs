@@ -89,14 +89,14 @@ public class AIBehaviour : MonoBehaviour
     private bool IsThisCardEqualToCardOnTable()
     {
         
-        foreach(Card card in GAMEMANAGER.Instance.tableList)
-        {
-            if(currentCard.CardValue == card.CardValue)
-            {
-                return true;
-            }
+        //foreach(Card card in )
+        //{
+        //    if(currentCard.CardValue == card.CardValue)
+        //    {
+        //        return true;
+        //    }
             
-        }
+        //}
         return false;
     }
     #endregion

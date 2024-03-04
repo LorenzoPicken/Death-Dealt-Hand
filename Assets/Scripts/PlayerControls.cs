@@ -51,10 +51,10 @@ public class PlayerControls : MonoBehaviour
             switch(currentState)
             {
                 case STATE.HAND:
-                    if (GAMEMANAGER.Instance.playerHand.Count == 0)
-                    {
-                        GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
-                    }
+                    //if (GAMEMANAGER.Instance.playerHand.Count == 0)
+                    //{
+                    //    GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
+                    //}
                     selectedCard = PlayFromHand();
                     break;
 
@@ -159,8 +159,7 @@ public class PlayerControls : MonoBehaviour
         if (Physics.Raycast(ray = Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 15, cards))
         {
             Card selectedCard = hit.transform?.GetComponent<Card>();
-            return selectedCard;
-            
+            return selectedCard; 
         }
         return null;
     }
@@ -207,8 +206,8 @@ public class PlayerControls : MonoBehaviour
 
                         // Adding card to tableList 
                         
-                        GAMEMANAGER.Instance.tableList.Add(selectedCard);
-                        GAMEMANAGER.Instance.playerHand.Remove(selectedCard);
+                        //GAMEMANAGER.Instance.tableList.Add(selectedCard);
+                       // GAMEMANAGER.Instance.playerHand.Remove(selectedCard);
                         currentState = STATE.MOVETOHAND;
                     }
                 }
@@ -261,18 +260,18 @@ public class PlayerControls : MonoBehaviour
 
     private void MovePlayedCards(Card card1, Card card2, Card card3)
     {
-        GAMEMANAGER.Instance.playedCards.Add(card1);
-        GAMEMANAGER.Instance.playedCards.Add(card2); 
-        GAMEMANAGER.Instance.tableList.Remove(card2);
-        GAMEMANAGER.Instance.playerHand.Remove(card1);
-        GAMEMANAGER.Instance.playerHand.Remove(card2);
+        //GAMEMANAGER.Instance.playedCards.Add(card1);
+        //GAMEMANAGER.Instance.playedCards.Add(card2); 
+       // GAMEMANAGER.Instance.tableList.Remove(card2);
+       // GAMEMANAGER.Instance.playerHand.Remove(card1);
+       // GAMEMANAGER.Instance.playerHand.Remove(card2);
         if(card3 != null)
         {
-            GAMEMANAGER.Instance.playedCards.Add(card3);
+            //GAMEMANAGER.Instance.playedCards.Add(card3);
             card3.transform.position = playedCards.transform.position;
             card3.transform.rotation = playedCards.transform.rotation;
-            GAMEMANAGER.Instance.tableList.Remove(card3);
-            GAMEMANAGER.Instance.playerHand.Remove(card3);
+            //GAMEMANAGER.Instance.tableList.Remove(card3);
+            //GAMEMANAGER.Instance.playerHand.Remove(card3);
         }
         card1.transform.position = playedCards.transform.position;
         card1.transform.rotation = playedCards.transform.rotation;
