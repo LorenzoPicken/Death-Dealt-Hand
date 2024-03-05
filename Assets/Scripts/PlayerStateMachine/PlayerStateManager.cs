@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStateManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerStateManager : MonoBehaviour
     public List<Card> playerCards;
     public Table table;
     public Transform playedCardsTransform;
+
+    // UI 
+    public Image image;
     
     // Raycast LayerMask
     public LayerMask cards;
@@ -22,6 +26,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         currentState = HandState;
         currentState.EnterState(this);
+        image.enabled = false;
     }
 
     void Update()

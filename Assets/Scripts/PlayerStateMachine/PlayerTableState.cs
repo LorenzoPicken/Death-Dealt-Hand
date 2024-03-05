@@ -16,6 +16,9 @@ public class PlayerTableState : PlayerBaseState
     {
         Debug.Log("Enter state Player Table");
         cardsSum = 0;
+        player.image.enabled = true;
+        player.image.sprite = player.selectedCard.sprite;
+        
     }
 
     public override void UpdateState(PlayerStateManager player)
@@ -80,10 +83,10 @@ public class PlayerTableState : PlayerBaseState
             card.transform.position -= Vector3.up * 0.25f;
         }
         Debug.Log("Exit state Player Table");
-        player.camSwitch.SwitchToHand();
         Debug.Log(cardsSum);
         cardsToPlay.Clear();
-
+        player.image.enabled = false;
+        player.camSwitch.SwitchToHand();
     }
 
     // Raycast that hits cardslot colliders, if there is no card in collider it will put selected card down

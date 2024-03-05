@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +37,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -108,18 +108,898 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: All Scopa cards_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 525
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da56e97efb9967a4ea71d402fd4b3a94
+      internalID: 1422439503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_1
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 525
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52c402737de8caa4d9e06ccbe7b23774
+      internalID: -672551751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_2
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 525
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcee2d72e99898241a4be0c2584f7869
+      internalID: -1721236611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_3
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 525
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d1fe1c7f20b0a04c97d038975250f55
+      internalID: 673601027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_4
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 525
+        width: 102
+        height: 175
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 706631a5919f26a44bc3c60db273cb62
+      internalID: 1974901949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_5
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 528
+        width: 98
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918a952f2cf74584e80de2b6d173b757
+      internalID: -1706182196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_6
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 525
+        width: 102.4
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad33984a91fcff5438215e1654521a01
+      internalID: 744933209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_7
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 525
+        width: 102.4
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 763de0a22c94cc846999bf4de0f5f39e
+      internalID: -911219431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_8
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 525
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45d200743e0db0e4f8ca72299b12cb8e
+      internalID: -1968456355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_9
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 525
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31ee0bf6cb9f740449f1f195f6476a6c
+      internalID: 2135122032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 350
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c61222461a0da124b9e411ccd58f0734
+      internalID: -1381510937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_11
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 350
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1592f82b192c4f149a76c942adc43794
+      internalID: -1958895637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_12
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 350
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efeda92f095b96241b7821a6863c3cd0
+      internalID: -1800511765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_13
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 354
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fa63c168fa82614290992e8539ce66c
+      internalID: 1073368770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_14
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 351
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5c31247f562fe2458879b9c652fcf9f
+      internalID: 1134404473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_15
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 354
+        width: 100
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1ad31acafa748247a292e5d889ce6f1
+      internalID: -1052643477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_16
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 350
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f35240057edc1949a76ac6e82da952b
+      internalID: -516289670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_17
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 350
+        width: 102.4
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55fc0c4b560b63741bb3b6b081250a46
+      internalID: -579490039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_18
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 353
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da00239bae14cd84b8557f03d9b96951
+      internalID: 1331199553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_19
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 351
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc011f5d7afaf8140bee8b04bce84df3
+      internalID: -1333094843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 175
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5501394dfabb3d438aa4423038a89a5
+      internalID: 1243935931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_21
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 175
+        width: 92
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 273f31c5d8b72404db20a38c5b099687
+      internalID: -1527821861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_22
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 175
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2e88f4baab6fb04c8c54343190b039d
+      internalID: -1424129544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_23
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 180
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be1033c2d65721e4a9fbf5965e8383db
+      internalID: -419701147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_24
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 176
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70a23b60649f14f44b2af28e0ad0a027
+      internalID: 1905452617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_25
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 181
+        width: 98
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03eab12a61257174dbf563407312ff9a
+      internalID: 785911744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_26
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 178
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94927b24ce37d3e4f9459ca7474ce0f4
+      internalID: -888210138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_27
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 175
+        width: 102.4
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b45d730f6892844b96ba829216eb4fa
+      internalID: 1344095866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_28
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 177
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 145d9efcf7189c24480ebf94b9504704
+      internalID: -273067603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_29
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 175
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fe0c244d9b0f3944abb097a3390e2ae
+      internalID: 739467527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eee5065cc7616274dbc81d7bee5cd218
+      internalID: 1775195965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_31
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 0
+        width: 92
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f333981a5718def449c1d0288ce902fa
+      internalID: -19137510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_32
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 0
+        width: 96
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4c5bbc483aaab649bdc8c08c4e6f309
+      internalID: 546173634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_33
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 4
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce22ca6ebb2415f49a8571d4be2230b0
+      internalID: -1193419295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_34
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 2
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5065ab7ebff4c714f8dc1597dc370e50
+      internalID: -590902252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_35
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 2
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4352a742189e0141884625e162e4313
+      internalID: 2110637884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_36
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 0
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2329727727f1f8e489e9164dbb26320f
+      internalID: -181994309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_37
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 0
+        width: 102.4
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d1937b2dab8b0f4e96324af427bc8b0
+      internalID: -1227486604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_38
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 0
+        width: 102.4
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2093d7699d517b4387151caa2d0e3ef
+      internalID: 58992307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: All Scopa cards_39
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 2
+        width: 102
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 921cec85787b4ca4eb0dfba1cd4dd303
+      internalID: 73896088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5c3eff64ec516ff438538c6cab9b1973
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      All Scopa cards_0: 1422439503
+      All Scopa cards_1: -672551751
+      All Scopa cards_10: -1381510937
+      All Scopa cards_11: -1958895637
+      All Scopa cards_12: -1800511765
+      All Scopa cards_13: 1073368770
+      All Scopa cards_14: 1134404473
+      All Scopa cards_15: -1052643477
+      All Scopa cards_16: -516289670
+      All Scopa cards_17: -579490039
+      All Scopa cards_18: 1331199553
+      All Scopa cards_19: -1333094843
+      All Scopa cards_2: -1721236611
+      All Scopa cards_20: 1243935931
+      All Scopa cards_21: -1527821861
+      All Scopa cards_22: -1424129544
+      All Scopa cards_23: -419701147
+      All Scopa cards_24: 1905452617
+      All Scopa cards_25: 785911744
+      All Scopa cards_26: -888210138
+      All Scopa cards_27: 1344095866
+      All Scopa cards_28: -273067603
+      All Scopa cards_29: 739467527
+      All Scopa cards_3: 673601027
+      All Scopa cards_30: 1775195965
+      All Scopa cards_31: -19137510
+      All Scopa cards_32: 546173634
+      All Scopa cards_33: -1193419295
+      All Scopa cards_34: -590902252
+      All Scopa cards_35: 2110637884
+      All Scopa cards_36: -181994309
+      All Scopa cards_37: -1227486604
+      All Scopa cards_38: 58992307
+      All Scopa cards_39: 73896088
+      All Scopa cards_4: 1974901949
+      All Scopa cards_5: -1706182196
+      All Scopa cards_6: 744933209
+      All Scopa cards_7: -911219431
+      All Scopa cards_8: -1968456355
+      All Scopa cards_9: 2135122032
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

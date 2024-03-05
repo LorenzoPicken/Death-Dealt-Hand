@@ -104,6 +104,7 @@ MonoBehaviour:
   cardValue: 4
   inHand: 0
   inTable: 0
+  sprite: {fileID: -419701147, guid: 80054584056e9454f96d5208503bb807, type: 3}
 --- !u!65 &-8878402333506352631
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Card : MonoBehaviour
     public bool inHand;
     public bool inTable;
     private bool selected = false;
+    public Sprite sprite;
 
     public Suit Suit
     {
