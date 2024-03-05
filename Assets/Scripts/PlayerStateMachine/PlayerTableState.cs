@@ -105,6 +105,7 @@ public class PlayerTableState : PlayerBaseState
                 {
                     player.selectedCard.transform.position = cardslot.transform.position;
                     player.selectedCard.transform.rotation = cardslot.transform.rotation;
+                    player.selectedCard.inHand = false;
                     player.table.cards.Add(player.selectedCard);
                     player.playerCards.Remove(player.selectedCard);
                     GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
@@ -129,6 +130,7 @@ public class PlayerTableState : PlayerBaseState
         player.playerCards.Remove(player.selectedCard);
         player.selectedCard.transform.position = player.playedCardsTransform.transform.position;
         player.selectedCard.transform.rotation = player.playedCardsTransform.transform.rotation;
+        player.selectedCard.inHand = false;
         player.SwitchState(player.HandState);
         cardsToPlay.Clear();
         GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;

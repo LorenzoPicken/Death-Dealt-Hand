@@ -20,7 +20,7 @@ public class PlayerHandState : PlayerBaseState
 
             Debug.Log(player.selectedCard);
 
-            if (player.selectedCard != null)
+            if (player.selectedCard != null && player.selectedCard.inHand)
             {
                 player.SwitchState(player.TableState);
             }
