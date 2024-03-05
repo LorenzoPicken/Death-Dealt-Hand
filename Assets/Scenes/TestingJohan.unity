@@ -4111,8 +4111,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -269, y: -134}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -283, y: -118}
+  m_SizeDelta: {x: 67, y: 122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1204913253
 MonoBehaviour:
@@ -4127,7 +4127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5189,6 +5189,7 @@ MonoBehaviour:
   playerCards: []
   table: {fileID: 1211700944}
   playedCardsTransform: {fileID: 1495685301}
+  image: {fileID: 1204913253}
   cards:
     serializedVersion: 2
     m_Bits: 64
