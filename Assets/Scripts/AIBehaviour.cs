@@ -1,166 +1,229 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 
-public class AIBehaviour : MonoBehaviour
+public class AIBehaviour: MonoBehaviour
 {
     Card currentCard;
+    [SerializeField] Transform AI_CollectedCards;
     
 
-    List<Card> handList = new List<Card>() { };
+    public List<Card> handList = new List<Card>() { };
+    public List<Card> collectedCards = new List<Card>() { };
     List<List<Card>> listOfPlays = new List<List<Card>>();
     Dictionary<Card, List<Card>> playDict = new Dictionary<Card, List<Card>> { };
-    public List<List<Card>> playList = new List<List<Card>> { };
+    List<List<Card>> playList = new List<List<Card>> { };
 
+    [Header("--- Table ---")]
     [SerializeField] Table table;
-    public void AIPlay()
+    [SerializeField] CardSlot slot1;
+    [SerializeField] CardSlot slot2;
+    [SerializeField] CardSlot slot3;
+    [SerializeField] CardSlot slot4;
+    [SerializeField] CardSlot slot5;
+    [SerializeField] CardSlot slot6;
+    [SerializeField] CardSlot slot7;
+    [SerializeField] CardSlot slot8;
+    [SerializeField] CardSlot slot9;
+    public List<CardSlot> slotsList = new List<CardSlot> { };
+
+
+
+
+    [Header("Timing")]
+    [SerializeField] int minimumTime;
+    [SerializeField] int maximumTime;
+
+    private void Start()
     {
-        int currentIndex = 0;
-        int playIndex = 0;
-
-
-        //Iterates through all cards in the AI's hand
-        while (currentIndex < handList.Count)
-        {
-            currentCard = handList[currentIndex];
-            bool cardOfSameValueOnTable = false;
-            List<Card> soloCardList = new List<Card> { };
-            foreach (Card card in table.cards)
-            {
-                //Checks if there is a card of the same value as current card on table and adds them to a list
-                if (currentCard.CardValue == card.CardValue)
-                {
-                    cardOfSameValueOnTable = true;
-                    soloCardList.Add(card);
-                }
-            }
-
-            
-            if (cardOfSameValueOnTable == true)
-            {
-                bool sunfound = false;
-                foreach (Card card in soloCardList)
-                {
-                    //Checks to see if any of those same value cards were of Suit suns and adds to dictionary of possible plays
-                    if (card.Suit == Suit.SUNS)
-                    {
-                        playDict.Add(currentCard, new List<Card> { card });
-                        sunfound = true;
-                    }
-
-                }
-
-                //If not, it will
-                if (sunfound == false)
-                {
-                    playDict.Add(currentCard, new List<Card> { soloCardList[0] });
-
-                }
-                sunfound = false;
-            }
-            else
-            {
-
-                FindCombinations(table.cards, currentCard);
-                if (playList.Count > 0)
-                {
-
-                    playDict.Add(currentCard, playList[playIndex]);
-                }
-
-            }
-            cardOfSameValueOnTable = false;
-            soloCardList.Clear();
-
-
-
-
-
-
-            currentIndex++;
-        }
-        playIndex = 0;
-
-
-        if (playDict.Count == 0)
-        {
-            int tableTotal = 0;
-            foreach (Card card in table.cards)
-            {
-                tableTotal += card.CardValue;
-            }
-
-            if (tableTotal > 10)
-            {
-                Card smallestCard = new Card();
-                smallestCard.CardValue = handList[0].CardValue; smallestCard.Suit = handList[0].Suit;
-
-                foreach (Card card in handList)
-                {
-                    if (card.CardValue <= smallestCard.CardValue)
-                    {
-                        smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
-                    }
-                }
-                //Console.WriteLine("Play the " + smallestCard.CardValue + " of " + smallestCard.Suit);
-            }
-            else
-            {
-                int count = 0;
-                Card smallestCard = new Card();
-                smallestCard.CardValue = 0; smallestCard.Suit = Suit.CLUBS;
-                foreach (Card card in handList)
-                {
-                    if (card.CardValue + tableTotal > 10)
-                    {
-                        if (smallestCard.CardValue == 0)
-                        {
-                            smallestCard.Suit = card.Suit;
-                            smallestCard.CardValue = card.CardValue;
-                        }
-                        else if (smallestCard.CardValue > card.CardValue)
-                        {
-                            smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
-
-                        }
-                    }
-                    else
-                    {
-                        count++;
-                    }
-                }
-
-                if (count == handList.Count)
-                {
-                    foreach (Card card in handList)
-                    {
-                        if (smallestCard.CardValue == 0)
-                        {
-                            smallestCard.Suit = card.Suit;
-                            smallestCard.CardValue = card.CardValue;
-                        }
-                        else if (smallestCard.CardValue > card.CardValue)
-                        {
-                            smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
-
-                        }
-                    }
-                }
-                //Console.WriteLine("Place the " + smallestCard.CardValue + " of " + smallestCard.Suit);
-            }
-
-        }
-
-        else
-        {
-
-            FinalChoice(table.cards, handList, playDict);
-        }
+        slotsList.Add(slot1);
+        slotsList.Add(slot2);
+        slotsList.Add(slot3);
+        slotsList.Add(slot4);
+        slotsList.Add(slot5);
+        slotsList.Add(slot6);
+        slotsList.Add(slot7);
+        slotsList.Add(slot8);
+        slotsList.Add(slot9);
     }
 
-    public static int CalculateTableTotal(List<Card> tableList)
+
+    public void CountDown()
+    {
+        int waitTime = Random.Range(minimumTime, maximumTime);
+        Invoke("AIPlay", waitTime);
+    }
+
+
+    private void AIPlay()
+    {
+        
+            
+            int currentIndex = 0;
+            int playIndex = 0;
+
+
+            //Iterates through all cards in the AI's hand
+            while (currentIndex < handList.Count)
+            {
+                currentCard = handList[currentIndex];
+                bool cardOfSameValueOnTable = false;
+                List<Card> soloCardList = new List<Card> { };
+                foreach (Card card in table.cards)
+                {
+                    //Checks if there is a card of the same value as current card on table and adds them to a list
+                    if (currentCard.CardValue == card.CardValue)
+                    {
+                        cardOfSameValueOnTable = true;
+                        soloCardList.Add(card);
+                    }
+                }
+
+                
+                if (cardOfSameValueOnTable == true)
+                {
+                    bool sunfound = false;
+                    foreach (Card card in soloCardList)
+                    {
+                        //Checks to see if any of those same value cards were of Suit suns and adds to dictionary of possible plays
+                        if (card.Suit == Suit.SUNS)
+                        {
+                            playDict.Add(currentCard, new List<Card> { card });
+                            sunfound = true;
+                        }
+
+                    }
+
+                    //If not, it will
+                    if (sunfound == false)
+                    {
+                       
+                        playDict.Add(currentCard, new List<Card> { soloCardList[0] });
+
+                        
+
+                    }
+                    sunfound = false;
+                }
+                else
+                {
+
+                    FindCombinations(table.cards, currentCard);
+                    if (playList.Count > 0)
+                    {
+
+                        playDict.Add(currentCard, playList[playIndex]);
+                    }
+
+                }
+                cardOfSameValueOnTable = false;
+                soloCardList.Clear();
+
+
+
+
+
+
+                currentIndex++;
+            }
+            playIndex = 0;
+
+
+            if (playDict.Count == 0)
+            {
+                int tableTotal = 0;
+                foreach (Card card in table.cards)
+                {
+                    tableTotal += card.CardValue;
+                }
+
+                if (tableTotal > 10)
+                {
+                    Card smallestCard = new Card();
+                    smallestCard.CardValue = handList[0].CardValue; smallestCard.Suit = handList[0].Suit;
+
+                    foreach (Card card in handList)
+                    {
+                        if (card.CardValue <= smallestCard.CardValue)
+                        {
+                            smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
+                        }
+                    }
+
+                    foreach(Card card in handList)
+                    {
+                        if (card.CardValue == smallestCard.CardValue && card.Suit == smallestCard.Suit)
+                        {
+                            PlaceCards(card);
+
+                        }
+                    }
+                }
+                else
+                {
+                    int count = 0;
+                    Card smallestCard = new Card();
+                    smallestCard.CardValue = 0; smallestCard.Suit = Suit.CLUBS;
+                    foreach (Card card in handList)
+                    {
+                        if (card.CardValue + tableTotal > 10)
+                        {
+                            if (smallestCard.CardValue == 0)
+                            {
+                                smallestCard.Suit = card.Suit;
+                                smallestCard.CardValue = card.CardValue;
+                            }
+                            else if (smallestCard.CardValue > card.CardValue)
+                            {
+                                smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
+
+                            }
+                        }
+                        else
+                        {
+                            count++;
+                        }
+                    }
+
+                    if (count == handList.Count)
+                    {
+                        foreach (Card card in handList)
+                        {
+                            if (smallestCard.CardValue == 0)
+                            {
+                                smallestCard.Suit = card.Suit;
+                                smallestCard.CardValue = card.CardValue;
+                            }
+                            else if (smallestCard.CardValue > card.CardValue)
+                            {
+                                smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
+
+                            }
+                        }
+                    }
+                    foreach (Card card in handList)
+                    {
+                        if (card.CardValue == smallestCard.CardValue && card.Suit == smallestCard.Suit)
+                        {
+                            PlaceCards(card);
+
+                        }
+                    }
+                    
+                }
+
+            }
+
+            else
+            {
+                Debug.Log("Making Final Play");
+                FinalChoice(table.cards, handList, playDict);
+            }
+        
+    }
+
+    public int CalculateTableTotal(List<Card> tableList)
     {
         int tableTotal = 0;
         foreach (Card card in tableList)
@@ -174,7 +237,7 @@ public class AIBehaviour : MonoBehaviour
 
 
     #region narrows down option to most beneficial play
-    public static void FinalChoice(List<Card> tableList, List<Card> handList, Dictionary<Card, List<Card>> dict)
+    public void FinalChoice(List<Card> tableList, List<Card> handList, Dictionary<Card, List<Card>> dict)
     {
         Dictionary<int, Dictionary<Card, List<Card>>> bigDict = new Dictionary<int, Dictionary<Card, List<Card>>> { };
         bool isScopa = false;
@@ -210,8 +273,8 @@ public class AIBehaviour : MonoBehaviour
         }
         if (max > 0)
         {
-
-            //DisplayRewardAndPlays(finalDict);
+            Dictionary <Card, List<Card>> dictionary = finalDict.First().Value;
+            PickUpCards(dictionary);
         }
         else if (max == 0)
         {
@@ -220,7 +283,8 @@ public class AIBehaviour : MonoBehaviour
 
             if (rand == 1)
             {
-                //DisplayRewardAndPlays(finalDict);
+                Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
+                PickUpCards(dictionary);
             }
             else
             {
@@ -262,12 +326,20 @@ public class AIBehaviour : MonoBehaviour
                         }
                         if (cardToPlay.CardValue != 0)
                         {
-                            //Console.WriteLine("Place " + cardToPlay.CardValue + " of " + cardToPlay.Suit);
+                            foreach (Card card in handList)
+                            {
+                                if (card.CardValue == cardToPlay.CardValue && card.Suit == cardToPlay.Suit)
+                                {
+                                    PlaceCards(card);
+
+                                }
+                            }
                             break;
                         }
                         else
                         {
-                            //DisplayRewardAndPlays(finalDict);
+                            Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
+                            PickUpCards(dictionary);
                         }
                     }
 
@@ -315,14 +387,23 @@ public class AIBehaviour : MonoBehaviour
                             }
                         }
                     }
-                    //Console.WriteLine("Play " + cardToPlay.CardValue + " of " + cardToPlay.Suit);
+                    foreach (Card card in handList)
+                    {
+                        if (card.CardValue == cardToPlay.CardValue && card.Suit == cardToPlay.Suit)
+                        {
+                            PlaceCards(card);
+
+                        }
+                    }
                 }
             }
         }
         else
         {
-            Card cardToPlay = new Card();
-            cardToPlay.CardValue = 0; cardToPlay.Suit = Suit.CLUBS;
+            Suit suitToPlay = Suit.CLUBS;
+            int valueToPlay = 0;
+            //Card cardToPlay = new Card();
+            //cardToPlay.CardValue = 0; cardToPlay.Suit = Suit.CLUBS;
             int count = 0;
 
             int tableTotal;
@@ -344,16 +425,16 @@ public class AIBehaviour : MonoBehaviour
                 if (card.CardValue + tableTotal > 10)
                 {
 
-                    if (cardToPlay.CardValue == 0)
+                    if (valueToPlay == 0)
                     {
 
-                        cardToPlay.Suit = card.Suit;
-                        cardToPlay.CardValue = card.CardValue;
+                        suitToPlay = card.Suit;
+                        valueToPlay = card.CardValue;
                     }
-                    else if (cardToPlay.CardValue > card.CardValue)
+                    else if (valueToPlay > card.CardValue)
                     {
-                        cardToPlay.Suit = card.Suit;
-                        cardToPlay.CardValue = card.CardValue;
+                        suitToPlay = card.Suit;
+                        valueToPlay = card.CardValue;
                     }
                 }
                 else
@@ -374,24 +455,32 @@ public class AIBehaviour : MonoBehaviour
             {
                 foreach (Card card in handList)
                 {
-                    if (cardToPlay.CardValue == 0)
+                    if (valueToPlay == 0)
                     {
-                        cardToPlay.CardValue = card.CardValue; cardToPlay.Suit = card.Suit;
+                        valueToPlay = card.CardValue; suitToPlay = card.Suit;
                     }
                     else
                     {
-                        if (cardToPlay.CardValue > card.CardValue)
+                        if (valueToPlay > card.CardValue)
                         {
-                            cardToPlay.Suit = card.Suit;
-                            cardToPlay.CardValue = card.CardValue;
+                            suitToPlay = card.Suit;
+                            valueToPlay = card.CardValue;
                         }
                     }
                 }
-                //Console.WriteLine("Play " + cardToPlay.CardValue + " of " + cardToPlay.Suit);
+                foreach (Card card in handList)
+                {
+                    if (card.CardValue == valueToPlay && card.Suit == suitToPlay)
+                    {
+                        PlaceCards(card);
+
+                    }
+                }
             }
             else if (match == true)
             {
-                //DisplayRewardAndPlays(finalDict);
+                Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
+                PickUpCards(dictionary);
             }
 
         }
@@ -402,7 +491,7 @@ public class AIBehaviour : MonoBehaviour
     #endregion
 
     #region Checks risks of a play
-    static void RiskChecker(Dictionary<Card, List<Card>> dict, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, int reward, List<Card> tableList, List<Card> handList, Card currentKey)
+    void RiskChecker(Dictionary<Card, List<Card>> dict, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, int reward, List<Card> tableList, List<Card> handList, Card currentKey)
     {
         int tableTotal = 0;
         int riskRewardValue = reward;
@@ -494,7 +583,7 @@ public class AIBehaviour : MonoBehaviour
     #endregion
 
     #region Checks for all different types of Plays
-    public static bool ScopaChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public bool ScopaChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
     {
         int reward = 10;
         int currentCardValue = currentKey.CardValue;
@@ -514,7 +603,7 @@ public class AIBehaviour : MonoBehaviour
         }
         return false;
     }
-    public static void SevenSunChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public void SevenSunChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
     {
         int reward = 0;
         bool foundSevenSun = false;
@@ -586,7 +675,7 @@ public class AIBehaviour : MonoBehaviour
 
     }
 
-    public static void SunsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public void SunsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
     {
         int sunCount = 0;
         int reward = 0;
@@ -624,7 +713,7 @@ public class AIBehaviour : MonoBehaviour
 
 
 
-    public static void NormalCardsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public void NormalCardsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
     {
         int reward = 0;
         if (dict[currentKey].Count >= 3)
@@ -772,4 +861,81 @@ public class AIBehaviour : MonoBehaviour
 
 
     }
+
+
+    public void PickUpCards(Dictionary<Card, List<Card>> dict)
+    {
+        Debug.Log("Making a Play");
+        List<Card> cardsToRemoveFromHand = new List<Card>();
+        List<Card> cardsToRemoveFromTable = new List<Card>();
+
+        foreach (KeyValuePair<Card, List<Card>> combination in dict)
+        {
+            foreach (Card card in handList.ToList()) // Use ToList() to create a copy of the list for iteration
+            {
+                if (card.CardValue == combination.Key.CardValue && card.Suit == combination.Key.Suit)
+                {
+                    card.transform.position = AI_CollectedCards.position;
+                    cardsToRemoveFromHand.Add(card);
+                    Debug.Log(card.CardValue + card.Suit);
+                }
+            }
+
+            foreach (Card card in combination.Value.ToList()) // Use ToList() to create a copy of the list for iteration
+            {
+                foreach (Card tableCard in table.cards.ToList()) // Use ToList() to create a copy of the list for iteration
+                {
+                    if (card.CardValue == tableCard.CardValue && card.Suit == tableCard.Suit)
+                    {
+                        card.transform.position = AI_CollectedCards.position;
+                        cardsToRemoveFromTable.Add(card);
+                    }
+                }
+            }
+        }
+
+        // Remove cards from handList
+        foreach (Card cardToRemove in cardsToRemoveFromHand)
+        {
+            collectedCards.Add(cardToRemove);
+            handList.Remove(cardToRemove);
+        }
+
+        // Remove cards from table.cards
+        foreach (Card cardToRemove in cardsToRemoveFromTable)
+        {
+            collectedCards.Add(cardToRemove);
+            table.cards.Remove(cardToRemove);
+        }
+
+        EndTurn();
+    }
+
+    private void EndTurn()
+    {
+        listOfPlays.Clear();
+        playDict.Clear();
+        playList.Clear();
+        GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
+
+    }
+
+    
+
+    private void PlaceCards(Card card)
+    {
+        Debug.Log("Cant Play");
+        foreach(CardSlot slot in slotsList)
+        {
+            if(slot.available == true)
+            {
+                handList.Remove(card);
+                card.transform.position = slot.transform.position;
+                break;
+            }
+        }
+        EndTurn();
+        
+    }
+
 }

@@ -61,6 +61,7 @@ public class PlayerTableState : PlayerBaseState
                 }
                 Debug.Log("correct");
                 MoveCards(player);
+                GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                 return;
             }
             if(cardsSum != player.selectedCard.CardValue) 
@@ -108,7 +109,7 @@ public class PlayerTableState : PlayerBaseState
                     player.selectedCard.inHand = false;
                     player.table.cards.Add(player.selectedCard);
                     player.playerCards.Remove(player.selectedCard);
-                    GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
+                    GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                     player.SwitchState(player.HandState);
 
                 }
@@ -133,7 +134,7 @@ public class PlayerTableState : PlayerBaseState
         player.selectedCard.inHand = false;
         player.SwitchState(player.HandState);
         cardsToPlay.Clear();
-        GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
+        GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
 
     }
 

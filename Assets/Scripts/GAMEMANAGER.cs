@@ -15,12 +15,15 @@ public class GAMEMANAGER : MonoBehaviour
     
     // Reference to the player and table
     [SerializeField] public PlayerStateManager player;
+    [SerializeField] public AIBehaviour enemy;
     [SerializeField] public Table table;
 
     private int round_number = 1;
     public int tableTotal;
     public static GAMEMANAGER Instance;
     public int playerPoints = 0;
+
+    public int executionCount = 0;
    
    
     
@@ -62,6 +65,8 @@ public class GAMEMANAGER : MonoBehaviour
                 SetUpGame();
                 break; 
             case RoundState.PLAYERTURN:
+                executionCount = 0;
+
                 break;               
             case RoundState.CHECKPLAYSTATE:
                 CheckPlayerHand();
@@ -70,6 +75,12 @@ public class GAMEMANAGER : MonoBehaviour
                 CountPoints();
                 break;
             case RoundState.ENEMYTURN:
+                if(executionCount == 0)
+                {
+                
+                    enemy.CountDown();
+                }
+                executionCount = 1;
                 break;
             case RoundState.LOST:
                 break;
@@ -87,6 +98,11 @@ public class GAMEMANAGER : MonoBehaviour
         {
             deck.Add(card);
             table.playedCards.Remove(card);
+        }
+        foreach(Card card in enemy.collectedCards)
+        {
+            deck.Add(card);
+            enemy.collectedCards.Remove(card);
         }
         foreach (Card card in table.cards)
         {
@@ -131,7 +147,7 @@ public class GAMEMANAGER : MonoBehaviour
     {
         if (deck.Count != 0)
         {
-            if (player.playerCards.Count == 0)
+            if (enemy.handList.Count == 0)
             {
                 for (int i = 0; i < playerSlots.Length; i++)
                 {
@@ -143,8 +159,14 @@ public class GAMEMANAGER : MonoBehaviour
                     deck.Remove(deck[0]);
 
                 }
+                for(int i =0; i <3; i++)
+                {
+                    enemy.handList.Add(deck[0]);
+                    deck.Remove(deck[0]);
+                }
             }
-                 currentRoundState = RoundState.PLAYERTURN;
+            
+            currentRoundState = RoundState.PLAYERTURN;
         }
         if(deck.Count == 0 && player.playerCards.Count == 0)
         {
@@ -189,6 +211,13 @@ public class GAMEMANAGER : MonoBehaviour
                 deck.Remove(deck[0]);
                 
             }
+
+            for(int i =0; i < 3; i++)
+            {
+                enemy.handList.Add(deck[0]);
+                deck.Remove(deck[0]);
+            }
+
             // Place four cards in the table
             for (int j = 0; j < 4; j++)
             {

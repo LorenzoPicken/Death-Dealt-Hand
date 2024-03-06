@@ -13,17 +13,20 @@ public class PlayerHandState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
-
-        if (Input.GetMouseButtonDown(0))
+        if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
-            player.selectedCard = player.SelectCard();
-
-            Debug.Log(player.selectedCard);
-
-            if (player.selectedCard != null && player.selectedCard.inHand)
+            if (Input.GetMouseButtonDown(0))
             {
-                player.SwitchState(player.TableState);
+                player.selectedCard = player.SelectCard();
+
+                Debug.Log(player.selectedCard);
+
+                if (player.selectedCard != null && player.selectedCard.inHand)
+                {
+                    player.SwitchState(player.TableState);
+                }
             }
+
         }
     }
     public override void ExitState(PlayerStateManager player)
