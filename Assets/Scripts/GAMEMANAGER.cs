@@ -69,6 +69,7 @@ public class GAMEMANAGER : MonoBehaviour
 
                 break;               
             case RoundState.CHECKPLAYSTATE:
+                Debug.Log("---------------------------------------------");
                 CheckPlayerHand();
                 break;
             case RoundState.COUNTPOINTS:
@@ -79,6 +80,7 @@ public class GAMEMANAGER : MonoBehaviour
                 {
                 
                     enemy.CountDown();
+                    
                 }
                 executionCount = 1;
                 break;
@@ -92,6 +94,7 @@ public class GAMEMANAGER : MonoBehaviour
         }
     }
 
+    
     private void ResetLists()
     {
         foreach(Card card in table.playedCards)

@@ -60,167 +60,173 @@ public class AIBehaviour: MonoBehaviour
     {
         
             
-            int currentIndex = 0;
-            int playIndex = 0;
+        int currentIndex = 0;
+        int playIndex = 0;
 
 
-            //Iterates through all cards in the AI's hand
-            while (currentIndex < handList.Count)
+        //Iterates through all cards in the AI's hand
+        while (currentIndex < handList.Count)
+        {
+            currentCard = handList[currentIndex];
+            bool cardOfSameValueOnTable = false;
+            List<Card> soloCardList = new List<Card> { };
+            foreach (Card card in table.cards)
             {
-                currentCard = handList[currentIndex];
-                bool cardOfSameValueOnTable = false;
-                List<Card> soloCardList = new List<Card> { };
-                foreach (Card card in table.cards)
+                //Checks if there is a card of the same value as current card on table and adds them to a list
+                if (currentCard.CardValue == card.CardValue)
                 {
-                    //Checks if there is a card of the same value as current card on table and adds them to a list
-                    if (currentCard.CardValue == card.CardValue)
-                    {
-                        cardOfSameValueOnTable = true;
-                        soloCardList.Add(card);
-                    }
+                    cardOfSameValueOnTable = true;
+                    soloCardList.Add(card);
                 }
-
-                
-                if (cardOfSameValueOnTable == true)
-                {
-                    bool sunfound = false;
-                    foreach (Card card in soloCardList)
-                    {
-                        //Checks to see if any of those same value cards were of Suit suns and adds to dictionary of possible plays
-                        if (card.Suit == Suit.SUNS)
-                        {
-                            playDict.Add(currentCard, new List<Card> { card });
-                            sunfound = true;
-                        }
-
-                    }
-
-                    //If not, it will
-                    if (sunfound == false)
-                    {
-                       
-                        playDict.Add(currentCard, new List<Card> { soloCardList[0] });
-
-                        
-
-                    }
-                    sunfound = false;
-                }
-                else
-                {
-
-                    FindCombinations(table.cards, currentCard);
-                    if (playList.Count > 0)
-                    {
-
-                        playDict.Add(currentCard, playList[playIndex]);
-                    }
-
-                }
-                cardOfSameValueOnTable = false;
-                soloCardList.Clear();
-
-
-
-
-
-
-                currentIndex++;
             }
-            playIndex = 0;
 
-
-            if (playDict.Count == 0)
+            
+            bool sunfound = false;
+            if (cardOfSameValueOnTable == true)
             {
-                int tableTotal = 0;
-                foreach (Card card in table.cards)
+                foreach (Card card in soloCardList)
                 {
-                    tableTotal += card.CardValue;
+                    //Checks to see if any of those same value cards were of Suit suns and adds to dictionary of possible plays
+                    if (card.Suit == Suit.SUNS)
+                    {
+                        playDict.Add(currentCard, new List<Card> { card });
+                        sunfound = true;
+                    }
+
                 }
 
-                if (tableTotal > 10)
+                //If not, it will
+                if (sunfound == false)
                 {
-                    Card smallestCard = new Card();
-                    smallestCard.CardValue = handList[0].CardValue; smallestCard.Suit = handList[0].Suit;
+                   
+                    playDict.Add(currentCard, new List<Card> { soloCardList[0] });
 
-                    foreach (Card card in handList)
-                    {
-                        if (card.CardValue <= smallestCard.CardValue)
-                        {
-                            smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
-                        }
-                    }
-
-                    foreach(Card card in handList)
-                    {
-                        if (card.CardValue == smallestCard.CardValue && card.Suit == smallestCard.Suit)
-                        {
-                            PlaceCards(card);
-
-                        }
-                    }
-                }
-                else
-                {
-                    int count = 0;
-                    Card smallestCard = new Card();
-                    smallestCard.CardValue = 0; smallestCard.Suit = Suit.CLUBS;
-                    foreach (Card card in handList)
-                    {
-                        if (card.CardValue + tableTotal > 10)
-                        {
-                            if (smallestCard.CardValue == 0)
-                            {
-                                smallestCard.Suit = card.Suit;
-                                smallestCard.CardValue = card.CardValue;
-                            }
-                            else if (smallestCard.CardValue > card.CardValue)
-                            {
-                                smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
-
-                            }
-                        }
-                        else
-                        {
-                            count++;
-                        }
-                    }
-
-                    if (count == handList.Count)
-                    {
-                        foreach (Card card in handList)
-                        {
-                            if (smallestCard.CardValue == 0)
-                            {
-                                smallestCard.Suit = card.Suit;
-                                smallestCard.CardValue = card.CardValue;
-                            }
-                            else if (smallestCard.CardValue > card.CardValue)
-                            {
-                                smallestCard.CardValue = card.CardValue; smallestCard.Suit = card.Suit;
-
-                            }
-                        }
-                    }
-                    foreach (Card card in handList)
-                    {
-                        if (card.CardValue == smallestCard.CardValue && card.Suit == smallestCard.Suit)
-                        {
-                            PlaceCards(card);
-
-                        }
-                    }
                     
+
                 }
-
+                sunfound = false;
             }
-
             else
             {
-                Debug.Log("Making Final Play");
-                FinalChoice(table.cards, handList, playDict);
+
+                FindCombinations(table.cards, currentCard);
+                if (playList.Count > 0)
+                {
+
+                    playDict.Add(currentCard, playList[playIndex]);
+                }
+
             }
-        
+            cardOfSameValueOnTable = false;
+            soloCardList.Clear();
+
+
+
+
+
+
+            currentIndex++;
+        }
+        playIndex = 0;
+
+
+        if (playDict.Count == 0)
+        {
+            int tableTotal = 0;
+            foreach (Card card in table.cards)
+            {
+                tableTotal += card.CardValue;
+            }
+
+            if (tableTotal > 10)
+            {
+               
+                int smallestValue = 0;
+                Suit smallestSuit = Suit.CLUBS;
+                smallestValue = handList[0].CardValue; smallestSuit = handList[0].Suit;
+
+                foreach (Card card in handList)
+                {
+                    if (card.CardValue <= smallestValue)
+                    {
+                        smallestValue = card.CardValue; smallestSuit = card.Suit;
+                    }
+                }
+
+                for (int i = 0; i < handList.Count; i++)
+                {
+                    if (handList[i].CardValue == smallestValue && handList[i].Suit == smallestSuit)
+                    {
+                        Debug.Log("placing card");
+                        PlaceCards(handList[i]);
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                int count = 0;
+                int smallestValue = 0;
+                Suit smallestSuit = Suit.CLUBS;
+                foreach (Card card in handList)
+                {
+                    if (card.CardValue + tableTotal > 10)
+                    {
+                        if (smallestValue == 0)
+                        {
+                            smallestSuit = card.Suit;
+                            smallestValue = card.CardValue;
+                        }
+                        else if (smallestValue > card.CardValue)
+                        {
+                            smallestValue = card.CardValue; smallestSuit = card.Suit;
+
+                        }
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
+
+                if (count == handList.Count)
+                {
+                    foreach (Card card in handList)
+                    {
+                        if (smallestValue == 0)
+                        {
+                            smallestSuit = card.Suit;
+                            smallestValue = card.CardValue;
+                        }
+                        else if (smallestValue > card.CardValue)
+                        {
+                            smallestValue = card.CardValue; smallestSuit = card.Suit;
+
+                        }
+                    }
+                }
+                
+                
+                for(int i =0; i < handList.Count; i++)
+                {
+                    if (handList[i].CardValue == smallestValue && handList[i].Suit == smallestSuit)
+                    {
+                        PlaceCards(handList[i]);
+                        break;
+                    }
+                }
+                
+            }
+
+        }
+
+        else
+        {
+            Debug.Log("Making Final Play");
+            FinalChoice(table.cards, handList, playDict);
+        }
+
+        GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
     }
 
     public int CalculateTableTotal(List<Card> tableList)
@@ -244,16 +250,17 @@ public class AIBehaviour: MonoBehaviour
 
         foreach (KeyValuePair<Card, List<Card>> combinations in dict)
         {
-            Card currentKey = new Card();
-            currentKey.CardValue = 0; currentKey.Suit = Suit.SUNS;
-            currentKey = combinations.Key;
+            
+           
+            int currentKeyValue = combinations.Key.CardValue; Suit currentKeySuit = combinations.Key.Suit;
+            
             if (isScopa == false)
             {
 
-                isScopa = ScopaChecker(handList, tableList, bigDict, dict, currentKey);
-                SevenSunChecker(handList, tableList, bigDict, dict, currentKey);
-                SunsChecker(handList, tableList, bigDict, dict, currentKey);
-                NormalCardsChecker(handList, tableList, bigDict, dict, currentKey);
+                isScopa = ScopaChecker(handList, tableList, bigDict, dict, currentKeyValue, currentKeySuit);
+                SevenSunChecker(handList, tableList, bigDict, dict, currentKeyValue, currentKeySuit);
+                SunsChecker(handList, tableList, bigDict, dict, currentKeyValue, currentKeySuit);
+                NormalCardsChecker(handList, tableList, bigDict, dict, currentKeyValue, currentKeySuit);
             }
             isScopa = false;
         }
@@ -491,7 +498,7 @@ public class AIBehaviour: MonoBehaviour
     #endregion
 
     #region Checks risks of a play
-    void RiskChecker(Dictionary<Card, List<Card>> dict, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, int reward, List<Card> tableList, List<Card> handList, Card currentKey)
+    void RiskChecker(Dictionary<Card, List<Card>> dict, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, int reward, List<Card> tableList, List<Card> handList, int currentKeyValue, Suit currentKeySuit)
     {
         int tableTotal = 0;
         int riskRewardValue = reward;
@@ -500,80 +507,98 @@ public class AIBehaviour: MonoBehaviour
         {
             tableTotal += card.CardValue;
         }
-        if (tableTotal - currentKey.CardValue > 0 && tableTotal - currentKey.CardValue <= 10)
+        if (tableTotal - currentKeyValue > 0 && tableTotal - currentKeyValue <= 10)
         {
             riskRewardValue -= 3;
         }
         if (!bigDict.ContainsKey(riskRewardValue))
         {
             Dictionary<Card, List<Card>> tenpDict = new Dictionary<Card, List<Card>>();
-            tenpDict.Add(currentKey, dict[currentKey]);
-            bigDict.Add(riskRewardValue, tenpDict);
+            foreach (Card card in handList)
+            {
+                if(card.CardValue == currentKeyValue && card.Suit == currentKeySuit)
+                {
+                    tenpDict.Add(card, dict[card]);
+                    bigDict.Add(riskRewardValue, tenpDict);
+                    break;
+
+                }
+            }
         }
         else
         {
-            int count = 0;
+            
             Dictionary<Card, List<Card>> CountDict = bigDict[riskRewardValue];
             List<Card> CountList = new List<Card> { };
-            foreach (KeyValuePair<Card, List<Card>> combination in CountDict)
+            foreach(Card card in handList)
             {
-                foreach (Card card in combination.Value)
+                if (dict.ContainsKey(card))
                 {
-                    count++;
-                }
-            }
-            if (dict[currentKey].Count > count)
-            {
-                Dictionary<Card, List<Card>> tenpDict = new Dictionary<Card, List<Card>>();
-                tenpDict.Add(currentKey, dict[currentKey]);
-                bigDict.Remove(riskRewardValue);
-                bigDict.Add(riskRewardValue, tenpDict);
-            }
-            else if (dict[currentKey].Count == count)
-            {
-                int sunCount = 0;
-                int newSunCount = 0;
-                Dictionary<Card, List<Card>> newDict = bigDict[riskRewardValue];
 
-
-                foreach (KeyValuePair<Card, List<Card>> combination in newDict)
-                {
-                    if (combination.Key.Suit == Suit.SUNS)
+                    int count = 0;
+                    foreach (KeyValuePair<Card, List<Card>> combination in CountDict)
                     {
-                        sunCount++;
-                    }
-                    foreach (Card card in combination.Value)
-                    {
-                        if (card.Suit == Suit.SUNS)
+                        foreach (Card miniCard in combination.Value)
                         {
-                            sunCount++;
+                            count++;
+                        }
+                    }
+                    if (dict[card].Count > count)
+                    {
+                        Dictionary<Card, List<Card>> tenpDict = new Dictionary<Card, List<Card>>();
+                        tenpDict.Add(card, dict[card]);
+                        bigDict.Remove(riskRewardValue);
+                        bigDict.Add(riskRewardValue, tenpDict);
+                        break;
+                    }
+                    else if (dict[card].Count == count)
+                    {
+                        int sunCount = 0;
+                        int newSunCount = 0;
+                        Dictionary<Card, List<Card>> newDict = bigDict[riskRewardValue];
+
+
+                        foreach (KeyValuePair<Card, List<Card>> combination in newDict)
+                        {
+                            if (combination.Key.Suit == Suit.SUNS)
+                            {
+                                sunCount++;
+                            }
+                            foreach (Card miniCard in combination.Value)
+                            {
+                                if (card.Suit == Suit.SUNS)
+                                {
+                                    sunCount++;
+                                }
+
+                            }
                         }
 
-                    }
-                }
-
-                foreach (KeyValuePair<Card, List<Card>> newCombination in dict)
-                {
-                    if (newCombination.Key.Suit == Suit.SUNS)
-                    {
-                        newSunCount++;
-                    }
-                    foreach (Card card in newCombination.Value)
-                    {
-                        if (card.Suit == Suit.SUNS)
+                        foreach (KeyValuePair<Card, List<Card>> newCombination in dict)
                         {
-                            newSunCount++;
+                            if (newCombination.Key.Suit == Suit.SUNS)
+                            {
+                                newSunCount++;
+                            }
+                            foreach (Card miniCard in newCombination.Value)
+                            {
+                                if (card.Suit == Suit.SUNS)
+                                {
+                                    newSunCount++;
+                                }
+
+                            }
                         }
 
+                        if (newSunCount > sunCount)
+                        {
+                            Dictionary<Card, List<Card>> tenpDict = new Dictionary<Card, List<Card>>();
+                            tenpDict.Add(card, dict[card]);
+                            bigDict.Remove(riskRewardValue);
+                            bigDict.Add(riskRewardValue, tenpDict);
+                            break;
+                        }
                     }
-                }
-
-                if (newSunCount > sunCount)
-                {
-                    Dictionary<Card, List<Card>> tenpDict = new Dictionary<Card, List<Card>>();
-                    tenpDict.Add(currentKey, dict[currentKey]);
-                    bigDict.Remove(riskRewardValue);
-                    bigDict.Add(riskRewardValue, tenpDict);
                 }
             }
 
@@ -583,10 +608,10 @@ public class AIBehaviour: MonoBehaviour
     #endregion
 
     #region Checks for all different types of Plays
-    public bool ScopaChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public bool ScopaChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, int currentKeyValue, Suit currentKeySuit)
     {
         int reward = 10;
-        int currentCardValue = currentKey.CardValue;
+        int currentCardValue = currentKeyValue;
         int tableTotal = 0;
         foreach (Card card in tableList)
         {
@@ -596,78 +621,96 @@ public class AIBehaviour: MonoBehaviour
         if (currentCardValue == tableTotal)
         {
             Dictionary<Card, List<Card>> tenpDict = new Dictionary<Card, List<Card>>();
-            tenpDict.Add(currentKey, dict[currentKey]);
-            bigDict.Add(reward, tenpDict);
-            return true;
+            foreach(Card card in handList)
+            {
+                if(card.CardValue == currentKeyValue &&  card.Suit == currentKeySuit) 
+                {
+                    tenpDict.Add(card, dict[card]);
+                    if(!bigDict.ContainsKey(reward))
+                    {
+                        bigDict.Add(reward, tenpDict);
+
+                    }
+                    return true;
+                    
+                }
+            }
 
         }
         return false;
     }
-    public void SevenSunChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public void SevenSunChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, int currentKeyValue, Suit currentKeySuit)
     {
         int reward = 0;
         bool foundSevenSun = false;
-        Card searchedKey = new Card();
-        searchedKey.CardValue = 7; searchedKey.Suit = Suit.SUNS;
-        if (dict[currentKey].Count > 1)
+        int searchedKeyValue = 7; Suit searchedKeySuit = Suit.SUNS;
+
+        foreach(Card card in handList)
         {
-            if (currentKey.Suit == Suit.SUNS && currentKey.CardValue == 7)
+            if(dict.ContainsKey(card))
             {
 
-                reward = 9;
-
-                RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-                return;
-            }
-            else
-            {
-                foreach (Card card in dict[currentKey])
+                if (dict[card].Count > 1)
                 {
-                    if (card.CardValue == 7 && card.Suit == Suit.SUNS)
+                    if (currentKeySuit == Suit.SUNS && currentKeyValue == 7)
                     {
-                        foundSevenSun = true;
+
+                        reward = 9;
+
+                        RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                        return;
+                    }
+                    else
+                    {
+                        foreach (Card miniCard in dict[card])
+                        {
+                            if (miniCard.CardValue == 7 && miniCard.Suit == Suit.SUNS)
+                            {
+                                foundSevenSun = true;
+                            }
+                        }
+                    }
+                    if (foundSevenSun == true)
+                    {
+                        reward = 9;
+
+                        RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                        return;
+                    }
+
+                }
+                else if (dict[card].Count == 1)
+                {
+                    if (currentKeyValue == 7 && currentKeySuit == Suit.SUNS)
+                    {
+
+                        reward = 8;
+
+                        RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                        return;
                     }
                 }
-            }
-            if (foundSevenSun == true)
-            {
-                reward = 9;
-
-                RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-                return;
-            }
-
-        }
-        else if (dict[currentKey].Count == 1)
-        {
-            if (currentKey.CardValue == 7 && currentKey.Suit == Suit.SUNS)
-            {
-
-                reward = 8;
-
-                RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-                return;
-            }
-        }
-        if (dict[currentKey].Count == 1)
-        {
-            bool foundSevenSuns = false;
-            foreach (Card card in dict[currentKey])
-            {
-                if (card.CardValue == searchedKey.CardValue && card.Suit == searchedKey.Suit)
+                if (dict[card].Count == 1)
                 {
-                    foundSevenSuns = true;
+                    bool foundSevenSuns = false;
+                    foreach (Card miniCard in dict[card])
+                    {
+                        if (card.CardValue == searchedKeyValue && card.Suit == searchedKeySuit)
+                        {
+                            foundSevenSuns = true;
+                        }
+                    }
+                    if (foundSevenSuns == true)
+                    {
+
+                        reward = 8;
+
+                        RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+
+                    }
+                    foundSevenSuns = false;
                 }
             }
-            if (foundSevenSuns == true)
-            {
-
-                reward = 8;
-
-                RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-
-            }
-            foundSevenSuns = false;
         }
 
 
@@ -675,37 +718,46 @@ public class AIBehaviour: MonoBehaviour
 
     }
 
-    public void SunsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public void SunsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, int currentKeyValue, Suit currentKeySuit)
     {
         int sunCount = 0;
         int reward = 0;
 
-        if (currentKey.Suit == Suit.SUNS)
+        foreach (Card card in handList)
         {
-            sunCount++;
-        }
-        foreach (Card card in dict[currentKey])
-        {
-            if (card.Suit == Suit.SUNS)
+            if (dict.ContainsKey(card))
             {
-                sunCount++;
+
+                if (card.Suit == Suit.SUNS)
+                {
+                    sunCount++;
+                }
+                foreach (Card miniCard in dict[card])
+                {
+                    if (card.Suit == Suit.SUNS)
+                    {
+                        sunCount++;
+                    }
+                }
+                if (sunCount >= 2)
+                {
+                    reward = 5;
+                    RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                    return;
+
+
+                }
+                else if (sunCount == 1)
+                {
+                    reward = 2;
+                    RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                    return;
+
+                }
             }
-        }
-        if (sunCount >= 2)
-        {
-            reward = 5;
-            RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-            return;
-
 
         }
-        else if (sunCount == 1)
-        {
-            reward = 2;
-            RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-            return;
-
-        }
+        
 
 
 
@@ -713,27 +765,35 @@ public class AIBehaviour: MonoBehaviour
 
 
 
-    public void NormalCardsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, Card currentKey)
+    public void NormalCardsChecker(List<Card> handList, List<Card> tableList, Dictionary<int, Dictionary<Card, List<Card>>> bigDict, Dictionary<Card, List<Card>> dict, int currentKeyValue, Suit currentKeySuit)
     {
-        int reward = 0;
-        if (dict[currentKey].Count >= 3)
-        {
-            reward = 3;
-            RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-            return;
 
-        }
-        else if (dict[currentKey].Count == 2)
+        foreach(Card card in handList)
         {
-            reward = 2;
-            RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-            return;
-        }
-        else if (dict[currentKey].Count == 1)
-        {
-            reward = 1;
-            RiskChecker(dict, bigDict, reward, tableList, handList, currentKey);
-            return;
+            if(dict.ContainsKey(card))
+            {
+
+                int reward = 0;
+                if (dict[card].Count >= 3)
+                {
+                    reward = 3;
+                    RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                    return;
+
+                }
+                else if (dict[card].Count == 2)
+                {
+                    reward = 2;
+                    RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                    return;
+                }
+                else if (dict[card].Count == 1)
+                {
+                    reward = 1;
+                    RiskChecker(dict, bigDict, reward, tableList, handList, currentKeyValue, currentKeySuit);
+                    return;
+                }
+            }
         }
 
     }
@@ -746,7 +806,7 @@ public class AIBehaviour: MonoBehaviour
         List<List<Card>> result = new List<List<Card>>();
         List<Card> currentCombination = new List<Card>();
 
-        FindCombinationsHelper(tableList, currentCard, 0, currentCombination, result);
+        FindCombinationsHelper(tableList, currentCard.CardValue, 0, currentCombination, result);
 
 
         CountSuns(result);
@@ -754,9 +814,9 @@ public class AIBehaviour: MonoBehaviour
 
     }
 
-    void FindCombinationsHelper(List<Card> tableList, Card remainingCard, int startIndex, List<Card> currentCombination, List<List<Card>> result)
+    void FindCombinationsHelper(List<Card> tableList, int remainingCard,int startIndex, List<Card> currentCombination, List<List<Card>> result)
     {
-        if (remainingCard.CardValue == 0)
+        if (remainingCard == 0)
         {
             // Combination found, add a copy to the result
             result.Add(new List<Card>(currentCombination));
@@ -765,14 +825,15 @@ public class AIBehaviour: MonoBehaviour
 
         for (int i = startIndex; i < tableList.Count; i++)
         {
-            if (tableList[i].CardValue <= remainingCard.CardValue)
+            if (tableList[i].CardValue <= remainingCard)
             {
                 // Add the card to the current combination
                 currentCombination.Add(tableList[i]);
 
                 // Recursively search for combinations with the remaining value
-                Card newCard = new Card();
-                newCard.CardValue = remainingCard.CardValue - table.cards[i].CardValue; newCard.Suit = remainingCard.Suit;
+                
+                int newCard = remainingCard - table.cards[i].CardValue;
+                //newCard.CardValue = remainingCard.CardValue - table.cards[i].CardValue; newCard.Suit = remainingCard.Suit;
                 FindCombinationsHelper(tableList, newCard, i + 1, currentCombination, result);
 
                 // Backtrack - remove the last added card for the next iteration
@@ -916,7 +977,7 @@ public class AIBehaviour: MonoBehaviour
         listOfPlays.Clear();
         playDict.Clear();
         playList.Clear();
-        GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
+        
 
     }
 
