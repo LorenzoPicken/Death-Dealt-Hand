@@ -51,30 +51,30 @@ public class PlayerTableState : PlayerBaseState
 
         // Confirm selection and Check, with Spacebar
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if(cardsSum == player.selectedCard.CardValue)
+       
+        
+            if (cardsSum == player.selectedCard.CardValue)
             {
                 foreach (Card card in cardsToPlay)
                 {
                     player.table.cards.Remove(card);
                 }
-                
+
                 MoveCards(player);
                 GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                 return;
             }
-            if(cardsSum != player.selectedCard.CardValue) 
+            if (cardsSum > player.selectedCard.CardValue)
             {
-                foreach(Card card in cardsToPlay)
+                foreach (Card card in cardsToPlay)
                 {
                     card.transform.position -= Vector3.up * 0.25f;
                 }
                 cardsToPlay.Clear();
-                
+
                 cardsSum = 0;
             }
-        }
+        
 
     }
     public override void ExitState(PlayerStateManager player)
