@@ -2761,6 +2761,9 @@ MonoBehaviour:
   slot7: {fileID: 1908876161}
   slot8: {fileID: 2107219854}
   slot9: {fileID: 1292720436}
+  slotsList: []
+  minimumTime: 1
+  maximumTime: 3
 --- !u!114 &831674629 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 480625529381760957, guid: aa7cda874822d7e4fb97b7a68e4320f1, type: 3}
@@ -5903,7 +5906,6 @@ MonoBehaviour:
   player: {fileID: 1521627079}
   enemy: {fileID: 826721584}
   table: {fileID: 1211700944}
-  tableTotal: 0
   playerPoints: 0
   executionCount: 0
   deck:

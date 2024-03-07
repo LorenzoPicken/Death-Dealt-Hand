@@ -8,7 +8,7 @@ public class PlayerHandState : PlayerBaseState
     
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Enter state Player Hand");
+       
     }
 
     public override void UpdateState(PlayerStateManager player)
@@ -19,7 +19,7 @@ public class PlayerHandState : PlayerBaseState
             {
                 player.selectedCard = player.SelectCard();
 
-                Debug.Log(player.selectedCard);
+                
 
                 if (player.selectedCard != null && player.selectedCard.inHand)
                 {
@@ -31,7 +31,7 @@ public class PlayerHandState : PlayerBaseState
     }
     public override void ExitState(PlayerStateManager player)
     {
-        Debug.Log("Exit state Player Hand");
+        
         player.camSwitch.SwitchToTable();
     }
 

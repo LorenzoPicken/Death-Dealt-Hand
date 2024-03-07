@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AIBehaviour: MonoBehaviour
@@ -157,7 +158,7 @@ public class AIBehaviour: MonoBehaviour
                 {
                     if (handList[i].CardValue == smallestValue && handList[i].Suit == smallestSuit)
                     {
-                        Debug.Log("placing card");
+                        Debug.Log("placing card because i cannot play and table total is over 10");
                         PlaceCards(handList[i]);
                         break;
                     }
@@ -211,8 +212,10 @@ public class AIBehaviour: MonoBehaviour
                 {
                     if (handList[i].CardValue == smallestValue && handList[i].Suit == smallestSuit)
                     {
+                        Debug.Log("placing card because i cannot play and table total is under 10");
                         PlaceCards(handList[i]);
                         break;
+                        
                     }
                 }
                 
@@ -222,10 +225,11 @@ public class AIBehaviour: MonoBehaviour
 
         else
         {
-            Debug.Log("Making Final Play");
+            
             FinalChoice(table.cards, handList, playDict);
         }
-
+        EndTurn();
+        Debug.Log("Ending Turn");
         GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
     }
 
@@ -281,6 +285,7 @@ public class AIBehaviour: MonoBehaviour
         if (max > 0)
         {
             Dictionary <Card, List<Card>> dictionary = finalDict.First().Value;
+            Debug.Log("Picking up Cards because riskreward is " + max);
             PickUpCards(dictionary);
         }
         else if (max == 0)
@@ -291,6 +296,7 @@ public class AIBehaviour: MonoBehaviour
             if (rand == 1)
             {
                 Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
+                Debug.Log("Picking up Cards because riskreward is " + max);
                 PickUpCards(dictionary);
             }
             else
@@ -298,8 +304,10 @@ public class AIBehaviour: MonoBehaviour
                 int tableTotal;
                 tableTotal = CalculateTableTotal(tableList);
 
-                Card cardToPlay = new Card();
-                cardToPlay.CardValue = 0; cardToPlay.Suit = Suit.CLUBS;
+                
+                int valueToPlay = 0;
+                Suit suitToPlay = new Suit();
+                
                 bool match = false;
 
 
@@ -316,28 +324,31 @@ public class AIBehaviour: MonoBehaviour
                             }
                             if (match != true)
                             {
-                                if (cardToPlay.CardValue == 0)
+                                if (valueToPlay == 0)
                                 {
-                                    cardToPlay.CardValue = handCard.CardValue;
-                                    cardToPlay.Suit = handCard.Suit;
+                                    valueToPlay = handCard.CardValue;
+                                    suitToPlay = handCard.Suit;
                                 }
                                 else
                                 {
-                                    if (cardToPlay.CardValue > handCard.CardValue)
+                                    if (valueToPlay > handCard.CardValue)
                                     {
-                                        cardToPlay.Suit = handCard.Suit;
-                                        cardToPlay.CardValue = handCard.CardValue;
+                                        suitToPlay = handCard.Suit;
+                                        valueToPlay = handCard.CardValue;
                                     }
                                 }
                             }
                         }
-                        if (cardToPlay.CardValue != 0)
+                        if (valueToPlay != 0)
                         {
-                            foreach (Card card in handList)
+                            
+                            for (int i = 0; i < handList.Count; i++)
                             {
-                                if (card.CardValue == cardToPlay.CardValue && card.Suit == cardToPlay.Suit)
+                                if (handList[i].CardValue == valueToPlay && handList[i].Suit == suitToPlay)
                                 {
-                                    PlaceCards(card);
+                                    Debug.Log("Placing Cards because riskreward is " + max);
+                                    PlaceCards(handList[i]);
+                                    break;
 
                                 }
                             }
@@ -346,6 +357,7 @@ public class AIBehaviour: MonoBehaviour
                         else
                         {
                             Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
+                            Debug.Log("Picking up Cards because riskreward is" + max);
                             PickUpCards(dictionary);
                         }
                     }
@@ -358,15 +370,15 @@ public class AIBehaviour: MonoBehaviour
                     {
                         if (card.CardValue + tableTotal > 10)
                         {
-                            if (cardToPlay.CardValue == 0)
+                            if (valueToPlay == 0)
                             {
-                                cardToPlay.Suit = card.Suit;
-                                cardToPlay.CardValue = card.CardValue;
+                                suitToPlay = card.Suit;
+                                valueToPlay = card.CardValue;
                             }
-                            else if (cardToPlay.CardValue > card.CardValue)
+                            else if (valueToPlay > card.CardValue)
                             {
-                                cardToPlay.Suit = card.Suit;
-                                cardToPlay.CardValue = card.CardValue;
+                                suitToPlay = card.Suit;
+                                valueToPlay = card.CardValue;
                             }
                         }
                         else
@@ -380,25 +392,28 @@ public class AIBehaviour: MonoBehaviour
                     {
                         foreach (Card card in handList)
                         {
-                            if (cardToPlay.CardValue == 0)
+                            if (valueToPlay == 0)
                             {
-                                cardToPlay.CardValue = card.CardValue; cardToPlay.Suit = card.Suit;
+                                valueToPlay = card.CardValue; suitToPlay = card.Suit;
                             }
                             else
                             {
-                                if (cardToPlay.CardValue > card.CardValue)
+                                if (valueToPlay > card.CardValue)
                                 {
-                                    cardToPlay.Suit = card.Suit;
-                                    cardToPlay.CardValue = card.CardValue;
+                                    suitToPlay = card.Suit;
+                                    valueToPlay = card.CardValue;
                                 }
                             }
                         }
                     }
-                    foreach (Card card in handList)
+                    
+                    for (int i = 0; i < handList.Count; i++)
                     {
-                        if (card.CardValue == cardToPlay.CardValue && card.Suit == cardToPlay.Suit)
+                        if (handList[i].CardValue == valueToPlay && handList[i].Suit == suitToPlay)
                         {
-                            PlaceCards(card);
+                            Debug.Log("Placing Cards because riskreward is " + max);
+                            PlaceCards(handList[i]);
+                            break;
 
                         }
                     }
@@ -475,18 +490,20 @@ public class AIBehaviour: MonoBehaviour
                         }
                     }
                 }
-                foreach (Card card in handList)
+                
+                for(int i = 0; i < handList.Count; i++)
                 {
-                    if (card.CardValue == valueToPlay && card.Suit == suitToPlay)
+                    if (handList[i].CardValue == valueToPlay && handList[i].Suit == suitToPlay)
                     {
-                        PlaceCards(card);
-
+                        PlaceCards(handList[i]);
+                        break;
                     }
                 }
             }
             else if (match == true)
             {
                 Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
+                Debug.Log("Picking up Cards because matching");
                 PickUpCards(dictionary);
             }
 
@@ -926,7 +943,6 @@ public class AIBehaviour: MonoBehaviour
 
     public void PickUpCards(Dictionary<Card, List<Card>> dict)
     {
-        Debug.Log("Making a Play");
         List<Card> cardsToRemoveFromHand = new List<Card>();
         List<Card> cardsToRemoveFromTable = new List<Card>();
 
@@ -938,7 +954,7 @@ public class AIBehaviour: MonoBehaviour
                 {
                     card.transform.position = AI_CollectedCards.position;
                     cardsToRemoveFromHand.Add(card);
-                    Debug.Log(card.CardValue + card.Suit);
+                   
                 }
             }
 
@@ -985,14 +1001,19 @@ public class AIBehaviour: MonoBehaviour
 
     private void PlaceCards(Card card)
     {
-        Debug.Log("Cant Play");
-        foreach(CardSlot slot in slotsList)
+        
+        for(int i =0; i < slotsList.Count; i++)
         {
-            if(slot.available == true)
+            if (slotsList[i].available == true)
             {
                 handList.Remove(card);
-                card.transform.position = slot.transform.position;
+                table.cards.Add(card);
+                card.transform.position = slotsList[i].transform.position;
                 break;
+            }
+            else
+            {
+                Debug.Log(slotsList[i].name + " is unavailable");
             }
         }
         EndTurn();

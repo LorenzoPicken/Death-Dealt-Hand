@@ -17,13 +17,13 @@ public class GAMEMANAGER : MonoBehaviour
     [SerializeField] public PlayerStateManager player;
     [SerializeField] public AIBehaviour enemy;
     [SerializeField] public Table table;
+    private int tableTotal = 0;
 
     private int round_number = 1;
-    public int tableTotal;
     public static GAMEMANAGER Instance;
     public int playerPoints = 0;
 
-    public int executionCount = 0;
+    public bool wasExecuted = false;
    
    
     
@@ -65,26 +65,28 @@ public class GAMEMANAGER : MonoBehaviour
                 SetUpGame();
                 break; 
             case RoundState.PLAYERTURN:
-                executionCount = 0;
+                wasExecuted = false;
 
                 break;               
             case RoundState.CHECKPLAYSTATE:
-                Debug.Log("---------------------------------------------");
+                
                 CheckPlayerHand();
                 break;
             case RoundState.COUNTPOINTS:
                 CountPoints();
                 break;
             case RoundState.ENEMYTURN:
-                if(executionCount == 0)
+                if(wasExecuted == false)
                 {
-                
+                    wasExecuted = true;
+                    CalculateTableTotal();
                     enemy.CountDown();
                     
                 }
-                executionCount = 1;
+                
                 break;
             case RoundState.LOST:
+                Application.Quit();
                 break;
             case RoundState.WON:
                 ResetLists();
@@ -94,27 +96,54 @@ public class GAMEMANAGER : MonoBehaviour
         }
     }
 
-    
+    private void CalculateTableTotal()
+    {
+        tableTotal = 0;
+        foreach(Card card in table.cards)
+        {
+            tableTotal += card.CardValue;
+        }
+        Debug.Log("tabelTotal is " + tableTotal);
+    }
     private void ResetLists()
     {
-        foreach(Card card in table.playedCards)
+        List<Card> cardsToRemoveFromPlayed = new List<Card>();
+        foreach (Card card in table.playedCards)
         {
             deck.Add(card);
+            cardsToRemoveFromPlayed.Add(card);
+        }
+
+        foreach (Card card in cardsToRemoveFromPlayed)
+        {
             table.playedCards.Remove(card);
         }
-        foreach(Card card in enemy.collectedCards)
+
+        List<Card> cardsToRemoveFromCollected = new List<Card>();
+        foreach (Card card in enemy.collectedCards)
         {
             deck.Add(card);
+            cardsToRemoveFromCollected.Add(card);
+        }
+
+        foreach (Card card in cardsToRemoveFromCollected)
+        {
             enemy.collectedCards.Remove(card);
         }
+
+        List<Card> cardsToRemoveFromTable = new List<Card>();
         foreach (Card card in table.cards)
         {
-            card.transform.position += Vector3.right * 7; 
+            card.transform.position += Vector3.right * 7;
             deck.Add(card);
-            table.cards.Remove(card);
-            
+            cardsToRemoveFromTable.Add(card);
         }
-        
+
+        foreach (Card card in cardsToRemoveFromTable)
+        {
+            table.cards.Remove(card);
+        }
+
         currentRoundState = RoundState.START;
     }
 
@@ -171,7 +200,11 @@ public class GAMEMANAGER : MonoBehaviour
             
             currentRoundState = RoundState.PLAYERTURN;
         }
-        if(deck.Count == 0 && player.playerCards.Count == 0)
+        else if(deck.Count == 0 && player.playerCards.Count > 0 && enemy.handList.Count > 0)
+        {
+            currentRoundState = RoundState.PLAYERTURN;
+        }
+        else 
         {
             currentRoundState = RoundState.COUNTPOINTS;
         }

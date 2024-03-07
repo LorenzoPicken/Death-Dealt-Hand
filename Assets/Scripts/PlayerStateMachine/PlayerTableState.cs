@@ -14,7 +14,7 @@ public class PlayerTableState : PlayerBaseState
     
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Enter state Player Table");
+        
         cardsSum = 0;
         player.image.enabled = true;
         player.image.sprite = player.selectedCard.sprite;
@@ -46,7 +46,7 @@ public class PlayerTableState : PlayerBaseState
                 putCardDown(player);
             }
 
-            Debug.Log(card);
+            
         }
 
         // Confirm selection and Check, with Spacebar
@@ -59,7 +59,7 @@ public class PlayerTableState : PlayerBaseState
                 {
                     player.table.cards.Remove(card);
                 }
-                Debug.Log("correct");
+                
                 MoveCards(player);
                 GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                 return;
@@ -71,7 +71,7 @@ public class PlayerTableState : PlayerBaseState
                     card.transform.position -= Vector3.up * 0.25f;
                 }
                 cardsToPlay.Clear();
-                Debug.Log("Incorrect: " + cardsSum);
+                
                 cardsSum = 0;
             }
         }
@@ -83,8 +83,7 @@ public class PlayerTableState : PlayerBaseState
         {
             card.transform.position -= Vector3.up * 0.25f;
         }
-        Debug.Log("Exit state Player Table");
-        Debug.Log(cardsSum);
+        
         cardsToPlay.Clear();
         player.image.enabled = false;
         player.camSwitch.SwitchToHand();
@@ -98,7 +97,7 @@ public class PlayerTableState : PlayerBaseState
         {
             if (hit.collider.tag == "cardslots")
             {
-                Debug.Log("card slot collider hit");
+                
 
                 var cardslot = hit.collider.GetComponent<CardSlot>();
 
