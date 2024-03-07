@@ -424,8 +424,7 @@ public class AIBehaviour: MonoBehaviour
         {
             Suit suitToPlay = Suit.CLUBS;
             int valueToPlay = 0;
-            //Card cardToPlay = new Card();
-            //cardToPlay.CardValue = 0; cardToPlay.Suit = Suit.CLUBS;
+            
             int count = 0;
 
             int tableTotal;
@@ -505,6 +504,17 @@ public class AIBehaviour: MonoBehaviour
                 Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
                 Debug.Log("Picking up Cards because matching");
                 PickUpCards(dictionary);
+            }
+            else
+            {
+                for (int i = 0; i < handList.Count; i++)
+                {
+                    if (handList[i].CardValue == valueToPlay && handList[i].Suit == suitToPlay)
+                    {
+                        PlaceCards(handList[i]);
+                        break;
+                    }
+                }
             }
 
         }
@@ -985,7 +995,7 @@ public class AIBehaviour: MonoBehaviour
             table.cards.Remove(cardToRemove);
         }
 
-        EndTurn();
+        //EndTurn();
     }
 
     private void EndTurn()
@@ -1011,12 +1021,9 @@ public class AIBehaviour: MonoBehaviour
                 card.transform.position = slotsList[i].transform.position;
                 break;
             }
-            else
-            {
-                Debug.Log(slotsList[i].name + " is unavailable");
-            }
+            
         }
-        EndTurn();
+        //EndTurn();
         
     }
 
