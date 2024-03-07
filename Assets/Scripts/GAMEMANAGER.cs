@@ -176,7 +176,7 @@ public class GAMEMANAGER : MonoBehaviour
         if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { enemyPoint++; }
         if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); } else if( playerSevens < 2){ enemyPoint++; }
 
-        textMeshPro.text = "Points: " + playerPoints;
+        textMeshPro.text = "Player: " + playerPoints;
         enemyPoints.text = "Opponent: " + enemyPoint;
 
         currentRoundState = RoundState.WON;
