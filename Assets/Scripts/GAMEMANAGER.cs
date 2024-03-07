@@ -11,6 +11,7 @@ public class GAMEMANAGER : MonoBehaviour
 {
 
     [SerializeField] public TMP_Text textMeshPro;
+    [SerializeField] public TMP_Text enemyPoints;
     [SerializeField] public TMP_Text round_number_tmp;
     
     // Reference to the player and table
@@ -22,6 +23,7 @@ public class GAMEMANAGER : MonoBehaviour
     private int round_number = 1;
     public static GAMEMANAGER Instance;
     public int playerPoints = 0;
+    public int enemyPoint= 0;
 
     public bool wasExecuted = false;
    
@@ -152,6 +154,7 @@ public class GAMEMANAGER : MonoBehaviour
 
         int playerSuns = 0;
         int playerSevens = 0;
+        bool foundSevenSuns = false;
         
         foreach(Card card in table.playedCards)
         {
@@ -161,15 +164,20 @@ public class GAMEMANAGER : MonoBehaviour
                
             }
 
-            if(card.Suit == Suit.SUNS && card.CardValue == 7) { playerPoints++; Debug.Log("You got the seven of SUNS"); }
+            if(card.Suit == Suit.SUNS && card.CardValue == 7) { playerPoints++; foundSevenSuns = true; Debug.Log("You got the seven of SUNS"); }
             if(card.CardValue == 7) { playerSevens++;  }
         }
+        if(foundSevenSuns ==false)
+        {
+           enemyPoint++; 
+        }
         
-        if (table.playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); }
-        if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); }
-        if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); }
+        if (table.playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { enemyPoint++; }
+        if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { enemyPoint++; }
+        if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); } else if( playerSevens < 2){ enemyPoint++; }
 
         textMeshPro.text = "Points: " + playerPoints;
+        enemyPoints.text = "Opponent: " + enemyPoint;
 
         currentRoundState = RoundState.WON;
 
