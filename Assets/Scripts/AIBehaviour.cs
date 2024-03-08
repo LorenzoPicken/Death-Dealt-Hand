@@ -158,7 +158,7 @@ public class AIBehaviour: MonoBehaviour
                 {
                     if (handList[i].CardValue == smallestValue && handList[i].Suit == smallestSuit)
                     {
-                        Debug.Log("placing card because i cannot play and table total is over 10");
+
                         PlaceCards(handList[i]);
                         break;
                     }
@@ -212,7 +212,7 @@ public class AIBehaviour: MonoBehaviour
                 {
                     if (handList[i].CardValue == smallestValue && handList[i].Suit == smallestSuit)
                     {
-                        Debug.Log("placing card because i cannot play and table total is under 10");
+
                         PlaceCards(handList[i]);
                         break;
                         
@@ -229,7 +229,7 @@ public class AIBehaviour: MonoBehaviour
             FinalChoice(table.cards, handList, playDict);
         }
         EndTurn();
-        Debug.Log("Ending Turn");
+
         GAMEMANAGER.Instance.currentRoundState = RoundState.CHECKPLAYSTATE;
     }
 
@@ -285,7 +285,7 @@ public class AIBehaviour: MonoBehaviour
         if (max > 0)
         {
             Dictionary <Card, List<Card>> dictionary = finalDict.First().Value;
-            Debug.Log("Picking up Cards because riskreward is " + max);
+
             PickUpCards(dictionary);
         }
         else if (max == 0)
@@ -296,7 +296,7 @@ public class AIBehaviour: MonoBehaviour
             if (rand == 1)
             {
                 Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
-                Debug.Log("Picking up Cards because riskreward is " + max);
+
                 PickUpCards(dictionary);
             }
             else
@@ -502,7 +502,7 @@ public class AIBehaviour: MonoBehaviour
             else if (match == true)
             {
                 Dictionary<Card, List<Card>> dictionary = finalDict.First().Value;
-                Debug.Log("Picking up Cards because matching");
+                
                 PickUpCards(dictionary);
             }
             else
@@ -1018,6 +1018,7 @@ public class AIBehaviour: MonoBehaviour
             {
                 handList.Remove(card);
                 table.cards.Add(card);
+                card.transform.rotation = slotsList[i].transform.rotation;
                 card.transform.position = slotsList[i].transform.position;
                 break;
             }

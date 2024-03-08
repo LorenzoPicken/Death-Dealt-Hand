@@ -105,7 +105,7 @@ public class GAMEMANAGER : MonoBehaviour
         {
             tableTotal += card.CardValue;
         }
-        Debug.Log("tabelTotal is " + tableTotal);
+       
     }
     private void ResetLists()
     {
@@ -169,12 +169,13 @@ public class GAMEMANAGER : MonoBehaviour
         }
         if(foundSevenSuns ==false)
         {
+            Debug.Log("Enemy Had Seven Of Suns");
            enemyPoint++; 
         }
         
-        if (table.playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { enemyPoint++; }
-        if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { enemyPoint++; }
-        if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); } else if( playerSevens < 2){ enemyPoint++; }
+        if (table.playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { enemyPoint++; Debug.Log("Enemy Had " + (40 - table.playedCards.Count) + " Total Cards"); }
+        if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { enemyPoint++; Debug.Log("Enemy Had " + (10 - playerSuns) + " suns"); }
+       // if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); } else if( playerSevens < 2){ enemyPoint++; Debug.Log("Enemy Had " + (4 - playerSevens) + " Sevens"); }
 
         textMeshPro.text = "Player: " + playerPoints;
         enemyPoints.text = "Opponent: " + enemyPoint;
