@@ -10,6 +10,8 @@ public class PlayerTableState : PlayerBaseState
   
     private List <Card> cardsToPlay = new List <Card> ();
     private int cardsSum;
+    private bool sameCardTable;
+    private List <Card> sameCardList = new List <Card> ();
 
     
     public override void EnterState(PlayerStateManager player)
@@ -18,6 +20,23 @@ public class PlayerTableState : PlayerBaseState
         cardsSum = 0;
         player.image.enabled = true;
         player.image.sprite = player.selectedCard.sprite;
+        foreach (Card card in player.table.cards) 
+        {
+            foreach (Card card1 in player.playerCards)
+            {
+
+                if (card.CardValue == card1.CardValue)
+                {
+                    sameCardTable = true;
+                    sameCardList.Add(card);
+                    var outline = card?.GetComponent<Outline>();
+                    outline.OutlineColor = Color.red;
+                    outline.enabled = true;
+                    Debug.Log("Match found");
+                }
+
+            }
+        }
         
     }
 
@@ -30,29 +49,40 @@ public class PlayerTableState : PlayerBaseState
         }
 
         // Pick Cards from table
-        if (Input.GetMouseButtonDown(0))
-        {
-            Card card = player.SelectCard();
-            
+       
+            if (Input.GetMouseButtonDown(0))
+            {
+                Card card = player.SelectCard();
+
             // If the card selected is not already into the list
-            if (card != null && !cardsToPlay.Contains(card))
-            {
-                cardsToPlay.Add(card);
-                card.transform.position += Vector3.up * 0.25f;
-                cardsSum += card.CardValue;
-            }
-            else
-            {
-                putCardDown(player);
+                if (!sameCardTable)
+                {
+                    if (card != null && !cardsToPlay.Contains(card))
+                    {
+                        cardsToPlay.Add(card);
+                        card.transform.position += Vector3.up * 0.25f;
+                        cardsSum += card.CardValue;
+                    }
+                    else
+                    {
+                        putCardDown(player);
+                    }
+                }
+                if(card != null && card.CardValue == player.selectedCard.CardValue && sameCardTable)
+                {
+                    cardsToPlay.Add(card);
+                    MoveCards(player);
+                    GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
+                    return;
+                }
+          
+                
             }
 
-            
-        }
 
         // Confirm selection and Check, with Spacebar
-
-       
-        
+        if (!sameCardTable)
+        {
             if (cardsSum == player.selectedCard.CardValue)
             {
                 foreach (Card card in cardsToPlay)
@@ -74,7 +104,7 @@ public class PlayerTableState : PlayerBaseState
 
                 cardsSum = 0;
             }
-        
+        }
 
     }
     public override void ExitState(PlayerStateManager player)
@@ -83,7 +113,14 @@ public class PlayerTableState : PlayerBaseState
         {
             card.transform.position -= Vector3.up * 0.25f;
         }
-        
+        foreach(Card card in sameCardList)
+        {
+           var outline = card.GetComponent<Outline>();
+           outline.OutlineColor = Color.white;
+           outline.enabled = false;
+        }
+        sameCardTable = false;
+        sameCardList.Clear();
         cardsToPlay.Clear();
         player.image.enabled = false;
         player.camSwitch.SwitchToHand();
