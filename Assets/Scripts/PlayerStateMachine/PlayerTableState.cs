@@ -22,19 +22,15 @@ public class PlayerTableState : PlayerBaseState
         player.image.sprite = player.selectedCard.sprite;
         foreach (Card card in player.table.cards) 
         {
-            foreach (Card card1 in player.playerCards)
+
+            if (card.CardValue == player.selectedCard.CardValue)
             {
-
-                if (card.CardValue == card1.CardValue)
-                {
-                    sameCardTable = true;
-                    sameCardList.Add(card);
-                    var outline = card?.GetComponent<Outline>();
-                    outline.OutlineColor = Color.red;
-                    outline.enabled = true;
-                    Debug.Log("Match found");
-                }
-
+                sameCardTable = true;
+                sameCardList.Add(card);
+                var outline = card?.GetComponent<Outline>();
+                outline.OutlineColor = Color.red;
+                outline.enabled = true;
+                Debug.Log("Match found");
             }
         }
         
