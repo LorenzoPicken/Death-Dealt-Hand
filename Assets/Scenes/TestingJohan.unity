@@ -17720,7 +17720,7 @@ MonoBehaviour:
   slot8: {fileID: 2107219854}
   slot9: {fileID: 1292720436}
   slotsList: []
-  minimumTime: 1
+  minimumTime: 2
   maximumTime: 4
 --- !u!1001 &828557438
 PrefabInstance:
