@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 85e06ea030a06894aa0da2315f69cd66, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 85e06ea030a06894aa0da2315f69cd66, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 17d83ec23d04e3a48a89cfe924de335d, type: 2}
     - target: {fileID: 919132149155446097, guid: 85e06ea030a06894aa0da2315f69cd66, type: 3}
       propertyPath: m_Name
       value: 10Clubs
@@ -105,6 +113,8 @@ MonoBehaviour:
   inHand: 0
   inTable: 0
   sprite: {fileID: 739467527, guid: 80054584056e9454f96d5208503bb807, type: 3}
+  dissolveMaterialFront: {fileID: 2100000, guid: 2339c06b59c19b043836d3507d18893e, type: 2}
+  dissolveMaterialBack: {fileID: 2100000, guid: 5ac066c661a42da41ad5f4d5ee41db12, type: 2}
 --- !u!65 &-8568616784699513212
 BoxCollider:
   m_ObjectHideFlags: 0
