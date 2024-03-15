@@ -26354,21 +26354,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4774074423182366428, guid: 925ce6993e341a840a07a1d51e63e6c4, type: 3}
-      propertyPath: dissolveMaterialBack
-      value: 
-      objectReference: {fileID: 2100000, guid: 99c6f178663f6a44886329bf5e45ef9e, type: 2}
-    - target: {fileID: 4774074423182366428, guid: 925ce6993e341a840a07a1d51e63e6c4, type: 3}
-      propertyPath: dissolveMaterialFront
-      value: 
-      objectReference: {fileID: 2100000, guid: 5b30a3d38e4ba3a43a429f620dbb1d45, type: 2}
     - target: {fileID: 5439586524741900757, guid: 925ce6993e341a840a07a1d51e63e6c4, type: 3}
       propertyPath: m_Name
       value: 7Suns
-      objectReference: {fileID: 0}
-    - target: {fileID: 5799993586561955840, guid: 925ce6993e341a840a07a1d51e63e6c4, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
