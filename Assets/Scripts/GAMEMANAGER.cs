@@ -193,6 +193,7 @@ public class GAMEMANAGER : MonoBehaviour
                 for (int i = 0; i < playerSlots.Length; i++)
                 {
                     deck[0].gameObject.SetActive(true);
+                    StartCoroutine(dissolvingEffect(deck[0]));
                     deck[0].transform.position = playerSlots[i].transform.position;
                     deck[0].transform.rotation = playerSlots[i].transform.rotation;
                     deck[0].inHand = true;
@@ -203,6 +204,8 @@ public class GAMEMANAGER : MonoBehaviour
                 for(int i =0; i <3; i++)
                 {
                     enemy.handList.Add(deck[0]);
+                    deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                    deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                     deck.Remove(deck[0]);
                 }
             }
@@ -252,6 +255,7 @@ public class GAMEMANAGER : MonoBehaviour
                 deck[0].transform.position = playerSlots[i].transform.position;
                 deck[0].transform.rotation = playerSlots[i].transform.rotation;
                 deck[0].inHand = true;
+                StartCoroutine(dissolvingEffect(deck[0]));
                 player.playerCards.Add(deck[0]);
                 deck.Remove(deck[0]);
                 
@@ -260,15 +264,20 @@ public class GAMEMANAGER : MonoBehaviour
             for(int i =0; i < 3; i++)
             {
                 enemy.handList.Add(deck[0]);
+                deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                 deck.Remove(deck[0]);
             }
 
             // Place four cards in the table
             for (int j = 0; j < 4; j++)
             {
+                deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value",1f);
+                deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value",1f);
                 deck[0].gameObject.SetActive(true);
                 deck[0].transform.position = cardSlots[j].transform.position;
                 deck[0].transform.rotation = cardSlots[j].transform.rotation;
+                StartCoroutine(dissolvingEffect(deck[0]));
                 cardSlots[j].available = false;
                 table.cards.Add(deck[0]);
                 deck.Remove(deck[0]);
@@ -279,4 +288,16 @@ public class GAMEMANAGER : MonoBehaviour
 
     }
 
+    IEnumerator dissolvingEffect(Card card)
+    {
+
+        for (int i = 0; i < 160; i++)
+        {
+            yield return new WaitForEndOfFrame();
+
+            card.dissolveMaterialFront.SetFloat("_Dissolve_Value", -i / 100f + 0.8f);
+            card.dissolveMaterialBack.SetFloat("_Dissolve_Value", -i / 100f + 0.8f);
+        }
+
+    }
 }

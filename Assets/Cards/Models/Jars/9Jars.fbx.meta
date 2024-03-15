@@ -3,7 +3,27 @@ guid: 5e9befef684462641a1e80b4f3b0430b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackFace
+    second: {fileID: 2100000, guid: c8f6bd507276bf84dbf721c6292d2b12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrontFace
+    second: {fileID: 2100000, guid: 3cef493b8c3bcad46b4123118aa7339c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: All Scopa cards
+    second: {fileID: 2800000, guid: 0a0e8b22b4564494a941d43af4077263, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Scopa card back
+    second: {fileID: 2800000, guid: c3f71d0be1163ef42b0f2e4e660a2afc, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

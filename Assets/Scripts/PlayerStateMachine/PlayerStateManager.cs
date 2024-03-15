@@ -11,6 +11,7 @@ public class PlayerStateManager : MonoBehaviour
     public List<Card> playerCards;
     public Table table;
     public Transform playedCardsTransform;
+   
 
     // UI 
     public Image image;

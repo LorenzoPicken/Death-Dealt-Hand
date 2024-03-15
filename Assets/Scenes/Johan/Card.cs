@@ -14,6 +14,8 @@ public class Card : MonoBehaviour
     private bool selected = false;
     public Sprite sprite;
     private Outline outline;
+    public Material dissolveMaterialFront;
+    public Material dissolveMaterialBack;
     
 
    
@@ -34,6 +36,8 @@ public class Card : MonoBehaviour
         outline.enabled = false;
         outline.OutlineWidth = 5f;
         outline.OutlineMode = Outline.Mode.OutlineVisible;
+        dissolveMaterialFront.SetFloat("_Dissolve_Value", 1f );
+        dissolveMaterialBack.SetFloat("_Dissolve_Value", 1f );
     }
     private void OnMouseOver()
     {
