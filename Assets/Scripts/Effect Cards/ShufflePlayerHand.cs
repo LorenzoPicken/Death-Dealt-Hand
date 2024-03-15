@@ -73,10 +73,10 @@ public class ShufflePlayerHand : EffectCard
             GAMEMANAGER.Instance.deck = GAMEMANAGER.Instance.Shuffle(GAMEMANAGER.Instance.deck);
 
 
-            foreach (Transform playerSlot in GAMEMANAGER.Instance.playerSlots)
+            foreach (Transform enemySlot in GAMEMANAGER.Instance.enemySlots)
             {
-                GAMEMANAGER.Instance.deck[0].transform.position = playerSlot.transform.position;
-                GAMEMANAGER.Instance.deck[0].transform.rotation = playerSlot.transform.rotation;
+                GAMEMANAGER.Instance.deck[0].transform.position = enemySlot.transform.position;
+                GAMEMANAGER.Instance.deck[0].transform.rotation = enemySlot.transform.rotation;
                 
                 GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
 

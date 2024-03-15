@@ -166,6 +166,12 @@ public class PlayerTableState : PlayerBaseState
         player.selectedCard.inHand = false;
         player.SwitchState(player.HandState);
         cardsToPlay.Clear();
+        if(GAMEMANAGER.Instance.WasPickupOverride == false)
+        {
+            Debug.Log("Priority is Set To Player");
+            GAMEMANAGER.Instance.currentPrio = PickupPrio.PLAYER;
+
+        }
         GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
 
     }

@@ -994,8 +994,11 @@ public class AIBehaviour: MonoBehaviour
             collectedCards.Add(cardToRemove);
             table.cards.Remove(cardToRemove);
         }
-
-        //EndTurn();
+        if(GAMEMANAGER.Instance.WasPickupOverride == false)
+        {
+            Debug.Log("Priority is Set To Enemy");
+            GAMEMANAGER.Instance.currentPrio = PickupPrio.ENEMY;
+        }
     }
 
     private void EndTurn()

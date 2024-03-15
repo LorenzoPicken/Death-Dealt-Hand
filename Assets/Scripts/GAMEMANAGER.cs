@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UIElements;
 //using UnityEditor.PackageManager.Requests;
 
 public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTURN, WON, LOST }
+
+public enum PickupPrio { PLAYER, ENEMY }
 public class GAMEMANAGER : MonoBehaviour
 {
 
@@ -27,19 +30,30 @@ public class GAMEMANAGER : MonoBehaviour
     public int enemyPoint= 0;
 
     public bool wasExecuted = false;
-   
-   
-    
-    public List<Card> deck = new List<Card>();
-    
-    
 
+    private bool wasPickupOverride = false;
+    public bool WasPickupOverride { get => wasPickupOverride; set => wasPickupOverride = value; }
+
+    public PickupPrio currentPrio;
+
+  
+    public List<Card> deck = new List<Card>();
+
+    [Header("--- Card Transforms ---")]
+    public Transform revealCardsTransform;
+    public Transform playerCardsTransform;
+    public Transform enemyCardsTransform;
+
+    [Header("--- Slot Transforms ---")]
     public Transform[] playerSlots;
     public Transform[] enemySlots;
     public CardSlot[] cardSlots;
 
-
+    [Header("--- State ---")]
     public RoundState currentRoundState;
+
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -139,7 +153,7 @@ public class GAMEMANAGER : MonoBehaviour
         foreach (Card card in table.cards)
         {
             card.transform.position += Vector3.right * 7;
-            deck.Add(card);
+            //deck.Add(card);
             cardsToRemoveFromTable.Add(card);
         }
 
@@ -224,6 +238,27 @@ public class GAMEMANAGER : MonoBehaviour
         }
         else 
         {
+            if(currentPrio == PickupPrio.PLAYER)
+            {
+                foreach(Card card in table.cards)
+                {
+                    table.playedCards.Add(card);
+                    card.transform.position += Vector3.right * 7;
+                    Debug.Log("Player Cleaned Up Table");
+                }
+
+            }
+            else
+            {
+                foreach(Card card in table.cards)
+                {
+                    enemy.collectedCards.Add(card);
+                    card.transform.position += Vector3.right * 7;
+                    Debug.Log("Enemy Cleaned Up Table");
+                }
+            }
+            
+            table.cards.Clear();
             currentRoundState = RoundState.COUNTPOINTS;
         }
        
@@ -235,6 +270,7 @@ public class GAMEMANAGER : MonoBehaviour
     {
         deck = Shuffle(deck);
         SetUpCards(cardSlots, playerSlots);
+        wasPickupOverride = false;
     }
 
     public List<Card> Shuffle(List<Card> listToShuffle)
@@ -310,4 +346,8 @@ public class GAMEMANAGER : MonoBehaviour
         }
 
     }
+
+    
+    
+    
 }
