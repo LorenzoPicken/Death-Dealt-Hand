@@ -204,6 +204,8 @@ public class GAMEMANAGER : MonoBehaviour
                 for(int i =0; i <3; i++)
                 {
                     enemy.handList.Add(deck[0]);
+                    deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                    deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                     deck.Remove(deck[0]);
                 }
             }
@@ -262,6 +264,8 @@ public class GAMEMANAGER : MonoBehaviour
             for(int i =0; i < 3; i++)
             {
                 enemy.handList.Add(deck[0]);
+                deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                 deck.Remove(deck[0]);
             }
 
