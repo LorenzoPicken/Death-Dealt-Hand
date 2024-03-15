@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 //using UnityEditor.PackageManager.Requests;
 
 public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTURN, WON, LOST }
@@ -34,6 +35,7 @@ public class GAMEMANAGER : MonoBehaviour
     
 
     public Transform[] playerSlots;
+    public Transform[] enemySlots;
     public CardSlot[] cardSlots;
 
 
@@ -204,6 +206,10 @@ public class GAMEMANAGER : MonoBehaviour
                 for(int i =0; i <3; i++)
                 {
                     enemy.handList.Add(deck[0]);
+                    deck[0].gameObject.SetActive(true);
+                    StartCoroutine(dissolvingEffect(deck[0]));
+                    deck[0].transform.position = enemySlots[i].transform.position;
+                    deck[0].transform.rotation = enemySlots[i].transform.rotation;
                     deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
                     deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                     deck.Remove(deck[0]);
@@ -264,6 +270,10 @@ public class GAMEMANAGER : MonoBehaviour
             for(int i =0; i < 3; i++)
             {
                 enemy.handList.Add(deck[0]);
+                deck[0].gameObject.SetActive(true);
+                deck[0].transform.position = enemySlots[i].transform.position;
+                deck[0].transform.rotation = enemySlots[i].transform.rotation;
+                StartCoroutine(dissolvingEffect(deck[0]));
                 deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
                 deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                 deck.Remove(deck[0]);
