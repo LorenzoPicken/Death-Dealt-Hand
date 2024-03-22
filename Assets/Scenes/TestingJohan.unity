@@ -1725,6 +1725,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1017606091530846216, guid: c5be39b879c83f54d9bbfebe68c809be, type: 3}
   m_PrefabInstance: {fileID: 354593664735805929}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &90176721
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 90176722}
+  m_Layer: 0
+  m_Name: EnemyPlayCardTransfrom
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &90176722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 90176721}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.085, y: 5.644, z: 5.065}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &90725780
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10298,7 +10329,8 @@ MonoBehaviour:
   evilEyeEffect: {fileID: 484226829}
   theTakersEffect: {fileID: 484226827}
   wheelOfFortuneEffect: {fileID: 484226828}
-  effectRevealTime: 3
+  effectRevealTime: 1.24
+  transitionTime: 0.5
 --- !u!4 &484226826
 Transform:
   m_ObjectHideFlags: 0
@@ -42311,7 +42343,7 @@ MonoBehaviour:
   - {fileID: 1292720436}
   currentRoundState: 0
   enemyEffectTokens: 0
-  playerEffectTokens: 0
+  playerEffectTokens: 99
 --- !u!1001 &1815317928
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50029,3 +50061,4 @@ SceneRoots:
   - {fileID: 784237472}
   - {fileID: 1569559174}
   - {fileID: 484226826}
+  - {fileID: 90176722}

@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using static System.TimeZoneInfo;
 
 public class PlayerDrawEffect : MonoBehaviour
 {
@@ -13,6 +16,8 @@ public class PlayerDrawEffect : MonoBehaviour
     [SerializeField] GameObject topEffectDeckCard;
     private GameObject currentCard;
 
+    private event Action onPlayerReveal;
+
 
     [Header("--- Effects ---")]
     [SerializeField] RevealCards evilEyeEffect;
@@ -22,6 +27,8 @@ public class PlayerDrawEffect : MonoBehaviour
 
     [Header("--- Timers ---")]
     [SerializeField, Range(0, 6)] float effectRevealTime;
+    [SerializeField, Range(0, 10)] float transitionTime;
+    
 
 
     public void DrawEffectCard()
@@ -52,7 +59,7 @@ public class PlayerDrawEffect : MonoBehaviour
         }
         else if(cardNum == 12)
         {
-            Debug.Log("Butcher");
+            
             currentCard = theButcherGO;
         }
 
@@ -65,9 +72,16 @@ public class PlayerDrawEffect : MonoBehaviour
     private void DisplayCard()
     {
 
-        currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
-        currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
-        Invoke(nameof(DisposeCard), effectRevealTime);
+        //currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
+        //currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
+        //Invoke(nameof(DisposeCard), effectRevealTime);
+        if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
+        {
+
+            StartCoroutine(PlayerTakeEffectCard(() => {
+                DisposeCard();
+            }));
+        }
 
         //trigger Animation
 
@@ -114,9 +128,49 @@ public class PlayerDrawEffect : MonoBehaviour
     private int RNGCard(int cardNum) 
     { 
         
-        return cardNum = Random.Range(1, 13); 
+        return cardNum = UnityEngine.Random.Range(1, 13); 
+    }
+
+    private void EnemyReveal()
+    {
+
+    }
+
+    private void PlayerReveal()
+    {
+
     }
    
+
+    private IEnumerator PlayerTakeEffectCard(System.Action onPlayerReveal)
+    {
+        float elapsedTime = 0f;
+
+        Vector3 initialPosition = currentCard.transform.position;
+        Quaternion initialRotation = currentCard.transform.rotation;
+
+        while(elapsedTime < effectRevealTime)
+        {
+            currentCard.transform.position = Vector3.Lerp(initialPosition, 
+                GAMEMANAGER.Instance.revealCardsTransform.position, 
+                elapsedTime / transitionTime);
+
+            currentCard.transform.rotation = Quaternion.Lerp(initialRotation, 
+                GAMEMANAGER.Instance.revealCardsTransform.rotation, 
+                elapsedTime / transitionTime);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
+        currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
+
+        yield return new WaitForSeconds(effectRevealTime);
+
+        onPlayerReveal?.Invoke();
+    }
 
 
 }
