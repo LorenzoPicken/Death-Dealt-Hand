@@ -29,6 +29,8 @@ public class AIBehaviour: MonoBehaviour
     [SerializeField] CardSlot slot9;
     public List<CardSlot> slotsList = new List<CardSlot> { };
 
+    
+
 
 
 
@@ -1006,6 +1008,12 @@ public class AIBehaviour: MonoBehaviour
         listOfPlays.Clear();
         playDict.Clear();
         playList.Clear();
+        GAMEMANAGER.Instance.CalculateTableTotal();
+        if (GAMEMANAGER.Instance.tableTotal == 0)
+        {
+            GAMEMANAGER.Instance.enemyEffectTokens++;
+            GAMEMANAGER.Instance.UpdateUI();
+        }
         
 
     }

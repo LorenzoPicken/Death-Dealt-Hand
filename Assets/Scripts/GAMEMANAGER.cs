@@ -17,12 +17,14 @@ public class GAMEMANAGER : MonoBehaviour
     [SerializeField] public TMP_Text textMeshPro;
     [SerializeField] public TMP_Text enemyPoints;
     [SerializeField] public TMP_Text round_number_tmp;
-    
+    [SerializeField] public TMP_Text playerTokens;
+    [SerializeField] public TMP_Text enemyTokens;
+
     // Reference to the player and table
     [SerializeField] public PlayerStateManager player;
     [SerializeField] public AIBehaviour enemy;
     [SerializeField] public Table table;
-    private int tableTotal = 0;
+    public int tableTotal = 0;
 
     private int round_number = 1;
     public static GAMEMANAGER Instance;
@@ -30,6 +32,8 @@ public class GAMEMANAGER : MonoBehaviour
     public int enemyPoint= 0;
 
     public bool wasExecuted = false;
+    public bool hasDrawnEffect = false;
+    public bool canPlay = true;
 
     private bool wasPickupOverride = false;
     public bool WasPickupOverride { get => wasPickupOverride; set => wasPickupOverride = value; }
@@ -51,6 +55,11 @@ public class GAMEMANAGER : MonoBehaviour
 
     [Header("--- State ---")]
     public RoundState currentRoundState;
+
+
+    [Header("--- Effect Tokens ---")]
+    public int enemyEffectTokens = 0;
+    public int playerEffectTokens = 0;
 
 
 
@@ -114,7 +123,15 @@ public class GAMEMANAGER : MonoBehaviour
         }
     }
 
-    private void CalculateTableTotal()
+    public void UpdateUI()
+    {
+        enemyTokens.text = "Enemy Tokens: " + enemyEffectTokens;
+        playerTokens.text = "Player Tokens: " + playerEffectTokens;
+        textMeshPro.text = "Player: " + playerPoints;
+        enemyPoints.text = "Opponent: " + enemyPoint;
+    }
+
+    public void CalculateTableTotal()
     {
         tableTotal = 0;
         foreach(Card card in table.cards)

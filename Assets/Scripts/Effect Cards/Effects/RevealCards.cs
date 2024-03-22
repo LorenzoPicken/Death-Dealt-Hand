@@ -3,25 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RevealCards : EffectCard
+public class RevealCards : MonoBehaviour
 {
     //THIS EFFECT WILL NOT BE ABLE TO BE DRAWN BY THE AI DUE TO A LACK OF TIME PROGRAMMING THE AI TO EXECUTE THIS
     private Transform initialTransform;
     [SerializeField, Range(0, 10)] private float transitionTime = 2f;
     [SerializeField, Range(0, 10)] private float displayTime = 3f;
 
-    public override void Draw()
-    {
-        base.Draw();
-    }
-
-    public override void Dispose()
-    {
-        base.Dispose();
-    }
-
-
-    public override void Execute()
+    
+    public void Execute()
     {
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {

@@ -28,7 +28,7 @@ public class PlayerTableState : PlayerBaseState
                 sameCardTable = true;
                 sameCardList.Add(card);
                 var outline = card?.GetComponent<Outline>();
-                outline.OutlineColor = Color.red;
+                outline.OutlineColor = Color.green;
                 outline.enabled = true;
                 Debug.Log("Match found");
             }
@@ -68,6 +68,7 @@ public class PlayerTableState : PlayerBaseState
                 {
                     cardsToPlay.Add(card);
                     MoveCards(player);
+                    GAMEMANAGER.Instance.hasDrawnEffect = false;
                     GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                     return;
                 }
@@ -87,6 +88,7 @@ public class PlayerTableState : PlayerBaseState
                 }
 
                 MoveCards(player);
+                GAMEMANAGER.Instance.hasDrawnEffect = false;
                 GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                 return;
             }
@@ -141,6 +143,7 @@ public class PlayerTableState : PlayerBaseState
                     player.selectedCard.inHand = false;
                     player.table.cards.Add(player.selectedCard);
                     player.playerCards.Remove(player.selectedCard);
+                    GAMEMANAGER.Instance.hasDrawnEffect = false;
                     GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                     player.SwitchState(player.HandState);
 
@@ -166,12 +169,20 @@ public class PlayerTableState : PlayerBaseState
         player.selectedCard.inHand = false;
         player.SwitchState(player.HandState);
         cardsToPlay.Clear();
+        GAMEMANAGER.Instance.CalculateTableTotal();
+        if(GAMEMANAGER.Instance.tableTotal == 0)
+        {
+            GAMEMANAGER.Instance.playerEffectTokens++;
+            GAMEMANAGER.Instance.UpdateUI();
+        }
+
         if(GAMEMANAGER.Instance.WasPickupOverride == false)
         {
             Debug.Log("Priority is Set To Player");
             GAMEMANAGER.Instance.currentPrio = PickupPrio.PLAYER;
 
         }
+        GAMEMANAGER.Instance.hasDrawnEffect = false;
         GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
 
     }

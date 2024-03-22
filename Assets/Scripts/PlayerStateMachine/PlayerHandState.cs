@@ -13,7 +13,7 @@ public class PlayerHandState : PlayerBaseState
 
     public override void UpdateState(PlayerStateManager player)
     {
-        if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
+        if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN && GAMEMANAGER.Instance.canPlay == true)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -25,7 +25,10 @@ public class PlayerHandState : PlayerBaseState
                 {
                     player.SwitchState(player.TableState);
                 }
+
+                
             }
+
 
         }
     }

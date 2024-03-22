@@ -7,6 +7,7 @@ TagManager:
   - cardslots
   - TableSlots
   - card
+  - EffectDeck
   layers:
   - Default
   - TransparentFX
