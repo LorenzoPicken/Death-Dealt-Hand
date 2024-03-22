@@ -5,7 +5,7 @@ using UnityEngine;
 public class StealCardsEffect: MonoBehaviour
 {
     [SerializeField] private AIBehaviour enemy;
-    [SerializeField] private PlayerStateManager player;
+    [SerializeField] private Table player;
    
 
     public void Execute()
@@ -29,7 +29,8 @@ public class StealCardsEffect: MonoBehaviour
 
                 foreach(Card card in cards)
                 {
-                    player.playerCards.Add(card);
+                    Debug.Log(card.CardValue.ToString() + card.Suit.ToString());
+                    player.playedCards.Add(card);
                     enemy.collectedCards.Remove(card);
                 }
             }
@@ -50,13 +51,13 @@ public class StealCardsEffect: MonoBehaviour
                 List<Card> cards = new List<Card>();
                 foreach (int index in list)
                 {
-                    cards.Add(player.playerCards[index]);
+                    cards.Add(player.playedCards[index]);
                 }
 
                 foreach (Card card in cards)
                 {
                     enemy.collectedCards.Add(card);
-                    player.playerCards.Remove(card);
+                    player.playedCards.Remove(card);
                 }
             }
         }
@@ -65,7 +66,7 @@ public class StealCardsEffect: MonoBehaviour
 
     private List<int> GetRandomPlayerCards()
     {
-        int max = player.playerCards.Count;
+        int max = player.playedCards.Count;
         int count = 0;
         List<int> indexList = new List<int>();
         

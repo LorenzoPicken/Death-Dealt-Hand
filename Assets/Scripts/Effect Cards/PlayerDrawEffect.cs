@@ -24,6 +24,7 @@ public class PlayerDrawEffect : MonoBehaviour
     {
         int cardNum = 0;
         GAMEMANAGER.Instance.canPlay = false;
+        GAMEMANAGER.Instance.playerEffectTokens--;
 
         cardNum = RNGCard(cardNum);
 
@@ -107,7 +108,7 @@ public class PlayerDrawEffect : MonoBehaviour
 
     private int RNGCard(int cardNum) 
     { 
-        return cardNum = Random.Range(1, 13); 
+        return cardNum = Random.Range(10, 12); 
     }
    
 

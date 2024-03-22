@@ -37,7 +37,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
 
-        if (Input.GetMouseButtonDown(0) && currentState == HandState && GAMEMANAGER.Instance.canPlay==true)
+        if (Input.GetMouseButtonDown(0) && currentState == HandState && GAMEMANAGER.Instance.canPlay==true && GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

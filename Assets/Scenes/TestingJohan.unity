@@ -7860,15 +7860,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5971
+      value: -2.5939
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.0847
+      value: 4.0848
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.6232
+      value: 8.6186
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10324,7 +10324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 826721584}
-  player: {fileID: 1521627079}
+  player: {fileID: 1211700944}
 --- !u!114 &484226828
 MonoBehaviour:
   m_ObjectHideFlags: 0
