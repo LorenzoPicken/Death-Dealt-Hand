@@ -31,6 +31,7 @@ public class PlayerDrawEffect : MonoBehaviour
         GAMEMANAGER.Instance.playerEffectTokens--;
 
         cardNum = RNGCard(cardNum);
+        Debug.Log(cardNum);
 
         if (cardNum == 1 || cardNum == 2 || cardNum == 3)
         {
@@ -112,7 +113,8 @@ public class PlayerDrawEffect : MonoBehaviour
 
     private int RNGCard(int cardNum) 
     { 
-        return cardNum = Random.Range(7, 10); 
+        
+        return cardNum = Random.Range(1, 13); 
     }
    
 

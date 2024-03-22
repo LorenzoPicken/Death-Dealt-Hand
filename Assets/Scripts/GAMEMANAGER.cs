@@ -351,7 +351,7 @@ public class GAMEMANAGER : MonoBehaviour
 
     }
 
-    IEnumerator dissolvingEffect(Card card)
+    public IEnumerator dissolvingEffect(Card card)
     {
 
         for (int i = 0; i < 160; i++)

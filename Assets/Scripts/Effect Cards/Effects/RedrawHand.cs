@@ -8,6 +8,7 @@ public class RedrawHand : MonoBehaviour
     [SerializeField] AIBehaviour enemy;
     
     
+    
     public  void Execute()
     {
         int cardsInHand = 0;
@@ -15,6 +16,7 @@ public class RedrawHand : MonoBehaviour
         {
             foreach(Card card in player.playerCards)
             {
+                card.transform.position = player.playedCardsTransform.position;
                 //Visually Send Card Back To Deck
             }
             cardsInHand = player.playerCards.Count;
@@ -27,14 +29,21 @@ public class RedrawHand : MonoBehaviour
             }
 
             //Reshuffle Deck Visualy
-            GAMEMANAGER.Instance.deck = GAMEMANAGER.Instance.Shuffle(GAMEMANAGER.Instance.deck);
-
+            //GAMEMANAGER.Instance.deck = GAMEMANAGER.Instance.Shuffle(GAMEMANAGER.Instance.deck);
+            int count = 0;
             foreach(Transform playerSlot in GAMEMANAGER.Instance.playerSlots)
             {
-                GAMEMANAGER.Instance.deck[0].transform.position = playerSlot.transform.position;
-                GAMEMANAGER.Instance.deck[0].transform.rotation = playerSlot.transform.rotation;
-                GAMEMANAGER.Instance.deck[0].inHand = true;
-                GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
+                if(count < cardsInHand)
+                {
+                    GAMEMANAGER.Instance.deck[0].transform.position = playerSlot.transform.position;
+                    GAMEMANAGER.Instance.deck[0].transform.rotation = playerSlot.transform.rotation;
+                    GAMEMANAGER.Instance.deck[0].inHand = true;
+                    player.playerCards.Add(GAMEMANAGER.Instance.deck[0]);
+                    StartCoroutine(GAMEMANAGER.Instance.dissolvingEffect(GAMEMANAGER.Instance.deck[0]));
+                    GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
+                    count++;
+
+                }
 
 
                 //Replace Card Teleport With Animation
@@ -74,6 +83,7 @@ public class RedrawHand : MonoBehaviour
                 //Replace Card Teleport With Animation
             }
         }
+        GAMEMANAGER.Instance.canPlay = true;
     }
 
     
