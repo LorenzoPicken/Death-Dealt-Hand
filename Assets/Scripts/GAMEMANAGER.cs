@@ -18,7 +18,7 @@ public class GAMEMANAGER : MonoBehaviour
     [SerializeField] public TMP_Text enemyPoints;
     [SerializeField] public TMP_Text round_number_tmp;
     [SerializeField] public TMP_Text playerTokens;
-    [SerializeField] public TMP_Text enemyTokens;
+    //[SerializeField] public TMP_Text enemyTokens;
 
     // Reference to the player and table
     [SerializeField] public PlayerStateManager player;
@@ -125,8 +125,16 @@ public class GAMEMANAGER : MonoBehaviour
 
     public void UpdateUI()
     {
-        enemyTokens.text = "Enemy Tokens: " + enemyEffectTokens;
+        //enemyTokens.text = "Enemy Tokens: " + enemyEffectTokens;
         playerTokens.text = "Player Tokens: " + playerEffectTokens;
+        if(playerEffectTokens > 9)
+        {
+            playerTokens.text = "0" + playerEffectTokens;
+        }
+        else
+        {
+            playerTokens.text = "00" + playerEffectTokens;
+        }
         textMeshPro.text = "Player: " + playerPoints;
         enemyPoints.text = "Opponent: " + enemyPoint;
     }
