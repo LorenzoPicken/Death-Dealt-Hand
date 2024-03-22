@@ -14,16 +14,21 @@ public class StealCardsEffect: MonoBehaviour
         {
             List<int> list = GetRandomEnemyCards();
 
+            
+
             if(list.Count == 0)
             {
-                //Show that enemy has no cards
                 
+                //Show that enemy has no cards
+
             }
             else
             {
+                
                 List<Card> cards = new List<Card>();
                 foreach(int index in list)
                 {
+                    Debug.Log(index);
                     cards.Add(enemy.collectedCards[index]);
                 }
 
@@ -115,40 +120,28 @@ public class StealCardsEffect: MonoBehaviour
     {
         int max = enemy.collectedCards.Count;
         int count = 0;
-        List<int> indexList = new List<int>();
+        List<int> indexList = new List<int>() { };
 
 
         if (max == 0)
         {
-            return null;
-        }
-
-        else if (max > 0 && max < 3)
-        {
-            while (count != max)
-            {
-                int index = Random.Range(0, max + 1);
-                while (indexList.Contains(index = Random.Range(0, max + 1)))
-                {
-                    index = Random.Range(0, max + 1);
-                }
-
-                indexList.Add(index);
-                count++;
-
-            }
+            
             return indexList;
         }
         else
         {
-            while (count < 3)
+            
+            if(max > 3)
             {
-                int index = Random.Range(0, max + 1);
-                while (indexList.Contains(index = Random.Range(0, max + 1)))
+                max = 3;
+            }
+            while (count < max)
+            {
+                int index;
+                while (indexList.Contains(index = Random.Range(0, enemy.collectedCards.Count)))
                 {
-                    index = Random.Range(0, max + 1);
+                    index = Random.Range(0, enemy.collectedCards.Count);
                 }
-
                 indexList.Add(index);
                 count++;
             }

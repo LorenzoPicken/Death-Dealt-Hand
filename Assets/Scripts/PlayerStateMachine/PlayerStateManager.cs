@@ -78,7 +78,7 @@ public class PlayerStateManager : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 15, cards))
+        if (Physics.Raycast(ray, out RaycastHit hit, 3, cards))
         {
             Card selectedCard = hit.transform?.GetComponent<Card>();
             return selectedCard;
