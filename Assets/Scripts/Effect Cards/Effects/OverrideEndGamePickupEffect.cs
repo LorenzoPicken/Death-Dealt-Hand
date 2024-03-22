@@ -18,5 +18,6 @@ public static class OverrideEndGamePickupEffect
             GAMEMANAGER.Instance.currentPrio = PickupPrio.ENEMY;
             
         }
+        GAMEMANAGER.Instance.canPlay = true;
     }
 }

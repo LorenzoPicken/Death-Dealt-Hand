@@ -20,6 +20,10 @@ public class PlayerDrawEffect : MonoBehaviour
     [SerializeField] RedrawHand wheelOfFortuneEffect;
 
 
+    [Header("--- Timers ---")]
+    [SerializeField, Range(0, 6)] float effectRevealTime;
+
+
     public void DrawEffectCard()
     {
         int cardNum = 0;
@@ -62,7 +66,7 @@ public class PlayerDrawEffect : MonoBehaviour
 
         currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
         currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
-        Invoke(nameof(DisposeCard), 4);
+        Invoke(nameof(DisposeCard), effectRevealTime);
 
         //trigger Animation
 
@@ -103,12 +107,12 @@ public class PlayerDrawEffect : MonoBehaviour
             theTakersEffect.Execute();
         }
         GAMEMANAGER.Instance.UpdateUI();
-        GAMEMANAGER.Instance.canPlay = true;
+        
     }
 
     private int RNGCard(int cardNum) 
     { 
-        return cardNum = Random.Range(10, 12); 
+        return cardNum = Random.Range(7, 10); 
     }
    
 

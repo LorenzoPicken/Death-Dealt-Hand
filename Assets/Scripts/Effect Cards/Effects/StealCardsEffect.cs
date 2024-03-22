@@ -39,6 +39,7 @@ public class StealCardsEffect: MonoBehaviour
                     enemy.collectedCards.Remove(card);
                 }
             }
+            GAMEMANAGER.Instance.canPlay = true;
 
 
         }

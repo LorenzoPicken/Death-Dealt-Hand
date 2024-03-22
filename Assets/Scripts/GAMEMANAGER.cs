@@ -110,8 +110,8 @@ public class GAMEMANAGER : MonoBehaviour
                     enemy.CountDown();
                     
                 }
-                
                 break;
+            
             case RoundState.LOST:
                 Application.Quit();
                 break;

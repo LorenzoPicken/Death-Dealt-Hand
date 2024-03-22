@@ -14,5 +14,6 @@ public static class DeductPointEffect
         {
             GAMEMANAGER.Instance.playerPoints--;
         }
+        GAMEMANAGER.Instance.canPlay = true;
     }
 }
