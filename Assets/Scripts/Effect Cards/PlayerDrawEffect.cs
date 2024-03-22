@@ -35,7 +35,7 @@ public class PlayerDrawEffect : MonoBehaviour
     {
         int cardNum = 0;
         GAMEMANAGER.Instance.canPlay = false;
-        GAMEMANAGER.Instance.playerEffectTokens--;
+        
 
         cardNum = RNGCard(cardNum);
         Debug.Log(cardNum);
@@ -49,53 +49,70 @@ public class PlayerDrawEffect : MonoBehaviour
         {
             currentCard = bloodPactGO;
         }
-        else if (cardNum == 7 || cardNum == 8 || cardNum == 9)
-        {
-            currentCard = evilEyeGO;
-        }
-        else if (cardNum == 10 || cardNum == 11)
+        else if (cardNum == 7 || cardNum == 8)
         {
             currentCard = theTakersGO;
         }
-        else if(cardNum == 12)
+        else if (cardNum == 9)
+        {
+            currentCard = theButcherGO;
+        }
+        else if(cardNum == 10 || cardNum == 11 || cardNum == 12)
         {
             
-            currentCard = theButcherGO;
+            currentCard = evilEyeGO;
         }
 
         currentCard.transform.position = topEffectDeckCard.transform.position;
         currentCard.transform.rotation = topEffectDeckCard.transform.rotation;
-        //topEffectDeckCard?.SetActive(false);
+        
         DisplayCard();
     }
 
+    private int RNGCard(int cardNum) 
+    { 
+        if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
+        {
+            return cardNum = UnityEngine.Random.Range(1, 13); 
+
+        }
+        else
+        {
+            return cardNum = UnityEngine.Random.Range(1, 10);
+        }
+    }
     private void DisplayCard()
     {
 
-        //currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
-        //currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
-        //Invoke(nameof(DisposeCard), effectRevealTime);
+        
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
-
+            GAMEMANAGER.Instance.playerEffectTokens--;
             StartCoroutine(PlayerTakeEffectCard(() => {
                 DisposeCard();
             }));
         }
+        else
+        {
+            //Make Card burn into existence then brun out
+            GAMEMANAGER.Instance.enemyEffectTokens--;
+            currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
+            currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
+            Invoke(nameof(DisposeCard), effectRevealTime);
+        }
 
-        //trigger Animation
+        
 
 
     }
 
     private void DisposeCard()
     {
-        //topEffectDeckCard?.SetActive(true);
+        
         currentCard.transform.position = GAMEMANAGER.Instance.player.playedCardsTransform.position;
         currentCard.transform.rotation = GAMEMANAGER.Instance.player.playedCardsTransform.rotation;
         ApplyEffect();
-        //Disolve Card
-        //Move Card Away
+        
     }
 
     private void ApplyEffect()
@@ -125,22 +142,6 @@ public class PlayerDrawEffect : MonoBehaviour
         
     }
 
-    private int RNGCard(int cardNum) 
-    { 
-        
-        return cardNum = UnityEngine.Random.Range(1, 13); 
-    }
-
-    private void EnemyReveal()
-    {
-
-    }
-
-    private void PlayerReveal()
-    {
-
-    }
-   
 
     private IEnumerator PlayerTakeEffectCard(System.Action onPlayerReveal)
     {

@@ -56,10 +56,10 @@ public class RedrawHand : MonoBehaviour
         {
             foreach (Card card in enemy.handList)
             {
+                card.transform.position = player.playedCardsTransform.position;
                 //Visually Send Card Back To Deck
             }
             cardsInHand = enemy.handList.Count;
-
             for (int i = 0; i < cardsInHand; i++)
             {
                 
@@ -69,20 +69,26 @@ public class RedrawHand : MonoBehaviour
             }
 
             //Reshuffle Deck Visualy
-            GAMEMANAGER.Instance.deck = GAMEMANAGER.Instance.Shuffle(GAMEMANAGER.Instance.deck);
-
-
-            foreach (Transform enemySlot in GAMEMANAGER.Instance.enemySlots)
+            //GAMEMANAGER.Instance.deck = GAMEMANAGER.Instance.Shuffle(GAMEMANAGER.Instance.deck);
+            int count = 0;
+            foreach (Transform playerSlot in GAMEMANAGER.Instance.enemySlots)
             {
-                GAMEMANAGER.Instance.deck[0].transform.position = enemySlot.transform.position;
-                GAMEMANAGER.Instance.deck[0].transform.rotation = enemySlot.transform.rotation;
-                
-                GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
+                if (count < cardsInHand)
+                {
+                    GAMEMANAGER.Instance.deck[0].transform.position = enemy.transform.position;
+                    GAMEMANAGER.Instance.deck[0].transform.rotation = enemy.transform.rotation;
+                    enemy.handList.Add(GAMEMANAGER.Instance.deck[0]);
+                    StartCoroutine(GAMEMANAGER.Instance.dissolvingEffect(GAMEMANAGER.Instance.deck[0]));
+                    GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
+                    count++;
+
+                }
 
 
                 //Replace Card Teleport With Animation
             }
         }
+        
         GAMEMANAGER.Instance.canPlay = true;
     }
 

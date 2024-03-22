@@ -39,7 +39,7 @@ public class StealCardsEffect: MonoBehaviour
                     enemy.collectedCards.Remove(card);
                 }
             }
-            GAMEMANAGER.Instance.canPlay = true;
+            
 
 
         }
@@ -49,24 +49,29 @@ public class StealCardsEffect: MonoBehaviour
 
             if (list.Count == 0)
             {
-                //Show that player has no cards
+
+                //Show that enemy has no cards
 
             }
             else
             {
+
                 List<Card> cards = new List<Card>();
                 foreach (int index in list)
                 {
+                    Debug.Log(index);
                     cards.Add(player.playedCards[index]);
                 }
 
                 foreach (Card card in cards)
                 {
+                    Debug.Log(card.CardValue.ToString() + card.Suit.ToString());
                     enemy.collectedCards.Add(card);
                     player.playedCards.Remove(card);
                 }
             }
         }
+        GAMEMANAGER.Instance.canPlay = true;
     }
 
 
@@ -74,40 +79,28 @@ public class StealCardsEffect: MonoBehaviour
     {
         int max = player.playedCards.Count;
         int count = 0;
-        List<int> indexList = new List<int>();
-        
+        List<int> indexList = new List<int>() { };
 
-        if(max == 0)
+
+        if (max == 0)
         {
-            return indexList;
-        }
 
-        else if(max > 0 &&  max < 3)
-        {
-            while (count != max) 
-            {
-                int index = Random.Range(0, max +1);
-                while(indexList.Contains(index = Random.Range(0, max + 1)))
-                {
-                    index = Random.Range(0, max + 1);
-                }
-
-                indexList.Add(index);
-                count++;
-
-            }
             return indexList;
         }
         else
         {
-            while(count < 3)
-            {
-                int index = Random.Range(0, max + 1);
-                while (indexList.Contains(index = Random.Range(0, max + 1)))
-                {
-                    index = Random.Range(0, max + 1);
-                }
 
+            if (max > 3)
+            {
+                max = 3;
+            }
+            while (count < max)
+            {
+                int index;
+                while (indexList.Contains(index = Random.Range(0, player.playedCards.Count)))
+                {
+                    index = Random.Range(0, player.playedCards.Count);
+                }
                 indexList.Add(index);
                 count++;
             }
