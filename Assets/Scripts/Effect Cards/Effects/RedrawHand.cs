@@ -45,9 +45,10 @@ public class RedrawHand : MonoBehaviour
 
                 }
 
-
                 //Replace Card Teleport With Animation
             }
+            GAMEMANAGER.Instance.canPlay = true;
+            return;
 
 
 
@@ -75,8 +76,8 @@ public class RedrawHand : MonoBehaviour
             {
                 if (count < cardsInHand)
                 {
-                    GAMEMANAGER.Instance.deck[0].transform.position = enemy.transform.position;
-                    GAMEMANAGER.Instance.deck[0].transform.rotation = enemy.transform.rotation;
+                    GAMEMANAGER.Instance.deck[0].transform.position = playerSlot.transform.position;
+                    GAMEMANAGER.Instance.deck[0].transform.rotation = playerSlot.transform.rotation;
                     enemy.handList.Add(GAMEMANAGER.Instance.deck[0]);
                     StartCoroutine(GAMEMANAGER.Instance.dissolvingEffect(GAMEMANAGER.Instance.deck[0]));
                     GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
@@ -87,9 +88,10 @@ public class RedrawHand : MonoBehaviour
 
                 //Replace Card Teleport With Animation
             }
+            GAMEMANAGER.Instance.canPlay = true;
+            return;
         }
         
-        GAMEMANAGER.Instance.canPlay = true;
     }
 
     

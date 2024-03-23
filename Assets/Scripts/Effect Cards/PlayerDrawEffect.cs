@@ -15,7 +15,7 @@ public class PlayerDrawEffect : MonoBehaviour
     [SerializeField] GameObject topEffectDeckCard;
     private GameObject currentCard;
 
-    private event Action onPlayerReveal;
+    //private event Action onPlayerReveal;
 
 
     [Header("--- Effects ---")]

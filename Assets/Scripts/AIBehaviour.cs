@@ -16,6 +16,9 @@ public class AIBehaviour: MonoBehaviour
     Dictionary<Card, List<Card>> playDict = new Dictionary<Card, List<Card>> { };
     List<List<Card>> playList = new List<List<Card>> { };
 
+
+    [SerializeField] private AIEffectProbability drawEffect;
+
     [Header("--- Table ---")]
     [SerializeField] Table table;
     [SerializeField] CardSlot slot1;
@@ -37,6 +40,7 @@ public class AIBehaviour: MonoBehaviour
     [Header("Timing")]
     [SerializeField] int minimumTime;
     [SerializeField] int maximumTime;
+    [SerializeField, Range(0, 10)] float waitTime;
 
     private void Start()
     {
@@ -55,7 +59,20 @@ public class AIBehaviour: MonoBehaviour
     public void CountDown()
     {
         int waitTime = Random.Range(minimumTime, maximumTime);
-        Invoke("AIPlay", waitTime);
+        Invoke(nameof(DrawEffect), waitTime);
+    }
+
+    private void DrawEffect()
+    {
+        
+        if(drawEffect.CheckForDraw() == true) 
+        {
+            Invoke(nameof(AIPlay), waitTime);
+        }
+        else
+        {
+            AIPlay();
+        }
     }
 
 

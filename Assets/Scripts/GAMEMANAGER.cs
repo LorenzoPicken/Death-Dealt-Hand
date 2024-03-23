@@ -231,6 +231,7 @@ public class GAMEMANAGER : MonoBehaviour
         {
             if (enemy.handList.Count == 0)
             {
+                AIEffectProbability.hasDrawnThisTurn = false;
                 for (int i = 0; i < playerSlots.Length; i++)
                 {
                     deck[0].gameObject.SetActive(true);

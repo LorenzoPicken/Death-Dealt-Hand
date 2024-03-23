@@ -18258,6 +18258,7 @@ GameObject:
   - component: {fileID: 826721582}
   - component: {fileID: 826721581}
   - component: {fileID: 826721584}
+  - component: {fileID: 826721585}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -18347,6 +18348,7 @@ MonoBehaviour:
   AI_CollectedCards: {fileID: 936476461}
   handList: []
   collectedCards: []
+  drawEffect: {fileID: 826721585}
   table: {fileID: 1211700944}
   slot1: {fileID: 1846895847}
   slot2: {fileID: 1481165249}
@@ -18360,6 +18362,22 @@ MonoBehaviour:
   slotsList: []
   minimumTime: 2
   maximumTime: 4
+  waitTime: 4
+--- !u!114 &826721585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826721579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5b69f200c145c48ba23742017bc1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1211700944}
+  enemy: {fileID: 826721584}
+  drawEffect: {fileID: 484226825}
 --- !u!1001 &828557438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42343,7 +42361,7 @@ MonoBehaviour:
   - {fileID: 1292720436}
   currentRoundState: 0
   enemyEffectTokens: 0
-  playerEffectTokens: 99
+  playerEffectTokens: 0
 --- !u!1001 &1815317928
 PrefabInstance:
   m_ObjectHideFlags: 0

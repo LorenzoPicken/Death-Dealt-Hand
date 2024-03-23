@@ -13,7 +13,7 @@ public class RevealCards : MonoBehaviour
     [SerializeField, Range(0, 10)] private float displayTime = 3f;
     //[SerializeField, Range(0, 10)] private float cantPlayTime;
     [SerializeField] AIBehaviour enemy;
-    private event Action onComplete;
+    //private event Action onComplete;
 
     private int count = 0;
 
