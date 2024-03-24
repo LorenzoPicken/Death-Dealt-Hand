@@ -44,19 +44,19 @@ public class PlayerDrawEffect : MonoBehaviour
             currentCard = wheelOfFortuneGO;
             
         }
-        else if (cardNum == 4 || cardNum == 5 || cardNum == 6)
+        else if (cardNum == 4 || cardNum == 5)
         {
             currentCard = bloodPactGO;
         }
-        else if (cardNum == 7 || cardNum == 8)
+        else if (cardNum == 6 || cardNum == 7)
         {
             currentCard = theTakersGO;
         }
-        else if (cardNum == 9)
+        else if (cardNum == 8)
         {
             currentCard = theButcherGO;
         }
-        else if(cardNum == 10 || cardNum == 11 || cardNum == 12)
+        else if(cardNum == 9 || cardNum == 10 || cardNum == 11)
         {
             
             currentCard = evilEyeGO;
@@ -72,12 +72,14 @@ public class PlayerDrawEffect : MonoBehaviour
     { 
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
-            return cardNum = UnityEngine.Random.Range(1, 13); 
+            return cardNum = UnityEngine.Random.Range(1, 12); 
+            
 
         }
         else
         {
-            return cardNum = UnityEngine.Random.Range(1, 10);
+            
+            return cardNum = UnityEngine.Random.Range(1, 9);
         }
     }
     private void DisplayCard()

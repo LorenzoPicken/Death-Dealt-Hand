@@ -125,7 +125,7 @@ public class GAMEMANAGER : MonoBehaviour
 
     public void UpdateUI()
     {
-        //enemyTokens.text = "Enemy Tokens: " + enemyEffectTokens;
+        
         playerTokens.text = "Player Tokens: " + playerEffectTokens;
         if(playerEffectTokens > 9)
         {

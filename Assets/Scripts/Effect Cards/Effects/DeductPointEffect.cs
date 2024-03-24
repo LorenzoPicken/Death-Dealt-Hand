@@ -10,13 +10,10 @@ public static class DeductPointEffect
         {
             GAMEMANAGER.Instance.enemyPoint--;
         }
-        else
+        else if(GAMEMANAGER.Instance.currentRoundState == RoundState.ENEMYTURN && GAMEMANAGER.Instance.playerPoints > 0)
         {
-            if(GAMEMANAGER.Instance.playerPoints > 0)
-            {
                 GAMEMANAGER.Instance.playerPoints--;
 
-            }
         }
         GAMEMANAGER.Instance.canPlay = true;
     }
