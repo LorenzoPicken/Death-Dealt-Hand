@@ -1028,7 +1028,11 @@ public class AIBehaviour: MonoBehaviour
         GAMEMANAGER.Instance.CalculateTableTotal();
         if (GAMEMANAGER.Instance.tableTotal == 0)
         {
-            GAMEMANAGER.Instance.enemyEffectTokens++;
+            if(GAMEMANAGER.Instance.enemyEffectTokens <= 2)
+            {
+                GAMEMANAGER.Instance.enemyEffectTokens++;
+
+            }
             GAMEMANAGER.Instance.UpdateUI();
         }
         

@@ -22235,7 +22235,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enemy: 0'
+  m_text: 'Opponent: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -42286,7 +42286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMeshPro: {fileID: 734644277}
-  enemyPoints: {fileID: 996174317}
+  enemyPointText: {fileID: 996174317}
   round_number_tmp: {fileID: 1645800655}
   playerTokens: {fileID: 2012182425}
   player: {fileID: 1521627079}
@@ -42294,7 +42294,7 @@ MonoBehaviour:
   table: {fileID: 1211700944}
   tableTotal: 0
   playerPoints: 0
-  enemyPoint: 0
+  enemyPoints: 0
   wasExecuted: 0
   hasDrawnEffect: 0
   canPlay: 1
@@ -46080,7 +46080,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 000
+  m_text: x0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

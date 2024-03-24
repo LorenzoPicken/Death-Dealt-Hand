@@ -6,9 +6,9 @@ public static class DeductPointEffect
 {
     public static void DeductPoint()
     {
-        if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN && GAMEMANAGER.Instance.enemyPoint > 0)
+        if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN && GAMEMANAGER.Instance.enemyPoints > 0)
         {
-            GAMEMANAGER.Instance.enemyPoint--;
+            GAMEMANAGER.Instance.enemyPoints--;
         }
         else if(GAMEMANAGER.Instance.currentRoundState == RoundState.ENEMYTURN && GAMEMANAGER.Instance.playerPoints > 0)
         {

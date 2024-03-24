@@ -28,7 +28,7 @@ public class AIEffectProbability : MonoBehaviour
                     return true;
                 }
             }
-            else if(difference >2 && difference < 6 && hasDrawnThisTurn == false)
+            else if(difference >=3  && hasDrawnThisTurn == false && GAMEMANAGER.Instance.playerPoints - GAMEMANAGER.Instance.enemyPoints <= 4)
             {
                 if(randNum > 0 && randNum < 5)
                 {
@@ -37,9 +37,9 @@ public class AIEffectProbability : MonoBehaviour
                     return true;
                 }
             }
-            else if(difference > 5 || GAMEMANAGER.Instance.playerPoints - GAMEMANAGER.Instance.enemyPoint > 4)
+            else if(GAMEMANAGER.Instance.playerPoints - GAMEMANAGER.Instance.enemyPoints > 4)
             {
-                if (randNum > 0 && randNum < 7)
+                if (randNum > 0 && randNum < 6)
                 {
                     drawEffect.DrawEffectCard();
                     hasDrawnThisTurn = true;

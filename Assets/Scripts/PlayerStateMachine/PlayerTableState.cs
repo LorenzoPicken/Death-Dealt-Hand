@@ -172,7 +172,11 @@ public class PlayerTableState : PlayerBaseState
         GAMEMANAGER.Instance.CalculateTableTotal();
         if(GAMEMANAGER.Instance.tableTotal == 0)
         {
-            GAMEMANAGER.Instance.playerEffectTokens++;
+            if(GAMEMANAGER.Instance.playerEffectTokens <= 2)
+            {
+                GAMEMANAGER.Instance.playerEffectTokens++;
+
+            }
             GAMEMANAGER.Instance.UpdateUI();
         }
 

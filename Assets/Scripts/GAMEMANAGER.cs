@@ -15,7 +15,7 @@ public class GAMEMANAGER : MonoBehaviour
 {
 
     [SerializeField] public TMP_Text textMeshPro;
-    [SerializeField] public TMP_Text enemyPoints;
+    [SerializeField] public TMP_Text enemyPointText;
     [SerializeField] public TMP_Text round_number_tmp;
     [SerializeField] public TMP_Text playerTokens;
     //[SerializeField] public TMP_Text enemyTokens;
@@ -29,7 +29,7 @@ public class GAMEMANAGER : MonoBehaviour
     private int round_number = 1;
     public static GAMEMANAGER Instance;
     public int playerPoints = 0;
-    public int enemyPoint= 0;
+    public int enemyPoints= 0;
 
     public bool wasExecuted = false;
     public bool hasDrawnEffect = false;
@@ -126,17 +126,10 @@ public class GAMEMANAGER : MonoBehaviour
     public void UpdateUI()
     {
         
-        playerTokens.text = "Player Tokens: " + playerEffectTokens;
-        if(playerEffectTokens > 9)
-        {
-            playerTokens.text = "0" + playerEffectTokens;
-        }
-        else
-        {
-            playerTokens.text = "00" + playerEffectTokens;
-        }
+        
+        playerTokens.text = "x" + playerEffectTokens;
         textMeshPro.text = "Player: " + playerPoints;
-        enemyPoints.text = "Opponent: " + enemyPoint;
+        enemyPointText.text = "Opponent: " + enemyPoints;
     }
 
     public void CalculateTableTotal()
@@ -196,6 +189,8 @@ public class GAMEMANAGER : MonoBehaviour
         int playerSuns = 0;
         int playerSevens = 0;
         bool foundSevenSuns = false;
+        int currentPlayerPoints = 0;
+        int currentEnemyPoints = 0;
         
         foreach(Card card in table.playedCards)
         {
@@ -205,21 +200,60 @@ public class GAMEMANAGER : MonoBehaviour
                
             }
 
-            if(card.Suit == Suit.SUNS && card.CardValue == 7) { playerPoints++; foundSevenSuns = true; Debug.Log("You got the seven of SUNS"); }
+            if(card.Suit == Suit.SUNS && card.CardValue == 7) { currentPlayerPoints++; foundSevenSuns = true; Debug.Log("You got the seven of SUNS"); }
             if(card.CardValue == 7) { playerSevens++;  }
         }
         if(foundSevenSuns ==false)
         {
             Debug.Log("Enemy Had Seven Of Suns");
-           enemyPoint++; 
+           currentEnemyPoints++; 
         }
         
-        if (table.playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { enemyPoint++; Debug.Log("Enemy Had " + (40 - table.playedCards.Count) + " Total Cards"); }
-        if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { enemyPoint++; Debug.Log("Enemy Had " + (10 - playerSuns) + " suns"); }
-       // if (playerSevens >= 3) {  playerPoints++; Debug.Log("You got the highest number of sevens" + playerSevens); } else if( playerSevens < 2){ enemyPoint++; Debug.Log("Enemy Had " + (4 - playerSevens) + " Sevens"); }
+        if (table.playedCards.Count >= 21) { currentPlayerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { currentEnemyPoints++; Debug.Log("Enemy Had " + (40 - table.playedCards.Count) + " Total Cards"); }
+        if (playerSuns >= 6) { currentPlayerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { currentEnemyPoints++; Debug.Log("Enemy Had " + (10 - playerSuns) + " suns"); }
+       
+        if(currentPlayerPoints > currentEnemyPoints)
+        {
+            if(enemyEffectTokens < 2)
+            {
+                enemyEffectTokens += 2;
 
-        textMeshPro.text = "Player: " + playerPoints;
-        enemyPoints.text = "Opponent: " + enemyPoint;
+            }
+            else if(enemyEffectTokens == 2) 
+            {
+                enemyEffectTokens++;
+            }
+        }
+        else if(currentPlayerPoints < currentEnemyPoints)
+        {
+            if (playerEffectTokens < 2)
+            {
+                playerEffectTokens += 2;
+
+            }
+            else if (playerEffectTokens == 2)
+            {
+                playerEffectTokens++;
+            }
+        }
+        else if(currentPlayerPoints == currentEnemyPoints)
+        {
+            if(enemyEffectTokens <=2)
+            {
+                 enemyEffectTokens++;
+
+            }
+            if(playerEffectTokens <= 2)
+            {
+                playerEffectTokens++;
+
+            }
+        }
+
+        playerPoints += currentPlayerPoints;
+        enemyPoints += currentEnemyPoints;
+
+        UpdateUI();
 
         currentRoundState = RoundState.WON;
 
