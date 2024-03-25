@@ -42547,8 +42547,8 @@ MonoBehaviour:
   - {fileID: 1745413849}
   - {fileID: 1292720436}
   currentRoundState: 0
-  enemyEffectTokens: 99
-  playerEffectTokens: 99
+  enemyEffectTokens: 0
+  playerEffectTokens: 0
 --- !u!1001 &1815317928
 PrefabInstance:
   m_ObjectHideFlags: 0
