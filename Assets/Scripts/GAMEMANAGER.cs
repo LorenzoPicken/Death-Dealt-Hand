@@ -337,6 +337,8 @@ public class GAMEMANAGER : MonoBehaviour
     {
         System.Random _rand = new System.Random();
 
+        EventManager.InvokeShuffleDeck();
+
         for (int i = listToShuffle.Count - 1; i > 0; i--)
         {
             var k = _rand.Next(i + 1);

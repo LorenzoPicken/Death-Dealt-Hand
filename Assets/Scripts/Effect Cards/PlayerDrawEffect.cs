@@ -15,7 +15,7 @@ public class PlayerDrawEffect : MonoBehaviour
     [SerializeField] GameObject topEffectDeckCard;
     private GameObject currentCard;
 
-    //private event Action onPlayerReveal;
+    
 
 
     [Header("--- Effects ---")]
@@ -72,13 +72,14 @@ public class PlayerDrawEffect : MonoBehaviour
     { 
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
+            return 1;
             return cardNum = UnityEngine.Random.Range(1, 16); 
             
 
         }
         else
         {
-            
+            return 1;
             return cardNum = UnityEngine.Random.Range(1, 12);
         }
     }
