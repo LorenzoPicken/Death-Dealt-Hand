@@ -169,6 +169,7 @@ public class PlayerTableState : PlayerBaseState
         player.selectedCard.inHand = false;
         player.SwitchState(player.HandState);
         cardsToPlay.Clear();
+        EventManager.InvokePlayerPickup();
         GAMEMANAGER.Instance.CalculateTableTotal();
         if(GAMEMANAGER.Instance.tableTotal == 0)
         {

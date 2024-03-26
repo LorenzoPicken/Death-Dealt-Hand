@@ -71,14 +71,14 @@ public class AIBehaviour: MonoBehaviour
         {
             if(GAMEMANAGER.Instance.handWasRedrawnByWOF == true)
             {
-                Debug.Log("Hand Was Redrawn. Wait " + waitAfterFortuneEffect);
+                
                 Invoke(nameof(AIPlay), waitAfterFortuneEffect);
                 
 
             }
             else
             {
-                Debug.Log("Hand Was Not Redrawn. Wait " + waitAfterFortuneEffect);
+                
                 Invoke(nameof(AIPlay), waitTime);
             }
         }
@@ -1032,6 +1032,7 @@ public class AIBehaviour: MonoBehaviour
             Debug.Log("Priority is Set To Enemy");
             GAMEMANAGER.Instance.currentPrio = PickupPrio.ENEMY;
         }
+        EventManager.InvokeEnemyPickup();
     }
 
     private void EndTurn()

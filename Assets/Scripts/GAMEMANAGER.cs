@@ -330,6 +330,7 @@ public class GAMEMANAGER : MonoBehaviour
 
     private void SetUpGame()
     {
+        EventManager.InvokeRoundEnd();
         deck = Shuffle(deck);
         SetUpCards(cardSlots, playerSlots);
         wasPickupOverride = false;
@@ -390,6 +391,7 @@ public class GAMEMANAGER : MonoBehaviour
                 StartCoroutine(dissolvingEffect(deck[0]));
                 cardSlots[j].available = false;
                 table.cards.Add(deck[0]);
+                
                 deck.Remove(deck[0]);
             }
 

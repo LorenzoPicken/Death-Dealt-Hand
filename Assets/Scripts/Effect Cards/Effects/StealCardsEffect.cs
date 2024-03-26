@@ -39,9 +39,10 @@ public class StealCardsEffect: MonoBehaviour
                     enemy.collectedCards.Remove(card);
                 }
             }
-            
 
 
+            EventManager.InvokeEnemyLoseCard();
+            EventManager.InvokePlayerPickup();
         }
         else
         {
@@ -70,6 +71,8 @@ public class StealCardsEffect: MonoBehaviour
                     player.playedCards.Remove(card);
                 }
             }
+            EventManager.InvokePlayerLoseCard();
+            EventManager.InvokeEnemyPickup();
         }
         GAMEMANAGER.Instance.canPlay = true;
     }
