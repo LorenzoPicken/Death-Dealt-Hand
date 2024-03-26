@@ -42,7 +42,8 @@ public class PlayerDrawEffect : MonoBehaviour
         if (cardNum == 1 || cardNum == 2 || cardNum == 3 || cardNum == 4)
         {
             currentCard = wheelOfFortuneGO;
-            
+            GAMEMANAGER.Instance.handWasRedrawnByWOF = true;
+
         }
         else if (cardNum == 5 || cardNum == 6 || cardNum == 7)
         {
@@ -76,6 +77,7 @@ public class PlayerDrawEffect : MonoBehaviour
         }
         else
         {
+           
             return cardNum = UnityEngine.Random.Range(1, 12);
         }
     }

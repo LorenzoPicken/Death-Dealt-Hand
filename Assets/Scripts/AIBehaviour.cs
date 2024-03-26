@@ -9,6 +9,7 @@ public class AIBehaviour: MonoBehaviour
     Card currentCard;
     [SerializeField] Transform AI_CollectedCards;
     
+    
 
     public List<Card> handList = new List<Card>() { };
     public List<Card> collectedCards = new List<Card>() { };
@@ -41,6 +42,7 @@ public class AIBehaviour: MonoBehaviour
     [SerializeField] int minimumTime;
     [SerializeField] int maximumTime;
     [SerializeField, Range(0, 10)] float waitTime;
+    [SerializeField, Range(0, 20)] float waitAfterFortuneEffect;
 
     private void Start()
     {
@@ -67,7 +69,18 @@ public class AIBehaviour: MonoBehaviour
         
         if(drawEffect.CheckForDraw() == true) 
         {
-            Invoke(nameof(AIPlay), waitTime);
+            if(GAMEMANAGER.Instance.handWasRedrawnByWOF == true)
+            {
+                Debug.Log("Hand Was Redrawn. Wait " + waitAfterFortuneEffect);
+                Invoke(nameof(AIPlay), waitAfterFortuneEffect);
+                
+
+            }
+            else
+            {
+                Debug.Log("Hand Was Not Redrawn. Wait " + waitAfterFortuneEffect);
+                Invoke(nameof(AIPlay), waitTime);
+            }
         }
         else
         {
@@ -78,8 +91,8 @@ public class AIBehaviour: MonoBehaviour
 
     private void AIPlay()
     {
-        
-            
+
+        GAMEMANAGER.Instance.handWasRedrawnByWOF = false;
         int currentIndex = 0;
         int playIndex = 0;
 
@@ -163,6 +176,7 @@ public class AIBehaviour: MonoBehaviour
                
                 int smallestValue = 0;
                 Suit smallestSuit = Suit.CLUBS;
+              
                 smallestValue = handList[0].CardValue; smallestSuit = handList[0].Suit;
 
                 foreach (Card card in handList)

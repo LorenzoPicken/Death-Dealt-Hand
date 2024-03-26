@@ -34,6 +34,7 @@ public class GAMEMANAGER : MonoBehaviour
     public bool wasExecuted = false;
     public bool hasDrawnEffect = false;
     public bool canPlay = true;
+    public bool handWasRedrawnByWOF = false;
 
     private bool wasPickupOverride = false;
     public bool WasPickupOverride { get => wasPickupOverride; set => wasPickupOverride = value; }
@@ -103,6 +104,7 @@ public class GAMEMANAGER : MonoBehaviour
                 CountPoints();
                 break;
             case RoundState.ENEMYTURN:
+                
                 if(wasExecuted == false)
                 {
                     wasExecuted = true;

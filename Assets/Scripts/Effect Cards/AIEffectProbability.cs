@@ -18,7 +18,7 @@ public class AIEffectProbability : MonoBehaviour
         {
             randNum = DrawRNG();
             int difference = playerCollectionSize - aiCollectionSize;
-
+            
             if(difference < 3 && hasDrawnThisTurn == false)
             {
                 if(randNum == 1)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using UnityEngine;
 
 public class RedrawHand : MonoBehaviour
@@ -13,15 +14,20 @@ public class RedrawHand : MonoBehaviour
 
     private int cardsInHand;
 
+    public bool handWasRedrawn;
+    
+   
+
     [Header("---Timing---")]
     [SerializeField, Range(0f, 5f)] float transitionTime;
     [SerializeField, Range(0f, 10f)] float returnCardsTime;
-    //[SerializeField, Range(0f, 10f)] float shuffleAnimationTime;
+   
     
     
     
     public  void Execute()
     {
+        
         cards = new List<Card>() { };
         cardsInHand = 0;
         if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
@@ -29,20 +35,20 @@ public class RedrawHand : MonoBehaviour
             foreach(Card card in player.playerCards)
             {
                 cards.Add(card);
-                
-                //Visually Send Card Back To Deck
+
             }
             cardsInHand = player.playerCards.Count;
-            for(int i = 0; i < cardsInHand; i++)
+            for (int i = cardsInHand - 1; i >= 0; i--)
             {
-                player.playerCards[0].InHand = false;
-                GAMEMANAGER.Instance.deck.Add(player.playerCards[0]);
-                player.playerCards.Remove(player.playerCards[0]);
-                
+                player.playerCards[i].InHand = false;
+                GAMEMANAGER.Instance.deck.Add(player.playerCards[i]);
+                player.playerCards.RemoveAt(i);
             }
-            StartCoroutine(SendCardsBackToDeck(() =>{GivePlayerNewCards();}));
-                
-            StartCoroutine(WaitFinishShuffle(() => { EndEffect(); }));
+            
+            GivePlayerNewCards();
+
+            StartCoroutine(SendCardsBackToDeck());
+            EndEffect();
 
 
 
@@ -53,24 +59,24 @@ public class RedrawHand : MonoBehaviour
             {
                 cards.Add(card);
                 
-                //Visually Send Card Back To Deck
+               
             }
             cardsInHand = enemy.handList.Count;
-            for (int i = 0; i < cardsInHand; i++)
+            for (int i = cardsInHand - 1; i >= 0; i--)
             {
-                
-                GAMEMANAGER.Instance.deck.Add(enemy.handList[0]);
-                enemy.handList.Remove(enemy.handList[0]);
-
+                GAMEMANAGER.Instance.deck.Add(enemy.handList[i]);
+                enemy.handList.RemoveAt(i);
             }
-            StartCoroutine(SendCardsBackToDeck(() => { GiveAINewCards(); }));
             
+            GiveAINewCards();
 
+            StartCoroutine(SendCardsBackToDeck());
+            EndEffect();
 
-            StartCoroutine(WaitFinishShuffle(() => { EndEffect(); }));
+            
         }
 
-        
+
         
     }
 
@@ -84,11 +90,9 @@ public class RedrawHand : MonoBehaviour
         {
             if (count < cardsInHand)
             {
-                GAMEMANAGER.Instance.deck[0].transform.position = playerSlot.transform.position;
-                GAMEMANAGER.Instance.deck[0].transform.rotation = playerSlot.transform.rotation;
+               
                 GAMEMANAGER.Instance.deck[0].inHand = true;
                 player.playerCards.Add(GAMEMANAGER.Instance.deck[0]);
-                StartCoroutine(GAMEMANAGER.Instance.dissolvingEffect(GAMEMANAGER.Instance.deck[0]));
                 GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
                 count++;
 
@@ -96,6 +100,7 @@ public class RedrawHand : MonoBehaviour
 
             
         }
+        Invoke("SpawnPlayerCards", 4);
     }
 
     private void GiveAINewCards()
@@ -105,10 +110,8 @@ public class RedrawHand : MonoBehaviour
         {
             if (count < cardsInHand)
             {
-                GAMEMANAGER.Instance.deck[0].transform.position = playerSlot.transform.position;
-                GAMEMANAGER.Instance.deck[0].transform.rotation = playerSlot.transform.rotation;
+                
                 enemy.handList.Add(GAMEMANAGER.Instance.deck[0]);
-                StartCoroutine(GAMEMANAGER.Instance.dissolvingEffect(GAMEMANAGER.Instance.deck[0]));
                 GAMEMANAGER.Instance.deck.Remove(GAMEMANAGER.Instance.deck[0]);
                 count++;
 
@@ -117,18 +120,58 @@ public class RedrawHand : MonoBehaviour
 
             
         }
+        Invoke("SpawnEnemyCards", 4);
+
+
+
+
+    }
+
+    private void SpawnPlayerCards()
+    {
+        int index = 0;
+        foreach(Transform playerSlot in GAMEMANAGER.Instance.playerSlots)
+        {
+            if(index < cardsInHand)
+            {
+                player.playerCards[index].transform.position = playerSlot.transform.position;
+                player.playerCards[index].transform.rotation = playerSlot.transform.rotation;
+                StartCoroutine(GAMEMANAGER.Instance.dissolvingEffect(player.playerCards[index]));
+                index++;
+
+            }
+        }
+    }
+
+    private void SpawnEnemyCards()
+    {
+        int index = 0;
+        foreach (Transform playerSlot in GAMEMANAGER.Instance.enemySlots)
+        {
+            if (index < cardsInHand)
+            {
+                enemy.handList[index].transform.position = playerSlot.transform.position;
+                enemy.handList[index].transform.rotation = playerSlot.transform.rotation;
+                StartCoroutine(GAMEMANAGER.Instance.dissolvingEffect(enemy.handList[index]));
+                index++;
+
+            }
+        }
     }
 
     private void EndEffect()
     {
         GAMEMANAGER.Instance.canPlay = true;
+        handWasRedrawn = true;
+       
+        
         return;
     }
 
 
     #region Coroutines
 
-    private IEnumerator SendCardsBackToDeck(System.Action onSendCardsBack)
+    private IEnumerator SendCardsBackToDeck()
     {
         
         int count = 0;
@@ -140,12 +183,14 @@ public class RedrawHand : MonoBehaviour
             {
                 initialPosition = GAMEMANAGER.Instance.playerSlots[count].transform.position;
                 initialRotation = GAMEMANAGER.Instance.playerSlots[count].transform.rotation;
+                
 
             }
             else
             {
                 initialPosition = GAMEMANAGER.Instance.enemySlots[count].transform.position;
                 initialRotation = GAMEMANAGER.Instance.enemySlots[count].transform.rotation;
+                
             }
             count++;
             float elapsedTime = 0f;
@@ -172,17 +217,13 @@ public class RedrawHand : MonoBehaviour
             card.transform.position = GAMEMANAGER.Instance.player.playedCardsTransform.position;
         }
 
-        yield return new WaitForSeconds(returnCardsTime); 
-        onSendCardsBack?.Invoke(); // Invoke the callback
+
+
+        
+        
     }
 
-    private IEnumerator WaitFinishShuffle(System.Action onReplenishHand)
-    {
-        yield return null;
-        onReplenishHand?.Invoke();
-
-
-    }
+    
 
     
 

@@ -10477,6 +10477,7 @@ MonoBehaviour:
   player: {fileID: 1521627079}
   enemy: {fileID: 826721584}
   topOfDeckTransform: {fileID: 1379706176}
+  handWasRedrawn: 0
   transitionTime: 0.5
   returnCardsTime: 3.2
 --- !u!114 &484226829
@@ -18519,6 +18520,7 @@ MonoBehaviour:
   minimumTime: 2
   maximumTime: 4
   waitTime: 4
+  waitAfterFortuneEffect: 10
 --- !u!114 &826721585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42485,6 +42487,7 @@ MonoBehaviour:
   wasExecuted: 0
   hasDrawnEffect: 0
   canPlay: 1
+  handWasRedrawnByWOF: 0
   currentPrio: 0
   deck:
   - {fileID: 1995841053}
@@ -42547,7 +42550,7 @@ MonoBehaviour:
   - {fileID: 1745413849}
   - {fileID: 1292720436}
   currentRoundState: 0
-  enemyEffectTokens: 0
+  enemyEffectTokens: 99
   playerEffectTokens: 0
 --- !u!1001 &1815317928
 PrefabInstance:
