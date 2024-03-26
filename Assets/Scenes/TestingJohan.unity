@@ -10480,6 +10480,7 @@ MonoBehaviour:
   handWasRedrawn: 0
   transitionTime: 0.5
   returnCardsTime: 3.2
+  respawnCardDelay: 3.75
 --- !u!114 &484226829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42550,7 +42551,7 @@ MonoBehaviour:
   - {fileID: 1745413849}
   - {fileID: 1292720436}
   currentRoundState: 0
-  enemyEffectTokens: 99
+  enemyEffectTokens: 0
   playerEffectTokens: 0
 --- !u!1001 &1815317928
 PrefabInstance:

@@ -21,6 +21,7 @@ public class RedrawHand : MonoBehaviour
     [Header("---Timing---")]
     [SerializeField, Range(0f, 5f)] float transitionTime;
     [SerializeField, Range(0f, 10f)] float returnCardsTime;
+    [SerializeField, Range (0f, 10f)] float respawnCardDelay;
    
     
     
@@ -100,7 +101,7 @@ public class RedrawHand : MonoBehaviour
 
             
         }
-        Invoke("SpawnPlayerCards", 4);
+        Invoke("SpawnPlayerCards", respawnCardDelay);
     }
 
     private void GiveAINewCards()
@@ -120,7 +121,7 @@ public class RedrawHand : MonoBehaviour
 
             
         }
-        Invoke("SpawnEnemyCards", 4);
+        Invoke("SpawnEnemyCards", respawnCardDelay);
 
 
 
