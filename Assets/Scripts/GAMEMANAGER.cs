@@ -6,6 +6,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using UnityEngine.Rendering;
 //using UnityEditor.PackageManager.Requests;
 
 public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTURN, WON, LOST }
@@ -37,6 +38,7 @@ public class GAMEMANAGER : MonoBehaviour
     public bool handWasRedrawnByWOF = false;
 
     private bool wasPickupOverride = false;
+    private bool endRoundChecked = false;
     public bool WasPickupOverride { get => wasPickupOverride; set => wasPickupOverride = value; }
 
     public PickupPrio currentPrio;
@@ -48,6 +50,8 @@ public class GAMEMANAGER : MonoBehaviour
     public Transform revealCardsTransform;
     public Transform playerCardsTransform;
     public Transform enemyCardsTransform;
+    [SerializeField] Transform playerCollectionDeckTransform;
+    [SerializeField] Transform enemyCollectionDeckTransform;
 
     [Header("--- Slot Transforms ---")]
     public Transform[] playerSlots;
@@ -61,6 +65,11 @@ public class GAMEMANAGER : MonoBehaviour
     [Header("--- Effect Tokens ---")]
     public int enemyEffectTokens = 0;
     public int playerEffectTokens = 0;
+
+
+    [Header("--- Timing ---")]
+    [SerializeField, Range(0f, 5f)] float transitionTime;
+    [SerializeField, Range(0f, 5f)] float cardsFloatTime;
 
 
 
@@ -263,73 +272,84 @@ public class GAMEMANAGER : MonoBehaviour
 
     private void CheckPlayerHand()
     {
-        if (deck.Count != 0)
+        if (endRoundChecked == false)
         {
-            if (enemy.handList.Count == 0)
-            {
-                AIEffectProbability.hasDrawnThisTurn = false;
-                for (int i = 0; i < playerSlots.Length; i++)
-                {
-                    deck[0].gameObject.SetActive(true);
-                    StartCoroutine(dissolvingEffect(deck[0]));
-                    deck[0].transform.position = playerSlots[i].transform.position;
-                    deck[0].transform.rotation = playerSlots[i].transform.rotation;
-                    deck[0].inHand = true;
-                    player.playerCards.Add(deck[0]);
-                    deck.Remove(deck[0]);
-                    EventManager.InvokeDrawCards();
 
-                }
-                for(int i =0; i <3; i++)
+
+            if (deck.Count != 0)
+            {
+                if (enemy.handList.Count == 0)
                 {
-                    enemy.handList.Add(deck[0]);
-                    deck[0].gameObject.SetActive(true);
-                    StartCoroutine(dissolvingEffect(deck[0]));
-                    deck[0].transform.position = enemySlots[i].transform.position;
-                    deck[0].transform.rotation = enemySlots[i].transform.rotation;
-                    deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
-                    deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
-                    deck.Remove(deck[0]);
-                    EventManager.InvokeDrawCards() ;
+                    AIEffectProbability.hasDrawnThisTurn = false;
+                    for (int i = 0; i < playerSlots.Length; i++)
+                    {
+                        deck[0].gameObject.SetActive(true);
+                        StartCoroutine(dissolvingEffect(deck[0]));
+                        deck[0].transform.position = playerSlots[i].transform.position;
+                        deck[0].transform.rotation = playerSlots[i].transform.rotation;
+                        deck[0].inHand = true;
+                        player.playerCards.Add(deck[0]);
+                        deck.Remove(deck[0]);
+                        EventManager.InvokeDrawCards();
+
+                    }
+                    for (int i = 0; i < 3; i++)
+                    {
+                        enemy.handList.Add(deck[0]);
+                        deck[0].gameObject.SetActive(true);
+                        StartCoroutine(dissolvingEffect(deck[0]));
+                        deck[0].transform.position = enemySlots[i].transform.position;
+                        deck[0].transform.rotation = enemySlots[i].transform.rotation;
+                        deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                        deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
+                        deck.Remove(deck[0]);
+                        EventManager.InvokeDrawCards();
+                    }
                 }
+
+                currentRoundState = RoundState.PLAYERTURN;
             }
-            
-            currentRoundState = RoundState.PLAYERTURN;
-        }
-        else if(deck.Count == 0 && player.playerCards.Count > 0 && enemy.handList.Count > 0)
-        {
-            currentRoundState = RoundState.PLAYERTURN;
-        }
-        else 
-        {
-            if(currentPrio == PickupPrio.PLAYER)
+            else if (deck.Count == 0 && player.playerCards.Count > 0 && enemy.handList.Count > 0)
             {
-                foreach(Card card in table.cards)
-                {
-                    table.playedCards.Add(card);
-                    card.transform.position += Vector3.right * 7;
-                    Debug.Log("Player Cleaned Up Table");
-                }
-
+                currentRoundState = RoundState.PLAYERTURN;
             }
             else
             {
-                foreach(Card card in table.cards)
+
+
+                endRoundChecked = true;
+                if (currentPrio == PickupPrio.PLAYER)
                 {
-                    enemy.collectedCards.Add(card);
-                    card.transform.position += Vector3.right * 7;
-                    Debug.Log("Enemy Cleaned Up Table");
+                    foreach (Card card in table.cards)
+                    {
+                        table.playedCards.Add(card);
+                        //card.transform.position += Vector3.right * 7;
+                        Debug.Log("Player Cleaned Up Table");
+                        StartCoroutine(MoveRemainingCards(playerCollectionDeckTransform));
+                    }
+
                 }
+                else
+                {
+                    foreach (Card card in table.cards)
+                    {
+                        enemy.collectedCards.Add(card);
+                        //card.transform.position += Vector3.right * 7;
+                        Debug.Log("Enemy Cleaned Up Table");
+                        StartCoroutine(MoveRemainingCards(enemyCollectionDeckTransform));
+                    }
+                }
+
+
+
+
             }
-            
-            table.cards.Clear();
-            currentRoundState = RoundState.COUNTPOINTS;
         }
        
 
 
     }
-
+   
     private void SetUpGame()
     {
         EventManager.InvokeRoundEnd();
@@ -404,6 +424,7 @@ public class GAMEMANAGER : MonoBehaviour
 
     }
 
+
     public IEnumerator dissolvingEffect(Card card)
     {
 
@@ -417,7 +438,61 @@ public class GAMEMANAGER : MonoBehaviour
 
     }
 
-    
-    
-    
+    private IEnumerator MoveRemainingCards(Transform collectionDeck)
+    {
+        float waitTime = 0;
+        
+        foreach (Card card in table.cards)
+        {
+            waitTime++;
+            float elapsedTime = 0;
+            Vector3 initialPosition = card.transform.position;
+            Quaternion initialRotation = card.transform.rotation;
+            Vector3 cardFloat = card.transform.position + new Vector3(0, 0.1f, 0);
+            while (elapsedTime < cardsFloatTime)
+            {
+                float t = elapsedTime / cardsFloatTime;
+                card.transform.position = Vector3.Lerp(initialPosition,
+                    cardFloat, t);
+                
+                elapsedTime += Time.deltaTime;
+                yield return new WaitForSeconds(0f);
+            }
+
+            //yield return new WaitForSeconds(1);
+            elapsedTime = 0;
+            
+
+            while (elapsedTime < transitionTime)
+            {
+                float t = elapsedTime / transitionTime;
+                card.transform.position = Vector3.Lerp(card.transform.position, 
+                    collectionDeck.position, t);
+                card.transform.rotation = Quaternion.Lerp(card.transform.rotation, 
+                    collectionDeck.rotation, t);
+
+                elapsedTime += Time.deltaTime;
+                yield return null; 
+            }
+
+            
+        }
+            
+
+
+        yield return new WaitForSeconds(1);
+        foreach (Card card in table.cards)
+        {
+            
+            card.transform.position = player.playedCardsTransform.position;
+        }
+        table.cards.Clear();
+        currentRoundState = RoundState.COUNTPOINTS;
+        endRoundChecked = false;
+        Debug.Log("table cleared");
+    }
+
+
+
+
 }
