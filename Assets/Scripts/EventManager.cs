@@ -16,6 +16,11 @@ public static class EventManager
     public static event Action onEnemyLoseCard;
 
 
+    //Main Deck
+    public static event Action onDrawCards;
+    public static event Action onReturnCards;
+
+
     public static event Action onRoundEnd;
 
     #region Game
@@ -50,7 +55,6 @@ public static class EventManager
 
 
 
-
     #region Enemy
     public static void InvokeEnemyPickup()
     {
@@ -61,6 +65,26 @@ public static class EventManager
     {
         onEnemyLoseCard?.Invoke();
     }
+
+    #endregion
+
+
+
+
+    #region Main Deck
+
+    public static void InvokeDrawCards()
+    {
+        onDrawCards?.Invoke();
+    }
+
+    public static void InvokeReturnCards()
+    {
+        onReturnCards?.Invoke();
+    }
+
+
+
 
     #endregion
 }

@@ -28,57 +28,61 @@ public class RedrawHand : MonoBehaviour
     
     public  void Execute()
     {
-        
-        cards = new List<Card>() { };
-        cardsInHand = 0;
-        if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
+        if(GAMEMANAGER.Instance.deck.Count > 0)
         {
-            foreach(Card card in player.playerCards)
+
+            cards = new List<Card>() { };
+            cardsInHand = 0;
+            if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
             {
-                cards.Add(card);
+                foreach(Card card in player.playerCards)
+                {
+                    cards.Add(card);
 
-            }
-            cardsInHand = player.playerCards.Count;
-            for (int i = cardsInHand - 1; i >= 0; i--)
-            {
-                player.playerCards[i].InHand = false;
-                GAMEMANAGER.Instance.deck.Add(player.playerCards[i]);
-                player.playerCards.RemoveAt(i);
-            }
-            
-            GivePlayerNewCards();
-
-            StartCoroutine(SendCardsBackToDeck());
-            EndEffect();
-
-
-
-        }
-        else
-        {
-            foreach (Card card in enemy.handList)
-            {
-                cards.Add(card);
+                }
+                cardsInHand = player.playerCards.Count;
+                for (int i = cardsInHand - 1; i >= 0; i--)
+                {
+                    player.playerCards[i].InHand = false;
+                    GAMEMANAGER.Instance.deck.Add(player.playerCards[i]);
+                    player.playerCards.RemoveAt(i);
+                }
                 
-               
+                GivePlayerNewCards();
+
+                StartCoroutine(SendCardsBackToDeck());
+                EndEffect();
+
+
+
             }
-            cardsInHand = enemy.handList.Count;
-            for (int i = cardsInHand - 1; i >= 0; i--)
+            else
             {
-                GAMEMANAGER.Instance.deck.Add(enemy.handList[i]);
-                enemy.handList.RemoveAt(i);
+                foreach (Card card in enemy.handList)
+                {
+                    cards.Add(card);
+                    
+                   
+                }
+                cardsInHand = enemy.handList.Count;
+                for (int i = cardsInHand - 1; i >= 0; i--)
+                {
+                    GAMEMANAGER.Instance.deck.Add(enemy.handList[i]);
+                    enemy.handList.RemoveAt(i);
+                }
+                
+                GiveAINewCards();
+
+                StartCoroutine(SendCardsBackToDeck());
+                EndEffect();
+
+                
             }
-            
-            GiveAINewCards();
-
-            StartCoroutine(SendCardsBackToDeck());
-            EndEffect();
-
-            
         }
+        GAMEMANAGER.Instance.canPlay = true;
 
 
-        
+
     }
 
 
@@ -142,6 +146,7 @@ public class RedrawHand : MonoBehaviour
 
             }
         }
+        
     }
 
     private void SpawnEnemyCards()
@@ -158,6 +163,7 @@ public class RedrawHand : MonoBehaviour
 
             }
         }
+        
     }
 
     private void EndEffect()
@@ -210,6 +216,7 @@ public class RedrawHand : MonoBehaviour
             // Ensure card is positioned at the destination after the loop completes
             card.transform.position = topOfDeckTransform.position;
             card.transform.rotation = topOfDeckTransform.rotation;
+            
         }
         
         EventManager.InvokeShuffleDeck();

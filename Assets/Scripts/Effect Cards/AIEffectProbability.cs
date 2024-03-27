@@ -30,7 +30,7 @@ public class AIEffectProbability : MonoBehaviour
             }
             else if(difference >=3  && hasDrawnThisTurn == false && GAMEMANAGER.Instance.playerPoints - GAMEMANAGER.Instance.enemyPoints <= 4)
             {
-                if(randNum > 0 && randNum < 5)
+                if(randNum > 0 && randNum < 4)
                 {
                     drawEffect.DrawEffectCard();
                     hasDrawnThisTurn=true;

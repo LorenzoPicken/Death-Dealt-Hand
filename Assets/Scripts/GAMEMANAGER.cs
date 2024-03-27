@@ -277,6 +277,7 @@ public class GAMEMANAGER : MonoBehaviour
                     deck[0].inHand = true;
                     player.playerCards.Add(deck[0]);
                     deck.Remove(deck[0]);
+                    EventManager.InvokeDrawCards();
 
                 }
                 for(int i =0; i <3; i++)
@@ -289,6 +290,7 @@ public class GAMEMANAGER : MonoBehaviour
                     deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
                     deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                     deck.Remove(deck[0]);
+                    EventManager.InvokeDrawCards() ;
                 }
             }
             
@@ -333,6 +335,8 @@ public class GAMEMANAGER : MonoBehaviour
         EventManager.InvokeRoundEnd();
         deck = Shuffle(deck);
         SetUpCards(cardSlots, playerSlots);
+        EventManager.InvokeReturnCards();
+        EventManager.InvokeDrawCards();
         wasPickupOverride = false;
     }
 
