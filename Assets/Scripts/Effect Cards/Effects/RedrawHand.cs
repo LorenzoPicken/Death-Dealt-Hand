@@ -26,7 +26,7 @@ public class RedrawHand : MonoBehaviour
     
     
     
-    public  void Execute()
+    public void Execute()
     {
         if(GAMEMANAGER.Instance.deck.Count > 0)
         {
@@ -37,6 +37,7 @@ public class RedrawHand : MonoBehaviour
             {
                 foreach(Card card in player.playerCards)
                 {
+
                     cards.Add(card);
 
                 }
@@ -60,9 +61,7 @@ public class RedrawHand : MonoBehaviour
             {
                 foreach (Card card in enemy.handList)
                 {
-                    cards.Add(card);
-                    
-                   
+                    cards.Add(card);                                      
                 }
                 cardsInHand = enemy.handList.Count;
                 for (int i = cardsInHand - 1; i >= 0; i--)
@@ -79,10 +78,7 @@ public class RedrawHand : MonoBehaviour
                 
             }
         }
-        GAMEMANAGER.Instance.canPlay = true;
-
-
-
+            GAMEMANAGER.Instance.canPlay = true;
     }
 
 

@@ -275,7 +275,6 @@ public class GAMEMANAGER : MonoBehaviour
         if (endRoundChecked == false)
         {
 
-
             if (deck.Count != 0)
             {
                 if (enemy.handList.Count == 0)
@@ -297,6 +296,8 @@ public class GAMEMANAGER : MonoBehaviour
                     {
                         enemy.handList.Add(deck[0]);
                         deck[0].gameObject.SetActive(true);
+                        var outline = deck[0].GetComponent<Outline>();
+                        outline.enabled = false;
                         StartCoroutine(dissolvingEffect(deck[0]));
                         deck[0].transform.position = enemySlots[i].transform.position;
                         deck[0].transform.rotation = enemySlots[i].transform.rotation;
@@ -392,15 +393,18 @@ public class GAMEMANAGER : MonoBehaviour
                 
             }
 
-            for(int i =0; i < 3; i++)
+            for(int i=0; i < 3; i++)
             {
                 enemy.handList.Add(deck[0]);
                 deck[0].gameObject.SetActive(true);
+                var outline = deck[0].GetComponent<Outline>();
+                outline.enabled = false;
+                deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
+                
                 deck[0].transform.position = enemySlots[i].transform.position;
                 deck[0].transform.rotation = enemySlots[i].transform.rotation;
                 StartCoroutine(dissolvingEffect(deck[0]));
-                deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
-                deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                 deck.Remove(deck[0]);
             }
 

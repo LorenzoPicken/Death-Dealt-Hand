@@ -39,6 +39,7 @@ public class PlayerTableState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         // Return to Hand State, right click 
+        
         if(Input.GetMouseButtonDown(1))
         {
             player.SwitchState(player.HandState);
@@ -46,38 +47,40 @@ public class PlayerTableState : PlayerBaseState
 
         // Pick Cards from table
        
-            if (Input.GetMouseButtonDown(0))
-            {
-                Card card = player.SelectCard();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Card card = player.SelectCard();
 
             // If the card selected is not already into the list
-                if (!sameCardTable)
-                {
-                    if (card != null && !cardsToPlay.Contains(card))
-                    {
-                        cardsToPlay.Add(card);
-                        card.transform.position += Vector3.up * 0.25f;
-                        cardsSum += card.CardValue;
-                    }
-                    else
-                    {
-                        putCardDown(player);
-                    }
-                }
-                if(card != null && card.CardValue == player.selectedCard.CardValue && sameCardTable)
+            if (!sameCardTable)
+            {
+                if (card != null && !cardsToPlay.Contains(card))
                 {
                     cardsToPlay.Add(card);
-                    MoveCards(player);
-                    GAMEMANAGER.Instance.hasDrawnEffect = false;
-                    GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
-                    return;
+                    card.transform.position += Vector3.up * 0.25f;
+                    cardsSum += card.CardValue;
                 }
-          
-                
+                else
+                {
+                    putCardDown(player);
+                }
             }
 
+            if(card != null && card.CardValue == player.selectedCard.CardValue && sameCardTable)
+            {
+                cardsToPlay.Add(card);
+                MoveCards(player);
+                GAMEMANAGER.Instance.hasDrawnEffect = false;
+                GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
+                return;
+            }
+          
+                
+        }
 
-        // Confirm selection and Check, with Spacebar
+
+        // If match is not found in table, then check if cards value sum is equal to the selected card
+        
         if (!sameCardTable)
         {
             if (cardsSum == player.selectedCard.CardValue)
@@ -109,7 +112,9 @@ public class PlayerTableState : PlayerBaseState
     {
         foreach (Card card in cardsToPlay)
         {
+            var outline = card.GetComponent<Outline>();
             card.transform.position -= Vector3.up * 0.25f;
+            outline.enabled = false;
         }
         foreach(Card card in sameCardList)
         {
@@ -171,6 +176,7 @@ public class PlayerTableState : PlayerBaseState
         cardsToPlay.Clear();
         EventManager.InvokePlayerPickup();
         GAMEMANAGER.Instance.CalculateTableTotal();
+        
         if(GAMEMANAGER.Instance.tableTotal == 0)
         {
             if(GAMEMANAGER.Instance.playerEffectTokens <= 2)
