@@ -122,12 +122,10 @@ public class StealCardsEffect: MonoBehaviour
 
         if (max == 0)
         {
-            
             return indexList;
         }
         else
-        {
-            
+        { 
             if(max > 3)
             {
                 max = 3;
