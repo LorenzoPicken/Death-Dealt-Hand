@@ -9,6 +9,9 @@ public class RedrawHand : MonoBehaviour
     [SerializeField] PlayerStateManager player;
     [SerializeField] AIBehaviour enemy;
     [SerializeField] Transform topOfDeckTransform;
+    [SerializeField] Material frontMaterial;
+    [SerializeField] Material backMaterial;
+    
 
     private List<Card> cards;
 

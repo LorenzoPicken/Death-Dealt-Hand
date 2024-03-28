@@ -434,10 +434,23 @@ public class GAMEMANAGER : MonoBehaviour
 
         for (int i = 0; i < 160; i++)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1/100000000000f);
 
             card.dissolveMaterialFront.SetFloat("_Dissolve_Value", -i / 100f + 0.8f);
             card.dissolveMaterialBack.SetFloat("_Dissolve_Value", -i / 100f + 0.8f);
+        }
+
+    }
+
+    public IEnumerator burningEffect(Card card)
+    {
+
+        for (int i = 0; i < 160; i++)
+        {
+            yield return new WaitForSeconds(1 / 100000000000f);
+
+            card.dissolveMaterialFront.SetFloat("_Dissolve_Value", i / 100f - 0.8f);
+            card.dissolveMaterialBack.SetFloat("_Dissolve_Value", i / 100f  - 0.8f);
         }
 
     }
