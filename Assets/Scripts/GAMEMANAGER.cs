@@ -493,7 +493,9 @@ public class GAMEMANAGER : MonoBehaviour
                 card.transform.position = player.playedCardsTransform.position;
             }
         }
+        EventManager.InvokeOnFinalCardsDistributed();
         table.cards.Clear();
+        yield return new WaitForSeconds(5);
         currentRoundState = RoundState.COUNTPOINTS;
         endRoundChecked = false;
         Debug.Log("table cleared");

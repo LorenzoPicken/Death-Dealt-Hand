@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AICollectionDeck : MonoBehaviour
 {
-    [SerializeField] List<GameObject> cards = new List<GameObject>();
+    [SerializeField] public List<GameObject> cards = new List<GameObject>();
 
     private void OnEnable()
     {
