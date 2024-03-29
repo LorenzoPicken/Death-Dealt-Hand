@@ -22,6 +22,7 @@ public static class EventManager
 
 
     public static event Action onRoundEnd;
+    public static event Action onFinalCardsDistributed;
 
     #region Game
     public static void InvokeShuffleDeck()
@@ -81,6 +82,11 @@ public static class EventManager
     public static void InvokeReturnCards()
     {
         onReturnCards?.Invoke();
+    }
+
+    public static void InvokeOnFinalCardsDistributed()
+    {
+        onFinalCardsDistributed?.Invoke();
     }
 
 
