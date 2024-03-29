@@ -7,21 +7,21 @@ using static System.TimeZoneInfo;
 public class PlayerDrawEffect : MonoBehaviour
 {
     [Header("--- Cards ---")]
-    [SerializeField] GameObject theTakersGO;
-    [SerializeField] GameObject theButcherGO;
-    [SerializeField] GameObject wheelOfFortuneGO;
-    [SerializeField] GameObject evilEyeGO;
-    [SerializeField] GameObject bloodPactGO;
-    [SerializeField] GameObject topEffectDeckCard;
-    private GameObject currentCard;
+    [SerializeField] EffectCard theTakers;
+    [SerializeField] EffectCard theButcher;
+    [SerializeField] EffectCard wheelOfFortune;
+    [SerializeField] EffectCard evilEye;
+    [SerializeField] EffectCard bloodPact;
+    [SerializeField] Transform topEffectDeckCard;
+    private EffectCard currentCard;
 
     
 
 
-    [Header("--- Effects ---")]
-    [SerializeField] RevealCards evilEyeEffect;
-    [SerializeField] StealCardsEffect theTakersEffect;
-    [SerializeField] RedrawHand wheelOfFortuneEffect;
+    //[Header("--- Effects ---")]
+    //[SerializeField] RevealCards evilEyeEffect;
+    //[SerializeField] StealCardsEffect theTakersEffect;
+    //[SerializeField] RedrawHand wheelOfFortuneEffect;
 
 
     [Header("--- Timers ---")]
@@ -41,26 +41,26 @@ public class PlayerDrawEffect : MonoBehaviour
 
         if (cardNum == 1 || cardNum == 2 || cardNum == 3 || cardNum == 4)
         {
-            currentCard = wheelOfFortuneGO;
+            currentCard = wheelOfFortune;
             GAMEMANAGER.Instance.handWasRedrawnByWOF = true;
 
         }
         else if (cardNum == 5 || cardNum == 6 || cardNum == 7)
         {
-            currentCard = bloodPactGO;
+            currentCard = bloodPact;
         }
         else if (cardNum == 8 || cardNum == 9 || cardNum == 10)
         {
-            currentCard = theTakersGO;
+            currentCard = theTakers;
         }
         else if (cardNum == 11)
         {
-            currentCard = theButcherGO;
+            currentCard = theButcher;
         }
         else if(cardNum == 12 || cardNum == 13 || cardNum == 14 || cardNum == 15)
         {
             
-            currentCard = evilEyeGO;
+            currentCard = evilEye;
         }
 
         currentCard.transform.position = topEffectDeckCard.transform.position;
@@ -118,27 +118,28 @@ public class PlayerDrawEffect : MonoBehaviour
 
     private void ApplyEffect()
     {
-        if(currentCard == wheelOfFortuneGO)
-        {
-            wheelOfFortuneEffect.Execute();
-        }
-        else if( currentCard == evilEyeGO)
-        {
-            evilEyeEffect.Execute();
-        }
-        else if (currentCard == bloodPactGO)
-        {
-            OverrideEndGamePickupEffect.OverridePickUp();
-        }
-        else if (currentCard == theButcherGO)
-        {
-            
-            DeductPointEffect.DeductPoint();
-        }
-        else if (currentCard == theTakersGO)
-        {
-            theTakersEffect.Execute();
-        }
+        //if(currentCard == wheelOfFortune)
+        //{
+        //    wheelOfFortune.Execute();
+        //}
+        //else if( currentCard == evilEye)
+        //{
+        //    evilEye.Execute();
+        //}
+        //else if (currentCard == bloodPact)
+        //{
+        //    bloodPact.Execute();
+        //}
+        //else if (currentCard == theButcher)
+        //{
+        //    theButcher.Execute();
+        //}
+        //else if (currentCard == theTakers)
+        //{
+        //    theTakers.Execute();
+        //}
+
+        currentCard.Execute();
         GAMEMANAGER.Instance.UpdateUI();
         
     }

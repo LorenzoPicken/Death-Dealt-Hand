@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class RevealCards : MonoBehaviour
+public class RevealCards : EffectCard
 {
     //THIS EFFECT WILL NOT BE ABLE TO BE DRAWN BY THE AI DUE TO A LACK OF TIME PROGRAMMING THE AI TO EXECUTE THIS
     private Transform initialTransform;
@@ -17,7 +17,7 @@ public class RevealCards : MonoBehaviour
 
     private int count = 0;
 
-    public void Execute()
+    public override void Execute()
     {
         //float timer = 0;
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)

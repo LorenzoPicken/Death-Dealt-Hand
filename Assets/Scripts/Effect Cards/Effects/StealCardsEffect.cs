@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StealCardsEffect: MonoBehaviour
+public class StealCardsEffect: EffectCard
 {
     [SerializeField] private AIBehaviour enemy;
     [SerializeField] private Table player;
    
 
-    public void Execute()
+    public override void Execute()
     {
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {

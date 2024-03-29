@@ -442,15 +442,15 @@ public class GAMEMANAGER : MonoBehaviour
 
     }
 
-    public IEnumerator burningEffect(Card card)
+    public IEnumerator burningEffect(EffectCard card)
     {
 
         for (int i = 0; i < 160; i++)
         {
             yield return new WaitForSeconds(1 / 100000000000f);
 
-            card.dissolveMaterialFront.SetFloat("_Dissolve_Value", i / 100f - 0.8f);
-            card.dissolveMaterialBack.SetFloat("_Dissolve_Value", i / 100f  - 0.8f);
+            card.frontMaterial.SetFloat("_Dissolve_Value", i / 100f - 0.8f);
+            card.backMaterial.SetFloat("_Dissolve_Value", i / 100f  - 0.8f);
         }
 
     }

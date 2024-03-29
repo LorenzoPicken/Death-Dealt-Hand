@@ -4,13 +4,12 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 
-public class RedrawHand : MonoBehaviour
+public class RedrawHand : EffectCard
 {
     [SerializeField] PlayerStateManager player;
     [SerializeField] AIBehaviour enemy;
     [SerializeField] Transform topOfDeckTransform;
-    [SerializeField] Material frontMaterial;
-    [SerializeField] Material backMaterial;
+
     
 
     private List<Card> cards;
@@ -29,7 +28,7 @@ public class RedrawHand : MonoBehaviour
     
     
     
-    public void Execute()
+    public override void Execute()
     {
         if(GAMEMANAGER.Instance.deck.Count > 0)
         {

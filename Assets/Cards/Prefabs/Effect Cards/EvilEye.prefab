@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3845449729944401096
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5.7023606
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.7023606
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5.7023606
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02755375
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0853
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1925
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000061817246
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 5.035654e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      propertyPath: m_Name
+      value: EvilEye
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2987382830513430766}
+  m_SourcePrefab: {fileID: 100100000, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+--- !u!1 &4151371035116571033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+  m_PrefabInstance: {fileID: 3845449729944401096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2987382830513430766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4151371035116571033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ab93bee858c8647bf4b1920e632841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontMaterial: {fileID: 2100000, guid: f753e19a31bd7bc4497526478f9408a3, type: 2}
+  backMaterial: {fileID: 2100000, guid: 593e2705735b3f24fb19f350a38100aa, type: 2}
+  transitionTime: 2
+  displayTime: 3
+  enemy: {fileID: 0}

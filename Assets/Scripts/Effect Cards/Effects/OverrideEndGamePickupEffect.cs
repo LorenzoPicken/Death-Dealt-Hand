@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class OverrideEndGamePickupEffect
+public class OverrideEndGamePickupEffect : EffectCard
 {
-    public static void OverridePickUp()
+    public override void Execute()
     {
         GAMEMANAGER.Instance.WasPickupOverride = true;
 

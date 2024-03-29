@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class DeductPointEffect
+public class DeductPointEffect : EffectCard
 {
-    public static void DeductPoint()
+    public override void Execute()
     {
         if (GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN && GAMEMANAGER.Instance.enemyPoints > 0)
         {
