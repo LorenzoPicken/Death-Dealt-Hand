@@ -25,6 +25,8 @@ public class GAMEMANAGER : MonoBehaviour
     [SerializeField] public PlayerStateManager player;
     [SerializeField] public AIBehaviour enemy;
     [SerializeField] public Table table;
+    [SerializeField] private PlayerCollectionDeck playerCollectionDeck;
+    [SerializeField] private AICollectionDeck enemyCollectionDeck;
     public int tableTotal = 0;
 
     private int round_number = 1;
@@ -45,6 +47,7 @@ public class GAMEMANAGER : MonoBehaviour
 
   
     public List<Card> deck = new List<Card>();
+    
 
     [Header("--- Card Transforms ---")]
     public Transform revealCardsTransform;
@@ -328,6 +331,10 @@ public class GAMEMANAGER : MonoBehaviour
                         Debug.Log("Player Cleaned Up Table");
                         StartCoroutine(MoveRemainingCards(playerCollectionDeckTransform));
                     }
+                    if(table.cards.Count <= 0)
+                    {
+                        StartCoroutine(MoveRemainingCards(playerCollectionDeckTransform));
+                    }
 
                 }
                 else
@@ -337,6 +344,10 @@ public class GAMEMANAGER : MonoBehaviour
                         enemy.collectedCards.Add(card);
                         //card.transform.position += Vector3.right * 7;
                         Debug.Log("Enemy Cleaned Up Table");
+                        StartCoroutine(MoveRemainingCards(enemyCollectionDeckTransform));
+                    }
+                    if (table.cards.Count <= 0)
+                    {
                         StartCoroutine(MoveRemainingCards(enemyCollectionDeckTransform));
                     }
                 }
@@ -460,59 +471,69 @@ public class GAMEMANAGER : MonoBehaviour
         float waitTime = 0;
         if(table.deck.Count <= 0)
         {
-
-            foreach (Card card in table.cards)
+            if(table.cards.Count > 0)
             {
-                waitTime++;
-                float elapsedTime = 0;
-                Vector3 initialPosition = card.transform.position;
-                Quaternion initialRotation = card.transform.rotation;
-                Vector3 cardFloat = card.transform.position + new Vector3(0, 0.1f, 0);
-                while (elapsedTime < cardsFloatTime)
+
+                foreach (Card card in table.cards)
                 {
-                    float t = elapsedTime / cardsFloatTime;
-                    card.transform.position = Vector3.Lerp(initialPosition,
-                        cardFloat, t);
+                    waitTime++;
+                    float elapsedTime = 0;
+                    Vector3 initialPosition = card.transform.position;
+                    Quaternion initialRotation = card.transform.rotation;
+                    Vector3 cardFloat = card.transform.position + new Vector3(0, 0.1f, 0);
+                    while (elapsedTime < cardsFloatTime)
+                    {
+                        float t = elapsedTime / cardsFloatTime;
+                        card.transform.position = Vector3.Lerp(initialPosition,
+                            cardFloat, t);
+                        
+                        elapsedTime += Time.deltaTime;
+                        yield return new WaitForSeconds(0f);
+                    }
+
+                    //yield return new WaitForSeconds(1);
+                    elapsedTime = 0;
                     
-                    elapsedTime += Time.deltaTime;
-                    yield return new WaitForSeconds(0f);
+
+                    while (elapsedTime < transitionTime)
+                    {
+                        float t = elapsedTime / transitionTime;
+                        card.transform.position = Vector3.Lerp(card.transform.position, 
+                            collectionDeck.position, t);
+                        card.transform.rotation = Quaternion.Lerp(card.transform.rotation, 
+                            collectionDeck.rotation, t);
+
+                        elapsedTime += Time.deltaTime;
+                        yield return null; 
+                    }
+                    
+
+
                 }
+                    
 
-                //yield return new WaitForSeconds(1);
-                elapsedTime = 0;
-                
 
-                while (elapsedTime < transitionTime)
+                yield return new WaitForSeconds(1);
+                foreach (Card card in table.cards)
                 {
-                    float t = elapsedTime / transitionTime;
-                    card.transform.position = Vector3.Lerp(card.transform.position, 
-                        collectionDeck.position, t);
-                    card.transform.rotation = Quaternion.Lerp(card.transform.rotation, 
-                        collectionDeck.rotation, t);
-
-                    elapsedTime += Time.deltaTime;
-                    yield return null; 
+                    
+                    card.transform.position = player.playedCardsTransform.position;
                 }
-
-                
             }
-                
-
-
-            yield return new WaitForSeconds(1);
-            foreach (Card card in table.cards)
-            {
-                
-                card.transform.position = player.playedCardsTransform.position;
-            }
+            yield return null;
         }
+        EventManager.InvokeEnemyPickup();
+        EventManager.InvokePlayerPickup();
         EventManager.InvokeOnFinalCardsDistributed();
         table.cards.Clear();
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(5.5f);
+        
         currentRoundState = RoundState.COUNTPOINTS;
         endRoundChecked = false;
         Debug.Log("table cleared");
     }
+
+    
 
 
 

@@ -10483,6 +10483,8 @@ MonoBehaviour:
   player: {fileID: 1521627079}
   enemy: {fileID: 826721584}
   topOfDeckTransform: {fileID: 1379706176}
+  frontMaterial: {fileID: 0}
+  backMaterial: {fileID: 0}
   handWasRedrawn: 0
   transitionTime: 0.5
   returnCardsTime: 3.2
@@ -42779,6 +42781,8 @@ MonoBehaviour:
   player: {fileID: 1521627079}
   enemy: {fileID: 826721584}
   table: {fileID: 1211700944}
+  playerCollectionDeck: {fileID: 1535293463}
+  enemyCollectionDeck: {fileID: 1372174590}
   tableTotal: 0
   playerPoints: 0
   enemyPoints: 0
@@ -50570,7 +50574,7 @@ PrefabInstance:
       objectReference: {fileID: 1535293463}
     - target: {fileID: 6219677307606867647, guid: d770d87ff99b4c142b7fba1680069371, type: 3}
       propertyPath: transitionTime
-      value: 1
+      value: 2.08
       objectReference: {fileID: 0}
     - target: {fileID: 7861656815611934572, guid: d770d87ff99b4c142b7fba1680069371, type: 3}
       propertyPath: m_LocalPosition.x

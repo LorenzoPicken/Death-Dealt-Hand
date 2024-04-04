@@ -61,32 +61,53 @@ public class CardDeck : MonoBehaviour
 
     private IEnumerator RefillDeck()
     {
-        int count = 0;
-        for(int i = 0; i < cards.Count / 2; i++)
+        
+
+        int activePlayerCards = 0;
+        foreach(GameObject go in playerDeck.cards)
         {
-            if(i < playerDeck.cards.Count)
+            if(go.activeSelf)
+            {
+                activePlayerCards++;
+
+            }
+        }
+
+        int activeEnemyCards = 0;
+        foreach (GameObject go in enemyDeck.cards)
+        {
+            if (go.activeSelf)
+            {
+                activeEnemyCards++;
+
+            }
+        }
+
+        int count = 0;
+        for(int i = 0; i < cards.Count; i++)
+        {
+            if(i < activePlayerCards)
             {
                 GameObject card = playerDeck.cards[i];
                 Transform initialPosition = playerDeck.cards[i].transform;
                 Transform finalPosition = cards[count].transform;
+                Debug.Log(initialPosition);
                 StartCoroutine(MoveCard(card, initialPosition, finalPosition));
                 yield return new WaitForSeconds(0.1f);
                 count++;
             }
-            if(i < enemyDeck.cards.Count)
+            if(i < activeEnemyCards)
             {
                 GameObject card = enemyDeck.cards[i];
                 Transform initialPosition = enemyDeck.cards[i].transform;
                 Transform finalPosition = cards[count].transform;
-                
+
                 StartCoroutine(MoveCard(card, initialPosition, finalPosition));
                 yield return new WaitForSeconds(0.1f);
                 count++;
             }
-            if(i >= enemyDeck.cards.Count && i>= playerDeck.cards.Count)
-            {
-                break;
-            }
+            
+            
 
            
             Debug.Log(i);
@@ -98,6 +119,8 @@ public class CardDeck : MonoBehaviour
 
     private IEnumerator MoveCard(GameObject card, Transform initialPosition, Transform finalPosition)
     {
+        Vector3 initialPos = initialPosition.position;
+        Quaternion initialRot = initialPosition.rotation;
         float elapsedTime = 0;
         while(elapsedTime < transitionTime)
         {
@@ -117,6 +140,16 @@ public class CardDeck : MonoBehaviour
 
         card.transform.position = finalPosition.position;
         card.transform.rotation = finalPosition.rotation;
+        StartCoroutine(SendCardsBack(card, initialPos, initialRot));
     }
-    
+
+    private IEnumerator SendCardsBack(GameObject card, Vector3 initialPosition, Quaternion initialRotation)
+    {
+        yield return new WaitForSeconds(5); 
+
+        // Return card to initial position and rotation
+        card.transform.position = initialPosition;
+        card.transform.rotation = initialRotation;
+    }
+
 }
