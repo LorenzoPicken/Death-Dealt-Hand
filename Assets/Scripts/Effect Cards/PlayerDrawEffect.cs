@@ -118,27 +118,6 @@ public class PlayerDrawEffect : MonoBehaviour
 
     private void ApplyEffect()
     {
-        //if(currentCard == wheelOfFortune)
-        //{
-        //    wheelOfFortune.Execute();
-        //}
-        //else if( currentCard == evilEye)
-        //{
-        //    evilEye.Execute();
-        //}
-        //else if (currentCard == bloodPact)
-        //{
-        //    bloodPact.Execute();
-        //}
-        //else if (currentCard == theButcher)
-        //{
-        //    theButcher.Execute();
-        //}
-        //else if (currentCard == theTakers)
-        //{
-        //    theTakers.Execute();
-        //}
-
         currentCard.Execute();
         GAMEMANAGER.Instance.UpdateUI();
         

@@ -127,7 +127,7 @@ public class GAMEMANAGER : MonoBehaviour
                 Application.Quit();
                 break;
             case RoundState.WON:
-                ResetLists();
+                //ResetLists();
                 round_number++;
                 round_number_tmp.text = "Round: " + round_number.ToString();
                 break;
@@ -154,40 +154,27 @@ public class GAMEMANAGER : MonoBehaviour
     }
     private void ResetLists()
     {
-        List<Card> cardsToRemoveFromPlayed = new List<Card>();
+        // Remove and add cards back to deck from played cards 
         foreach (Card card in table.playedCards)
         {
             deck.Add(card);
-            cardsToRemoveFromPlayed.Add(card);
+            card.dissolveMaterialBack.SetFloat("_Dissolve_Value", -1);
+            card.dissolveMaterialFront.SetFloat("_Dissolve_Value", -1);
+            table.playedCards.Remove(card);            
         }
-
-        foreach (Card card in cardsToRemoveFromPlayed)
-        {
-            table.playedCards.Remove(card);
-        }
-
-        List<Card> cardsToRemoveFromCollected = new List<Card>();
+        
+        // Remove and add cards back to deck from enemy collected cards 
         foreach (Card card in enemy.collectedCards)
         {
             deck.Add(card);
-            cardsToRemoveFromCollected.Add(card);
-        }
-
-        foreach (Card card in cardsToRemoveFromCollected)
-        {
             enemy.collectedCards.Remove(card);
         }
 
-        List<Card> cardsToRemoveFromTable = new List<Card>();
+        // Remove and add cards back to deck from cards on the table
         foreach (Card card in table.cards)
         {
             card.transform.position += Vector3.right * 7;
-            //deck.Add(card);
-            cardsToRemoveFromTable.Add(card);
-        }
-
-        foreach (Card card in cardsToRemoveFromTable)
-        {
+            deck.Add(card);
             table.cards.Remove(card);
         }
 
@@ -200,8 +187,7 @@ public class GAMEMANAGER : MonoBehaviour
         int playerSuns = 0;
         int playerSevens = 0;
         bool foundSevenSuns = false;
-        int currentPlayerPoints = 0;
-        int currentEnemyPoints = 0;
+       
         
         foreach(Card card in table.playedCards)
         {
@@ -211,58 +197,32 @@ public class GAMEMANAGER : MonoBehaviour
                
             }
 
-            if(card.Suit == Suit.SUNS && card.CardValue == 7) { currentPlayerPoints++; foundSevenSuns = true; Debug.Log("You got the seven of SUNS"); }
-            if(card.CardValue == 7) { playerSevens++;  }
+            if(card.Suit == Suit.SUNS && card.CardValue == 7) { playerPoints++; foundSevenSuns = true; Debug.Log("You got the seven of SUNS"); }
+            if(card.CardValue == 7) { playerSevens++; }
         }
-        if(foundSevenSuns ==false)
+        if(foundSevenSuns == false)
         {
             Debug.Log("Enemy Had Seven Of Suns");
-           currentEnemyPoints++; 
+           playerPoints++; 
         }
         
-        if (table.playedCards.Count >= 21) { currentPlayerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { currentEnemyPoints++; Debug.Log("Enemy Had " + (40 - table.playedCards.Count) + " Total Cards"); }
-        if (playerSuns >= 6) { currentPlayerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { currentEnemyPoints++; Debug.Log("Enemy Had " + (10 - playerSuns) + " suns"); }
+        if (table.playedCards.Count >= 21) { playerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { enemyPoints++; Debug.Log("Enemy Had " + (40 - table.playedCards.Count) + " Total Cards"); }
+        if (playerSuns >= 6) { playerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { enemyPoints++; Debug.Log("Enemy Had " + (10 - playerSuns) + " suns"); }
        
-        if(currentPlayerPoints > currentEnemyPoints)
+        // Tokens assignment 
+        if(playerPoints > enemyPoints)
         {
-            if(enemyEffectTokens < 2)
-            {
-                enemyEffectTokens += 2;
-
-            }
-            else if(enemyEffectTokens == 2) 
-            {
-                enemyEffectTokens++;
-            }
+            enemyEffectTokens += 2;
         }
-        else if(currentPlayerPoints < currentEnemyPoints)
+        else if(playerPoints < enemyPoints)
         {
-            if (playerEffectTokens < 2)
-            {
-                playerEffectTokens += 2;
-
-            }
-            else if (playerEffectTokens == 2)
-            {
-                playerEffectTokens++;
-            }
+            playerEffectTokens += 2;
         }
-        else if(currentPlayerPoints == currentEnemyPoints)
+        else if(playerPoints == enemyPoints)
         {
-            if(enemyEffectTokens <=2)
-            {
-                 enemyEffectTokens++;
-
-            }
-            if(playerEffectTokens <= 2)
-            {
-                playerEffectTokens++;
-
-            }
+            playerEffectTokens++;
+            enemyEffectTokens++;
         }
-
-        playerPoints += currentPlayerPoints;
-        enemyPoints += currentEnemyPoints;
 
         UpdateUI();
 
@@ -301,8 +261,8 @@ public class GAMEMANAGER : MonoBehaviour
                         StartCoroutine(dissolvingEffect(deck[0]));
                         deck[0].transform.position = enemySlots[i].transform.position;
                         deck[0].transform.rotation = enemySlots[i].transform.rotation;
-                        deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
-                        deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
+                        //deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                        //deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                         deck.Remove(deck[0]);
                         EventManager.InvokeDrawCards();
                     }
@@ -317,18 +277,17 @@ public class GAMEMANAGER : MonoBehaviour
             else
             {
 
-
                 endRoundChecked = true;
                 if (currentPrio == PickupPrio.PLAYER)
                 {
                     foreach (Card card in table.cards)
                     {
                         table.playedCards.Add(card);
-                        //card.transform.position += Vector3.right * 7;
                         Debug.Log("Player Cleaned Up Table");
                         StartCoroutine(MoveRemainingCards(playerCollectionDeckTransform));
                     }
 
+                    ResetLists();
                 }
                 else
                 {
@@ -339,6 +298,7 @@ public class GAMEMANAGER : MonoBehaviour
                         Debug.Log("Enemy Cleaned Up Table");
                         StartCoroutine(MoveRemainingCards(enemyCollectionDeckTransform));
                     }
+                    ResetLists();
                 }
 
 
@@ -399,8 +359,8 @@ public class GAMEMANAGER : MonoBehaviour
                 deck[0].gameObject.SetActive(true);
                 var outline = deck[0].GetComponent<Outline>();
                 outline.enabled = false;
-                deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
-                deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
+                //deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value", -1f);
+                //deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value", -1f);
                 
                 deck[0].transform.position = enemySlots[i].transform.position;
                 deck[0].transform.rotation = enemySlots[i].transform.rotation;
@@ -411,8 +371,8 @@ public class GAMEMANAGER : MonoBehaviour
             // Place four cards in the table
             for (int j = 0; j < 4; j++)
             {
-                deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value",1f);
-                deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value",1f);
+                //deck[0].dissolveMaterialBack.SetFloat("_Dissolve_Value",1f);
+                //deck[0].dissolveMaterialFront.SetFloat("_Dissolve_Value",1f);
                 deck[0].gameObject.SetActive(true);
                 deck[0].transform.position = cardSlots[j].transform.position;
                 deck[0].transform.rotation = cardSlots[j].transform.rotation;
@@ -458,9 +418,8 @@ public class GAMEMANAGER : MonoBehaviour
     private IEnumerator MoveRemainingCards(Transform collectionDeck)
     {
         float waitTime = 0;
-        if(table.deck.Count <= 0)
+        if(deck.Count > 0)
         {
-
             foreach (Card card in table.cards)
             {
                 waitTime++;
@@ -502,7 +461,6 @@ public class GAMEMANAGER : MonoBehaviour
             yield return new WaitForSeconds(1);
             foreach (Card card in table.cards)
             {
-                
                 card.transform.position = player.playedCardsTransform.position;
             }
         }
