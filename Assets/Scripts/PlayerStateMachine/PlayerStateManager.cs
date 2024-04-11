@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerStateManager : MonoBehaviour
 {
+   
+   
     // Player variables
     public CameraSwitch camSwitch;
     public Card selectedCard;
@@ -37,6 +39,8 @@ public class PlayerStateManager : MonoBehaviour
     {
         currentState.UpdateState(this);
 
+
+
         if (Input.GetMouseButtonDown(0) && currentState == HandState && GAMEMANAGER.Instance.canPlay==true && GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
             
@@ -51,7 +55,7 @@ public class PlayerStateManager : MonoBehaviour
                     {
                         GAMEMANAGER.Instance.hasDrawnEffect = true;
                         playerDrawEffect.DrawEffectCard();
-
+                       
                     }
                     else
                     {

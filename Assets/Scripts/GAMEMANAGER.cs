@@ -7,7 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering;
-//using UnityEditor.PackageManager.Requests;
+
 
 public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTURN, WON, LOST }
 
@@ -45,6 +45,8 @@ public class GAMEMANAGER : MonoBehaviour
 
     public PickupPrio currentPrio;
 
+
+    [SerializeField] DeckOfCards effectsCardsDeck;
   
     public List<Card> deck = new List<Card>();
     
@@ -225,17 +227,26 @@ public class GAMEMANAGER : MonoBehaviour
         
         if (table.playedCards.Count >= 21) { currentPlayerPoints++; Debug.Log("You got the highest number of cards" + table.playedCards.Count); } else if(table.playedCards.Count < 20) { currentEnemyPoints++; Debug.Log("Enemy Had " + (40 - table.playedCards.Count) + " Total Cards"); }
         if (playerSuns >= 6) { currentPlayerPoints++; Debug.Log("You got the highest number of suns" + playerSuns); } else if(playerSuns < 5) { currentEnemyPoints++; Debug.Log("Enemy Had " + (10 - playerSuns) + " suns"); }
-       
+        
+        // Effect cards deck outline handling 
+        if(playerEffectTokens == 0)
+        {
+            effectsCardsDeck.ToggleColor();
+        }
+
         if(currentPlayerPoints > currentEnemyPoints)
         {
             if(enemyEffectTokens < 2)
             {
                 enemyEffectTokens += 2;
+                playerEffectTokens++;
 
             }
             else if(enemyEffectTokens == 2) 
             {
                 enemyEffectTokens++;
+                playerEffectTokens++;
+
             }
         }
         else if(currentPlayerPoints < currentEnemyPoints)
@@ -442,10 +453,24 @@ public class GAMEMANAGER : MonoBehaviour
 
     public IEnumerator dissolvingEffect(Card card)
     {
+        //float timeElapsed = 0;
+        //float duration = 10f;
+        //float t;
 
+        //while (timeElapsed < duration)
+        //{
+        //    t = Mathf.Tan(timeElapsed);
+        //    card.dissolveMaterialFront.SetFloat("_Dissolve_Value", t);
+        //    card.dissolveMaterialBack.SetFloat("_Dissolve_Value", t);
+
+        //    timeElapsed += Time.deltaTime;
+
+        //}
+
+        //yield return new WaitForSeconds(0f);
         for (int i = 0; i < 160; i++)
         {
-            yield return new WaitForSeconds(1/100000000000f);
+            yield return new WaitForSeconds(1 / 100000000000f);
 
             card.dissolveMaterialFront.SetFloat("_Dissolve_Value", -i / 100f + 0.8f);
             card.dissolveMaterialBack.SetFloat("_Dissolve_Value", -i / 100f + 0.8f);
@@ -455,14 +480,17 @@ public class GAMEMANAGER : MonoBehaviour
 
     public IEnumerator burningEffect(EffectCard card)
     {
-
+       
         for (int i = 0; i < 160; i++)
         {
             yield return new WaitForSeconds(1 / 100000000000f);
 
             card.frontMaterial.SetFloat("_Dissolve_Value", i / 100f - 0.8f);
             card.backMaterial.SetFloat("_Dissolve_Value", i / 100f  - 0.8f);
+
         }
+        
+        Debug.Log("burnt");
 
     }
 

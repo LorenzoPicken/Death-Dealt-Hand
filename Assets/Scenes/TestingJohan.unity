@@ -7975,11 +7975,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
---- !u!1 &343363157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
-  m_PrefabInstance: {fileID: 343363156}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &343363158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
@@ -9901,6 +9896,7 @@ GameObject:
   - component: {fileID: 446965573}
   - component: {fileID: 446965575}
   - component: {fileID: 446965574}
+  - component: {fileID: 446965576}
   m_Layer: 0
   m_Name: BloodPactModel - Copy
   m_TagString: Untagged
@@ -9974,6 +9970,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446965572}
   m_Mesh: {fileID: -462981019419857548, guid: 9506eeac5b51aea4a9a410cf84b97c87, type: 3}
+--- !u!114 &446965576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446965572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06fbe5623ced9a542a5ed9491fb54cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontMaterial: {fileID: 2100000, guid: 24deefb163d125a4fb1e8cd9f40ff54d, type: 2}
+  backMaterial: {fileID: 2100000, guid: b3fe60c684d686341a6d8d8a0ea054e5, type: 2}
 --- !u!1001 &454768039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10406,9 +10416,6 @@ GameObject:
   m_Component:
   - component: {fileID: 484226826}
   - component: {fileID: 484226825}
-  - component: {fileID: 484226829}
-  - component: {fileID: 484226828}
-  - component: {fileID: 484226827}
   m_Layer: 0
   m_Name: EffectManager
   m_TagString: Untagged
@@ -10428,15 +10435,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6437ce3776adfe04ca06add6e8f74e71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theTakersGO: {fileID: 1093324488}
-  theButcherGO: {fileID: 943146258}
-  wheelOfFortuneGO: {fileID: 716896307}
-  evilEyeGO: {fileID: 1730294003}
-  bloodPactGO: {fileID: 446965572}
-  topEffectDeckCard: {fileID: 343363157}
-  evilEyeEffect: {fileID: 484226829}
-  theTakersEffect: {fileID: 484226827}
-  wheelOfFortuneEffect: {fileID: 484226828}
+  effectsCardsDeck: {fileID: 1769047972}
+  theTakers: {fileID: 1093324492}
+  theButcher: {fileID: 943146262}
+  wheelOfFortune: {fileID: 716896311}
+  evilEye: {fileID: 1730294007}
+  bloodPact: {fileID: 446965576}
+  topEffectDeckCard: {fileID: 343363158}
   effectRevealTime: 1.24
   transitionTime: 0.5
 --- !u!4 &484226826
@@ -10454,56 +10459,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &484226827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484226824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51a529dfb2b637c42a91a71cdb0f3172, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 826721584}
-  player: {fileID: 1211700944}
---- !u!114 &484226828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484226824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ccb23cfefe64b546aff6adc85d3b67f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1521627079}
-  enemy: {fileID: 826721584}
-  topOfDeckTransform: {fileID: 1379706176}
-  frontMaterial: {fileID: 0}
-  backMaterial: {fileID: 0}
-  handWasRedrawn: 0
-  transitionTime: 0.5
-  returnCardsTime: 3.2
-  respawnCardDelay: 3.75
---- !u!114 &484226829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 484226824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33ab93bee858c8647bf4b1920e632841, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transitionTime: 0.6
-  displayTime: 1.51
-  enemy: {fileID: 826721584}
 --- !u!1001 &486225540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12039,7 +11994,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99fec10b37a0faa489ffe26bec180026, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1093324492}
   m_SourcePrefab: {fileID: 100100000, guid: 99fec10b37a0faa489ffe26bec180026, type: 3}
 --- !u!1001 &561022998
 PrefabInstance:
@@ -15463,6 +15421,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
   m_PrefabInstance: {fileID: 1678502810}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &716896311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716896307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ccb23cfefe64b546aff6adc85d3b67f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontMaterial: {fileID: 2100000, guid: 57cffae1979c5d749a676312a385c58f, type: 2}
+  backMaterial: {fileID: 2100000, guid: a61fcbabeb05d074095e54b753f74413, type: 2}
+  player: {fileID: 1521627079}
+  enemy: {fileID: 826721584}
+  topOfDeckTransform: {fileID: 1379706176}
+  handWasRedrawn: 0
+  transitionTime: 0
+  returnCardsTime: 0
+  respawnCardDelay: 0
 --- !u!1001 &719011517
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19154,7 +19133,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1730294007}
   m_SourcePrefab: {fileID: 100100000, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
 --- !u!1001 &861896340
 PrefabInstance:
@@ -20612,6 +20594,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 69906f8ad59a88e47a5a97c01be4f875, type: 3}
   m_PrefabInstance: {fileID: 1157115193}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &943146262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943146258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c1db2b889dc49468186ab883342543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontMaterial: {fileID: 2100000, guid: 2c5ba747a57f67a41a9106b08ae4388b, type: 2}
+  backMaterial: {fileID: 2100000, guid: 02d96726a4c94e140aef276b38a66c1d, type: 2}
 --- !u!4 &943367289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3667825465465734118, guid: 226aa234041d2be48881aab9632ea78e, type: 3}
@@ -25106,6 +25102,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 99fec10b37a0faa489ffe26bec180026, type: 3}
   m_PrefabInstance: {fileID: 560374337}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1093324492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093324488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a529dfb2b637c42a91a71cdb0f3172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontMaterial: {fileID: 2100000, guid: 97b9d0d174a1f7f46b4b78bb3a0656ca, type: 2}
+  backMaterial: {fileID: 2100000, guid: 046e1a424be85d343841fb386c5701e6, type: 2}
+  enemy: {fileID: 826721584}
+  player: {fileID: 1211700944}
 --- !u!4 &1093571879 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2200114559990214439, guid: 40399f95a6f26064ebdd3b08052bb9fc, type: 3}
@@ -26146,7 +26158,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 69906f8ad59a88e47a5a97c01be4f875, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 943146262}
   m_SourcePrefab: {fileID: 100100000, guid: 69906f8ad59a88e47a5a97c01be4f875, type: 3}
 --- !u!1001 &1159894165
 PrefabInstance:
@@ -37273,6 +37288,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a659b114c450f684ab727ef7721c8a82, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1769047970}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a659b114c450f684ab727ef7721c8a82, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1769047972}
   m_SourcePrefab: {fileID: 100100000, guid: a659b114c450f684ab727ef7721c8a82, type: 3}
 --- !u!1001 &1569684117
 PrefabInstance:
@@ -39968,7 +39986,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 716896311}
   m_SourcePrefab: {fileID: 100100000, guid: 63ca745a7044e344da5385d6f5c96237, type: 3}
 --- !u!1001 &1678735687
 PrefabInstance:
@@ -40851,6 +40872,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 18cce0910c8ad2349b73f9c91b097765, type: 3}
   m_PrefabInstance: {fileID: 860881455}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1730294007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730294003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ab93bee858c8647bf4b1920e632841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frontMaterial: {fileID: 2100000, guid: f753e19a31bd7bc4497526478f9408a3, type: 2}
+  backMaterial: {fileID: 2100000, guid: 593e2705735b3f24fb19f350a38100aa, type: 2}
+  transitionTime: 2
+  displayTime: 3
+  enemy: {fileID: 826721584}
 --- !u!1001 &1734721683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42064,6 +42102,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a659b114c450f684ab727ef7721c8a82, type: 3}
   m_PrefabInstance: {fileID: 1569559174}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1769047972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769047968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94ac96a9bf53e04aaf2781d4bcaa02b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1771024484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42791,6 +42841,7 @@ MonoBehaviour:
   canPlay: 1
   handWasRedrawnByWOF: 0
   currentPrio: 0
+  effectsCardsDeck: {fileID: 1769047972}
   deck:
   - {fileID: 1995841053}
   - {fileID: 2084206324}

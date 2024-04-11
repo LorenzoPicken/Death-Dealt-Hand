@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static System.TimeZoneInfo;
 
 public class PlayerDrawEffect : MonoBehaviour
 {
+    [SerializeField] DeckOfCards effectsCardsDeck;
+
     [Header("--- Cards ---")]
     [SerializeField] EffectCard theTakers;
     [SerializeField] EffectCard theButcher;
@@ -14,14 +17,6 @@ public class PlayerDrawEffect : MonoBehaviour
     [SerializeField] EffectCard bloodPact;
     [SerializeField] Transform topEffectDeckCard;
     private EffectCard currentCard;
-
-    
-
-
-    //[Header("--- Effects ---")]
-    //[SerializeField] RevealCards evilEyeEffect;
-    //[SerializeField] StealCardsEffect theTakersEffect;
-    //[SerializeField] RedrawHand wheelOfFortuneEffect;
 
 
     [Header("--- Timers ---")]
@@ -59,7 +54,7 @@ public class PlayerDrawEffect : MonoBehaviour
         }
         else if(cardNum == 12 || cardNum == 13 || cardNum == 14 || cardNum == 15)
         {
-            
+
             currentCard = evilEye;
         }
 
@@ -85,20 +80,26 @@ public class PlayerDrawEffect : MonoBehaviour
     private void DisplayCard()
     {
 
-        
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
             GAMEMANAGER.Instance.playerEffectTokens--;
+            if(GAMEMANAGER.Instance.playerEffectTokens == 0)
+            {
+                effectsCardsDeck.ToggleColor();
+            }
+            StartCoroutine(burningEffect(currentCard));
+
             StartCoroutine(PlayerTakeEffectCard(() => {
                 DisposeCard();
             }));
         }
         else
         {
-            //Make Card burn into existence then brun out
+            //Make Card burn into existence then burn out
             GAMEMANAGER.Instance.enemyEffectTokens--;
             currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
             currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
+            StartCoroutine(burningEffect(currentCard));
             Invoke(nameof(DisposeCard), effectRevealTime);
         }
 
@@ -106,42 +107,36 @@ public class PlayerDrawEffect : MonoBehaviour
 
 
     }
+    public IEnumerator burningEffect(EffectCard card)
+    {
+        yield return new WaitForSeconds(effectRevealTime / 1.25f);
+        
+        for (int i = 0; i < 160; i++)
+        {
+            yield return new WaitForSeconds(1 / 100000000000f);
+
+            card.frontMaterial.SetFloat("_Dissolve_Value", i / 100f - 0.8f);
+            card.backMaterial.SetFloat("_Dissolve_Value", i / 100f - 0.8f);
+
+        }
+
+        Debug.Log("burnt");
+    }
 
     private void DisposeCard()
     {
-        
         currentCard.transform.position = GAMEMANAGER.Instance.player.playedCardsTransform.position;
         currentCard.transform.rotation = GAMEMANAGER.Instance.player.playedCardsTransform.rotation;
+        currentCard.backMaterial.SetFloat("_Dissolve_Value", - 1f);
+        currentCard.frontMaterial.SetFloat("_Dissolve_Value", - 1f);
         ApplyEffect();
         
     }
 
     private void ApplyEffect()
-    {
-        //if(currentCard == wheelOfFortune)
-        //{
-        //    wheelOfFortune.Execute();
-        //}
-        //else if( currentCard == evilEye)
-        //{
-        //    evilEye.Execute();
-        //}
-        //else if (currentCard == bloodPact)
-        //{
-        //    bloodPact.Execute();
-        //}
-        //else if (currentCard == theButcher)
-        //{
-        //    theButcher.Execute();
-        //}
-        //else if (currentCard == theTakers)
-        //{
-        //    theTakers.Execute();
-        //}
-
+    { 
         currentCard.Execute();
         GAMEMANAGER.Instance.UpdateUI();
-        
     }
 
 
