@@ -28,7 +28,7 @@ public class StealCardsEffect: EffectCard
                 List<Card> cards = new List<Card>();
                 foreach(int index in list)
                 {
-                    Debug.Log(index);
+                    
                     cards.Add(enemy.collectedCards[index]);
                 }
 
