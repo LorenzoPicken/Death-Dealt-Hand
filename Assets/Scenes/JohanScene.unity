@@ -2338,15 +2338,13 @@ MonoBehaviour:
     - Clear
     the table to earn 1 Token
 
-    - If you earn all 3 points you get 0 Tokens
+    - If you earn all 3 points player get 0 Tokens
 
-    -If
-    you earn all 2 points you get 1 Token
+    -
+    If you tie in points player get 0 Tokens
 
-    - If you earn all 1 points you get
-    1 Token
-
-    - If you earn all 0 points you get 2 Tokens
+    - If you earn 0 points player get
+    2 Tokens
 
 
 '
