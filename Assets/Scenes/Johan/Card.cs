@@ -14,7 +14,7 @@ public class Card : MonoBehaviour
     public bool inTable;
     private bool selected = false;
     public Sprite sprite;
-    private Outline outline;
+    public Outline outline;
     public Material dissolveMaterialFront;
     public Material dissolveMaterialBack;
     

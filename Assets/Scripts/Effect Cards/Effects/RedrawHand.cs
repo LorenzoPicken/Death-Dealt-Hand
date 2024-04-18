@@ -47,7 +47,9 @@ public class RedrawHand : EffectCard
                 for (int i = cardsInHand - 1; i >= 0; i--)
                 {
                     player.playerCards[i].InHand = false;
+                    player.playerCards[i].outline.enabled = false;
                     GAMEMANAGER.Instance.deck.Add(player.playerCards[i]);
+                    
                     player.playerCards.RemoveAt(i);
                 }
                 

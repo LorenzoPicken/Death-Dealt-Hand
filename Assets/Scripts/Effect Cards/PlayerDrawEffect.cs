@@ -97,15 +97,21 @@ public class PlayerDrawEffect : MonoBehaviour
         {
             //Make Card burn into existence then burn out
             GAMEMANAGER.Instance.enemyEffectTokens--;
+            StartCoroutine(burningEffect(currentCard));
             currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
             currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
-            StartCoroutine(burningEffect(currentCard));
             
-            Invoke(nameof(DisposeCard), effectRevealTime);
+            //Invoke(nameof(DisposeCard), effectRevealTime);
+            StartCoroutine(AIburningEffect());
         }
 
-        
+    }
 
+    public IEnumerator AIburningEffect()
+    {
+        yield return new WaitForSeconds(effectRevealTime * 2f);
+
+        DisposeCard();
 
     }
     public IEnumerator burningEffect(EffectCard card)
@@ -123,6 +129,13 @@ public class PlayerDrawEffect : MonoBehaviour
         }
 
         Debug.Log("burnt");
+
+        yield return new WaitForSeconds(1f);
+
+        // Resetting dissolve Value
+        card.frontMaterial.SetFloat("_Dissolve_Value", -1f);
+        card.backMaterial.SetFloat("_Dissolve_Value", -1f);
+
     }
 
     private void DisposeCard()
