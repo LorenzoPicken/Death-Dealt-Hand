@@ -255,6 +255,7 @@ public class GAMEMANAGER : MonoBehaviour
         else if(currentPlayerPoints < currentEnemyPoints)
         {
             monsterAnimator.SetTrigger("laugh");
+
             if (playerEffectTokens < 2)
             {
                 playerEffectTokens += 2;
@@ -267,7 +268,9 @@ public class GAMEMANAGER : MonoBehaviour
         }
         else if(currentPlayerPoints == currentEnemyPoints)
         {
-            if(enemyEffectTokens <=2)
+            monsterAnimator.SetTrigger("clapping");
+
+            if (enemyEffectTokens <=2)
             {
                  enemyEffectTokens++;
 
