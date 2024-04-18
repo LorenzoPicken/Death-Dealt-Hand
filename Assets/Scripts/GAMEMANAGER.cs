@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 
 public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTURN, WON, LOST }
@@ -14,8 +15,10 @@ public enum RoundState { START, PLAYERTURN, CHECKPLAYSTATE, COUNTPOINTS, ENEMYTU
 public enum PickupPrio { PLAYER, ENEMY }
 public class GAMEMANAGER : MonoBehaviour
 {
-
-    public Animator monsterAnimator; 
+    public Canvas playerUI;
+    public Canvas gameOver;
+    public Animator monsterAnimator;
+    public TMP_Text gameOverResult;
 
     [SerializeField] public TMP_Text textMeshPro;
     [SerializeField] public TMP_Text enemyPointText;
@@ -85,7 +88,7 @@ public class GAMEMANAGER : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -96,6 +99,7 @@ public class GAMEMANAGER : MonoBehaviour
     // Set Cards
     void Start()
     {
+      gameOver.enabled = false;
       currentRoundState = RoundState.START;
       round_number_tmp.text = "Round: " + round_number.ToString();
     }
@@ -131,7 +135,7 @@ public class GAMEMANAGER : MonoBehaviour
                 break;
             
             case RoundState.LOST:
-                Application.Quit();
+                GameOver();
                 break;
             case RoundState.WON:
                 ResetLists();
@@ -141,6 +145,33 @@ public class GAMEMANAGER : MonoBehaviour
         }
     }
 
+    private void GameOver()
+    {
+
+        playerUI.enabled = false;
+        gameOver.enabled = true;
+
+        if(playerPoints >= 11)
+        {
+            gameOverResult.text = "YOU WIN";
+           
+        }
+        else
+        {
+            gameOverResult.text = "YOU LOST";
+            gameOverResult.color = Color.red;
+        }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+        SceneManager.LoadScene(0);    
+    }
     public void UpdateUI()
     {
         
@@ -284,11 +315,19 @@ public class GAMEMANAGER : MonoBehaviour
 
         playerPoints += currentPlayerPoints;
         enemyPoints += currentEnemyPoints;
-
         UpdateUI();
 
-        currentRoundState = RoundState.WON;
+        if(playerPoints >= 11 || enemyPoints >= 11)
+        {
+            currentRoundState = RoundState.LOST;
+        }
+        else
+        {
+            currentRoundState = RoundState.WON;
+        }
+        
 
+ 
     }
 
     private void CheckPlayerHand()
