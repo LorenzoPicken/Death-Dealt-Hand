@@ -1027,7 +1027,8 @@ public class AIBehaviour: MonoBehaviour
             collectedCards.Add(cardToRemove);
             table.cards.Remove(cardToRemove);
         }
-        if(GAMEMANAGER.Instance.WasPickupOverride == false)
+        AudioManager.Instance.Play("PlaceCard");
+        if (GAMEMANAGER.Instance.WasPickupOverride == false)
         {
             Debug.Log("Priority is Set To Enemy");
             GAMEMANAGER.Instance.currentPrio = PickupPrio.ENEMY;
@@ -1071,8 +1072,9 @@ public class AIBehaviour: MonoBehaviour
             }
             
         }
+        AudioManager.Instance.Play("PlaceCard");
         //EndTurn();
-        
+
     }
 
 }

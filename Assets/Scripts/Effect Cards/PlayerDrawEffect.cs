@@ -79,7 +79,7 @@ public class PlayerDrawEffect : MonoBehaviour
     }
     private void DisplayCard()
     {
-
+        FindAnyObjectByType<AudioManager>().Play("DrawCard");
         if(GAMEMANAGER.Instance.currentRoundState == RoundState.PLAYERTURN)
         {
             GAMEMANAGER.Instance.playerEffectTokens--;
@@ -88,7 +88,7 @@ public class PlayerDrawEffect : MonoBehaviour
                 effectsCardsDeck.ToggleColor();
             }
             StartCoroutine(burningEffect(currentCard));
-
+            
             StartCoroutine(PlayerTakeEffectCard(() => {
                 DisposeCard();
             }));
@@ -100,6 +100,7 @@ public class PlayerDrawEffect : MonoBehaviour
             currentCard.transform.position = GAMEMANAGER.Instance.revealCardsTransform.position;
             currentCard.transform.rotation = GAMEMANAGER.Instance.revealCardsTransform.rotation;
             StartCoroutine(burningEffect(currentCard));
+            
             Invoke(nameof(DisposeCard), effectRevealTime);
         }
 
@@ -111,6 +112,7 @@ public class PlayerDrawEffect : MonoBehaviour
     {
         yield return new WaitForSeconds(effectRevealTime / 1.25f);
         
+        AudioManager.Instance.Play("CardBurnOut");
         for (int i = 0; i < 160; i++)
         {
             yield return new WaitForSeconds(1 / 100000000000f);

@@ -293,6 +293,7 @@ public class GAMEMANAGER : MonoBehaviour
             {
                 if (enemy.handList.Count == 0)
                 {
+                    AudioManager.Instance.Play("CardAppear");
                     AIEffectProbability.hasDrawnThisTurn = false;
                     for (int i = 0; i < playerSlots.Length; i++)
                     {
@@ -403,6 +404,7 @@ public class GAMEMANAGER : MonoBehaviour
 
         if (deck.Count >= 0)
         {
+            AudioManager.Instance.Play("CardAppear");
             for (int i = 0; i < playerSlots.Length; i++)
             {
                 deck[0].gameObject.SetActive(true);

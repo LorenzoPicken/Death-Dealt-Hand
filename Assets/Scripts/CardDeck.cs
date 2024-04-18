@@ -31,6 +31,7 @@ public class CardDeck : MonoBehaviour
     private void ShuffleAnimation()
     {
         animator.SetTrigger("TriggerSuffle");
+        FindAnyObjectByType<AudioManager>().Play("CardShuffle");
     }
 
     private void DeckEmptyCards()
@@ -88,6 +89,7 @@ public class CardDeck : MonoBehaviour
         {
             if(i < activePlayerCards)
             {
+                AudioManager.Instance.Play("DrawCard");
                 GameObject card = playerDeck.cards[i];
                 Transform initialPosition = playerDeck.cards[i].transform;
                 Transform finalPosition = cards[count].transform;
@@ -98,6 +100,7 @@ public class CardDeck : MonoBehaviour
             }
             if(i < activeEnemyCards)
             {
+                AudioManager.Instance.Play("DrawCard");
                 GameObject card = enemyDeck.cards[i];
                 Transform initialPosition = enemyDeck.cards[i].transform;
                 Transform finalPosition = cards[count].transform;

@@ -71,6 +71,7 @@ public class PlayerTableState : PlayerBaseState
                 cardsToPlay.Add(card);
                 MoveCards(player);
                 GAMEMANAGER.Instance.hasDrawnEffect = false;
+                AudioManager.Instance.Play("PlaceCard");
                 GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                 return;
             }
@@ -92,6 +93,7 @@ public class PlayerTableState : PlayerBaseState
 
                 MoveCards(player);
                 GAMEMANAGER.Instance.hasDrawnEffect = false;
+                AudioManager.Instance.Play("PlaceCard");
                 GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                 return;
             }
@@ -148,6 +150,7 @@ public class PlayerTableState : PlayerBaseState
                     player.selectedCard.inHand = false;
                     player.table.cards.Add(player.selectedCard);
                     player.playerCards.Remove(player.selectedCard);
+                    AudioManager.Instance.Play("PlaceCard");
                     GAMEMANAGER.Instance.hasDrawnEffect = false;
                     GAMEMANAGER.Instance.currentRoundState = RoundState.ENEMYTURN;
                     player.SwitchState(player.HandState);
