@@ -209,8 +209,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1153,7 +1153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -440, y: -113}
+  m_AnchoredPosition: {x: -35, y: -189}
   m_SizeDelta: {x: 700, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &194675512
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Select one card from the hand and pick up an equivalent amount of cards
+  m_text: "Select one card from the hand and pick up an equivalent amount of \ncards
     from the table and place them in your collection deck.\r\nIf not possible, place
     one card from your hand down on the table and end your turn\r\nEach player plays
     one card before giving the other player their turn.\r\nOnce both players have
@@ -1217,8 +1217,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4566,7 +4566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -132}
+  m_AnchoredPosition: {x: 364, y: -195}
   m_SizeDelta: {x: 700, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1015253693
@@ -4594,9 +4594,9 @@ MonoBehaviour:
     deck\r\n\r\nEVIL EYE:\r\nReveal the opponent's hand\r\n\r\nTHE BUTCHER:\r\nRemove
     ONE point from the opponent\u2019s SCORE\r\n\r\nWHEEL OF FORTUNE:\r\nShuffle
     your hand into the deck and draw an equivalent amount of new cards\r\n\r\nBLOOD
-    PACT:\r\nAt the end of the current round. No unless your opponent draws this
+    PACT:\r\nAt the end of the current round. No unless your opponent \ndraws this
     card after your initial draw. You collect all leftover cards on the table\r\n\r\n\r\nThe
-    game concludes when a player reaches or surpasses the target score of ELEVEN
+    game concludes when a player reaches or surpasses \nthe target score of ELEVEN
     points\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4624,8 +4624,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6340,7 +6340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -7404,8 +7404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 436, y: -417}
-  m_SizeDelta: {x: 130, y: 40}
+  m_AnchoredPosition: {x: 175, y: -142}
+  m_SizeDelta: {x: 50, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1639281947
 MonoBehaviour:
