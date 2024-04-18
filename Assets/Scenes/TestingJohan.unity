@@ -43559,8 +43559,8 @@ MonoBehaviour:
   - {fileID: 1745413849}
   - {fileID: 1292720436}
   currentRoundState: 0
-  enemyEffectTokens: 10
-  playerEffectTokens: 10
+  enemyEffectTokens: 0
+  playerEffectTokens: 0
   transitionTime: 1
   cardsFloatTime: 0.4
 --- !u!1001 &1815317928
