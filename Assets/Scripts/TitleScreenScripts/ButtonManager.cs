@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class ButtonManager : MonoBehaviour
 {
     int index = 0;
+    [SerializeField] Canvas MainMenuCanvas;
+    [SerializeField] Canvas ExtrasCanvas;
+
+    public void Start()
+    {
+        ExtrasCanvas.enabled = false;
+    }
 
     public void Play()
     {
@@ -17,5 +25,17 @@ public class ButtonManager : MonoBehaviour
     public void Close()
     {
         Application.Quit();
+    }
+
+    public void Extras()
+    {
+        MainMenuCanvas.enabled = false;
+        ExtrasCanvas.enabled = true;
+    }
+
+    public void BackFromExtras()
+    {
+        MainMenuCanvas.enabled = true;
+        ExtrasCanvas.enabled = false;
     }
 }

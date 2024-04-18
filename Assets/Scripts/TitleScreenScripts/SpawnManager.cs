@@ -23,6 +23,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         timeBetweenSpawns = 2;
+        
     }
 
     // Update is called once per frame
