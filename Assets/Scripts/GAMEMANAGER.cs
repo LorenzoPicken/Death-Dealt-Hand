@@ -15,6 +15,8 @@ public enum PickupPrio { PLAYER, ENEMY }
 public class GAMEMANAGER : MonoBehaviour
 {
 
+    public Animator monsterAnimator; 
+
     [SerializeField] public TMP_Text textMeshPro;
     [SerializeField] public TMP_Text enemyPointText;
     [SerializeField] public TMP_Text round_number_tmp;
@@ -236,6 +238,7 @@ public class GAMEMANAGER : MonoBehaviour
 
         if(currentPlayerPoints > currentEnemyPoints)
         {
+            monsterAnimator.SetTrigger("clapping");
             if(enemyEffectTokens < 2)
             {
                 enemyEffectTokens += 2;
@@ -251,6 +254,7 @@ public class GAMEMANAGER : MonoBehaviour
         }
         else if(currentPlayerPoints < currentEnemyPoints)
         {
+            monsterAnimator.SetTrigger("laugh");
             if (playerEffectTokens < 2)
             {
                 playerEffectTokens += 2;
