@@ -53,4 +53,9 @@ public class ButtonManager : MonoBehaviour
         MainMenuCanvas.enabled = false;
         ExtrasCanvas.enabled = true;
     }
+    public void GoToCards()
+    {
+        ExtrasCanvas.enabled = false;
+
+    }
 }
