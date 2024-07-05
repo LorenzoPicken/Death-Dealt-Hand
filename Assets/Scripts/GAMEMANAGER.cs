@@ -143,6 +143,10 @@ public class GAMEMANAGER : MonoBehaviour
                 round_number_tmp.text = "Round: " + round_number.ToString();
                 break;
         }
+        if(Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void GameOver()
