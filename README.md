@@ -5,7 +5,7 @@
 <h2>Gameplay</h2>
 <p>Death Dealt Hand's gameplay is simple and breaks down into three main systems that work in unison to deliver the final coherent experience. These three systems are:</p>
 <ul>
-  <li><a href="[https://github.com/LorenzoPicken/Death-Dealt-Hand/edit/main/README.md#](https://github.com/LorenzoPicken/Death-Dealt-Hand/blob/main/README.md#the-table)">The Table</a></li>
+  <li><a href="https://github.com/LorenzoPicken/Death-Dealt-Hand/blob/main/README.md#the-table">The Table</a></li>
   <li><a href="#">The Opponent</a></li>
   <li><a href="#">The Effect Deck</a></li>
 </ul>
