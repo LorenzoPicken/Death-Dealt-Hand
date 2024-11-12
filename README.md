@@ -69,3 +69,5 @@
 <br>
 
 <p>To draw from the effect deck, a token must be used in exchange. These tokens are awarded to both the player and the enemy throughout the match based on two conditions. First, a player recieves one token every time they clear the table of cards. The second condition directly corelated to the performance of a player at the end of a round. Winning the round will award 2 tokens to the losing player and none to the victor. A tie on the other hand will award a token to each player. A maximum limit of three tokens is enstated at all times throughout the match and an effect card must be drawn before playing a regular card and is limited to one draw per turn.</p>
+
+
