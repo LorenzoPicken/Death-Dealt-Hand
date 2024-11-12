@@ -7,7 +7,7 @@
 <ul>
   <li><a href="https://github.com/LorenzoPicken/Death-Dealt-Hand/blob/main/README.md#the-table">The Table</a></li>
   <li><a href="https://github.com/LorenzoPicken/Death-Dealt-Hand/blob/main/README.md#the-opponent">The Opponent</a></li>
-  <li><a href="#">The Effect Deck</a></li>
+  <li><a href="https://github.com/LorenzoPicken/Death-Dealt-Hand/blob/main/README.md#the-effect-deck">The Effect Deck</a></li>
 </ul>
 <br><br>
 
