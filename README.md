@@ -33,7 +33,7 @@
 
 <h3>The Effect Deck</h3>
 <p>Finally, The Effect Deck is the final piece of the puzzle that brings the whole experience together. In an attempt to diversify the experience and introduce a more enjoyable gameplay loop, we came up with the idea of an additional card deck that could be blended seamlessly into a traditional game of Scopa. What we came up with was The Effect Deck, a special collection of cards that could offer an advantage to the player who draws them.</p>
-<p>Within the current version of the game, there are # unique cards that can be drawn from the supplementary deck. These are:</p>
+<p>Within the current version of the game, there are FIVE unique cards that can be drawn from the supplementary deck. These are:</p>
 
 <ul>
   <li>
