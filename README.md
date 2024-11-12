@@ -21,4 +21,32 @@
 
 <h3>The Effect Deck</h3>
 <p>Finally, The Effect Deck is the final piece of the puzzle that brings the whole experience together. In an attempt to diversify the experience and introduce a more enjoyable gameplay loop, we came up with the idea of an additional card deck that could be blended seamlessly into a traditional game of Scopa. What we came up with was The Effect Deck, a special collection of cards that could offer an advantage to the player who draws them.</p>
-<p>Within the current version of the game, there are # unique cards that can be drawn from the supplementary deck. </p>
+<p>Within the current version of the game, there are # unique cards that can be drawn from the supplementary deck. These are:</p>
+
+<ul>
+  <li>
+    <h4>The Takers</h4>
+    <p>Steal three random cards from your opponents collected cards</p>
+  </li>
+
+  <li>
+    <h4>Wheel Of Fortune</h4>
+    <p>Shuffle all cards from your hand into the deck and draw the same number of new cards from the top of the pack</p>
+    <p>*The card will</p>
+  </li>
+
+  <li>
+    <h4>The Butcher</h4>
+    <p>If your opponent's score is above zero, subtract their current score by one</p>
+  </li>
+
+  <li>
+    <h4>Blood Pact</h4>
+    <p>At the end of the current match, collect all remaining cards from the table. This effect is overwritten if the opponent draws the effect after you.</p>
+  </li>
+
+  <li>
+    <h4>Evil Eye</h4>
+    <p></p>
+  </li>
+</ul>
