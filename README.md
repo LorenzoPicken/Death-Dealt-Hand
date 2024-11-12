@@ -77,3 +77,24 @@
 
 <h2>Audio System and Design</h2>
 <p>Audio always plays a big roll in horror by building suspense and providing ambiance and this is no different for our game. Taking inspiration from some of our favorite games and movies, we attempted to create an audio system that provided just the right amount of scare factor without being overbearing or loosing its effect too early in the game. We did this with a selection of free online audio as well as self recorded audio which we edited and spliced in a music production software. This audio is then used in one of two ways. For ambiance or as part of scares! Ambiance is manely comprised of the weather audio which escalates over the course of the game. In the beginning light wind can be heard outside, rustling trees and shaking the windows lightly, however, the closer the opponent gets to winning, the more violent the weather becomes eventually turning into a torentual thunder storm that rumbles in the background and provides some tenssion to the game. For scares, an array of audio from footsteps to slamming doors to whispers play at random intervals throughout the game, just far enough appart to catch a distracted person off guard.</p>
+<br><br>
+
+<h2>Cut Content</h2>
+<p>Due to a couple of feature delays and a tight development period, some planned content never made it into the final version of the game. Here is a list of all of it, in no particular order.</p>
+<br>
+
+<h3>Introduction and Game Over Sequence</h3>
+<p>Originally, we had planned to have short animated sequences using cinemachine cameras and model animations to infuse the game with a bit more life and create a small sence of connection between the user and the player character. This was supposed to be accomplished with a small interactive sequence at the beginning of the game which would have the player open the pack of cards, triggering a power outage and initialising the start of the game, as well as read a tutorial on how to play the game from the back of the card box. Other sequences where also planned for when the player won or lost the game which would each trigger unique scripted jumpscares.</p>
+<br>
+
+<h3>Visual Scare Events</h3>
+<p>While there are audio based scares in the game, there were also planned to be visual events that would be used with the audio to invoke an even stronger sense of danger in the player. Things such as shadowy figures walking around in the background, hands reaching out from behind the player's head or even the opponent's character model moving during flashes of lightning where all planned but never implemented due to a lack of time.</p>
+<br>
+
+<h3>Enemy Aggressiveness</h3>
+<p>This is a feature that can be found within the game but that was never implemented to match the complete vision we had. While the weather does worsen as the enemy AI approaches victory and its play style does change to reflect the score, there were also plans to add challenge and additional effects to better display progress within the game. Firstly, once the player scored three points, a timer system was supposed to be introduced giving the player a smaller window for decision making. This timer would shorten from 8 seconds upon its introduction to 5 once the player reaches 7 points. Initially, the penalty for not playing within the given time would be a forced discard of a random card from the player's hand, howeverm towards the later part of the game, faliure to play within the time would result in a jumpscare and an immediate game over. In addition to this, as the enemy gained points they would also slowly become more visible and take on a more sinister form, showing that the player was at the risk of loosing the game.</p>
+<br>
+
+<h3>Improved Juice</h3>
+<p>More impactful animations and visual effects were planned in order to better display events taking place within the game but were never completed in the end.</p>
+<br>
