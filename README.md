@@ -69,5 +69,11 @@
 <br>
 
 <p>To draw from the effect deck, a token must be used in exchange. These tokens are awarded to both the player and the enemy throughout the match based on two conditions. First, a player recieves one token every time they clear the table of cards. The second condition directly corelated to the performance of a player at the end of a round. Winning the round will award 2 tokens to the losing player and none to the victor. A tie on the other hand will award a token to each player. A maximum limit of three tokens is enstated at all times throughout the match and an effect card must be drawn before playing a regular card and is limited to one draw per turn.</p>
+<br><br>
 
+<h2>Card Designs</h2>
+<p>While the designs of the main deck of scopa cards are ones found on traditional italian playing cards, the designs for the effect cards were a mix of fair use images found online and original designs stensiled or drawn in Microsoft Paint 3D and overlayed as materials on custom 3D card models made in Blender. The same process was used to model every card used in the game as well as the deck asset.</p>
+<br><br>
 
+<h2>Audio System and Design</h2>
+<p></p>
