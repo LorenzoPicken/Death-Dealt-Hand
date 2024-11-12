@@ -27,26 +27,33 @@
   <li>
     <h4>The Takers</h4>
     <p>Steal three random cards from your opponents collected cards</p>
+    <p>*If the opponent has three or less cards in their collection deck. Steal the entire deck. Effect is negated if the opponent has no cards.</p>
   </li>
 
   <li>
     <h4>Wheel Of Fortune</h4>
     <p>Shuffle all cards from your hand into the deck and draw the same number of new cards from the top of the pack</p>
-    <p>*The card will</p>
+    <p>*This card's effect is negated if the deck is empty.</p>
   </li>
 
   <li>
     <h4>The Butcher</h4>
     <p>If your opponent's score is above zero, subtract their current score by one</p>
+    <p>*For balancing, this card has the lowest chance of being drawn.</p>
   </li>
 
   <li>
     <h4>Blood Pact</h4>
-    <p>At the end of the current match, collect all remaining cards from the table. This effect is overwritten if the opponent draws the effect after you.</p>
+    <p>At the end of the current match, collect all remaining cards from the table.</p>
+    <p>*This effect is negated if the opponent draws this effect after you.</p>
   </li>
 
   <li>
     <h4>Evil Eye</h4>
-    <p></p>
+    <p>Reveals the opponent's hand to the player</p>
+    <p>*This is the only effect that cannot be drawn by the enemy AI</p>
   </li>
 </ul>
+<br>
+
+<p>To draw from the effect deck, a token must be used in exchange. These tokens are awarded to both the player and the enemy throughout the match based on two conditions. First, a player recieves one token every time they clear the table of cards. The second condition directly corelated to the performance of a player at the end of a round. Winning the round will award 2 tokens to the losing player and none to the victor. A tie on the other hand will award a token to each player. A maximum limit of three tokens is enstated at all times throughout the match and an effect card must be drawn before playing a regular card and is limited to one draw per turn.</p>
