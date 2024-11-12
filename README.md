@@ -97,7 +97,7 @@
 
 <h3>Improved Juice</h3>
 <p>More impactful animations and visual effects were planned in order to better display events taking place within the game but were never completed in the end.</p>
-<br><br>
+<br><br><br>
 
 <h2>AI Development and Testing</h2>
-<p>The AI(algorythm) responsible for the enemy decision making</p>
+<p>The AI (algorythm) is responsible for the enemy decision making and went through many iterations and tests before we finally landed on the final version. Originally, this algorythm was developped seperately from the rest of the game, in a Visual Studio console application in order to get a more straight forward and decoupled environment. This version required a user to manually enter the hand and table into two seperate lists then run the application. Eventually, once completely bug free, the algorythm was tested in actual games of scopa against members of the team as well as some experienced scopa players and managed to win about as many games as any regular person would. Finally, in order to accomidate for less experienced players, a few parameters were tweaked to make the system a bit less difficult to play against and it was then implemented into the Unity project. Just like a real opponent, the algorythm does not cheat or gain any additional insight on the player's hand. It makes its decision only through information it knows like the visible cards on the table and in its hand, essentially making it so that the winner of each round is determined by the luck of the cards like in most other similar table top games.</p>
