@@ -39,7 +39,7 @@
   <li>
     <h4>The Takers</h4>
     <p>Steal three random cards from your opponents collected cards</p>
-    <p>*If the opponent has three or less cards in their collection deck. Steal the entire deck. Effect is negated if the opponent has no cards.</p>
+    <p>*If the opponent has three or less cards in their collection deck, steal the entire deck. Effect is negated if the opponent has no cards.</p>
   </li>
 
   <li>
