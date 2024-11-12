@@ -97,4 +97,7 @@
 
 <h3>Improved Juice</h3>
 <p>More impactful animations and visual effects were planned in order to better display events taking place within the game but were never completed in the end.</p>
-<br>
+<br><br>
+
+<h3>AI Development and Testing</h3>
+<p>The AI(algorythm) responsible for the enemy decision making</p>
