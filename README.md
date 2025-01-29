@@ -4,9 +4,8 @@
 
 <h2>Gameplay</h2>
 <p>Death Dealt Hand's gameplay is simple and mainely revolves around the same mechanics found in a traditional game of Scopa, aside from a couple of small differences. Both the player and the enemy AI will take turns playing a card from their hand until the entire deck has been emptied. From here, points are counted and a new round begins. This will last until either player reaches 11 points, in which case the game will end.</p>
-<br>
 <a href="https://youtu.be/A6HeU3YFyyA" target="_blank">Gameplay Demo Video</a>
-<br>
+<br><br>
 
 <h3>General Rules</h3>
 <p>Just like in Scopa, a match begins by distributing three cards to each player and placing four cards down on the table. From here the starting player must try and pick up a card or sum of cards from the table with an identical value to a chosen card from their hand. If this is not possible, then they must discard a card, placing it down on the table. Once the current player has played a card from their hand, their turn ends, and the next opponent begins theirs. Collected cards go into the respective player's collection deck which will be counted at the end of a round during point calculation. Once both players have played all their cards, which takes 6 turns/ three per player, a new batch of 3 cards is dealt and the process restarts. This will last until the deck from which new cards are drawn from is empty. Once this happens, all remaining table cards will go to the last player to have picked up and then point calculation begins. Three possible points can be scored each round and are determined as follows:</p>
